@@ -16,6 +16,10 @@
   </main>
 </template>
 
+<script setup>
+Office.onReady()
+</script>
+
 <style scoped>
 .formatPanel,
 .lmDataPanel {

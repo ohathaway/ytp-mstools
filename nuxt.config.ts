@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   head: {
     script: [
-      'https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js'
+      { src: 'https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js' }
     ]
   },
   ssr: false,

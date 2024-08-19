@@ -1,0 +1,68 @@
+<template>
+  <fluent-button
+    @click="insertSignatureBlock2()"
+  >
+    Insert Signature Block 2
+  </fluent-button>
+  <fluent-button
+    @click="insertImage('/assets/img/owen_signature-trans.png')"
+  >
+    Insert Owen's Signature
+  </fluent-button>
+</template>
+
+<script setup>
+const insertImage = async path => {
+  const image = await fetch(path)
+  const imageBuffer = await image.arrayBuffer()
+  var imageRaw = ''
+  var bytes = new Uint8Array(imageBuffer)
+  var len = bytes.byteLength
+  for (var i = 0; i < len; i++) {
+    imageRaw += String.fromCharCode(bytes[i])
+  }
+  const imageB64 = window.btoa(imageRaw)
+
+  await Word.run(async context => {
+    const body = context.document.body
+
+    body.insertInlinePictureFromBase64(imageB64, Word.InsertLocation.start)
+    await context.sync()
+  })
+}
+
+const insertSignatureBlock2 = async () => {
+  await Word.run(async context => {
+    const range = context.document.getSelection()
+    const data = [
+      ['', '', '', '', '', '', ''],
+      ['Signer 1', '', 'Date', '', 'Signer 2', '', 'Date']
+    ]
+
+    // create the table
+    const table = range.insertTable(2, 7, 'Before', data)
+    table.alignment = 'Centered'
+
+    // const s1SignCell = table.getCell(0, 0)
+    // remove all borders
+    const tableBorder = table.getBorder('All')
+    tableBorder.load(['type', 'width'])
+    tableBorder.type = 'None'
+
+    // add bottom border to row 1
+    const firstRow = table.rows.getFirst()
+    const bottomBorder = firstRow.getBorder('Bottom')
+    bottomBorder.type = 'Single'
+
+    // remove borders from spacer cells
+    const spacerCells = [1, 3, 5]
+    spacerCells.map(column => {
+      const cell = table.getCell(0, column)
+      const cellBorder = cell.getBorder('Bottom')
+      cellBorder.type = 'None'
+    })
+
+    await context.sync()
+  })
+}
+</script>

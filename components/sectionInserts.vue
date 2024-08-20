@@ -5,7 +5,7 @@
     Insert Signature Block 2
   </fluent-button>
   <fluent-button
-    @click="insertImage('/assets/img/owen_signature-trans.png')"
+    @click="insertImage('/img/owen_signature-trans.png')"
   >
     Insert Owen's Signature
   </fluent-button>

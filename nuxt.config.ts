@@ -13,10 +13,15 @@ export default defineNuxtConfig({
     '@/assets/css/global.css'
   ],
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      lmBasicAuth: process.env.LM_GET_DATA_TOKEN
+    }
+  },
   ssr: false,
   vue: {
     compilerOptions: {
-      isCustomElement: tag => ['-'].includes(tag)
+      isCustomElement: tag => tag.includes('-')
     }
   }
 })

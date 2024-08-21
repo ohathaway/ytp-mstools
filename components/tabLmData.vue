@@ -9,13 +9,15 @@
         <fluent-search
           appearance="outline"
           placeholder="Search ..."
-          v-model="contactable.search"
+          v-model="searchTerm"
         />
         <fluent-radio-group
           orientation="horizontal"
-          v-model="contactable.type"
+          name="searchType" 
+          :value="searchType"
+          @change="event => searchType = event.target.value"
         >
-          <fluent-radio value="text" curren-checked>name</fluent-radio>
+          <fluent-radio value="text">name</fluent-radio>
           <fluent-radio value="email">email</fluent-radio>
           <fluent-radio value="phone">phone</fluent-radio>
         </fluent-radio-group>
@@ -24,17 +26,23 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue'
-const contactable = ref({ type: 'name', search: '' })
+// import { ref, watchEffect } from 'vue'
 
-watchEffect(() => {
-  console.debug('contactable: ', contactable)
-})
+const searchTerm = ref()
+const searchType = ref('text')
+
 const isLmAuthenticated = () => {
   return true
 }
 
+const config = useRuntimeConfig()
 
+const authHeader = { authorization: `Basic ${config.public.lmBasicAuth}` }
+const endpoint = 'https://us-west3-www-prod-389819.cloudfunctions.net/nodejs-http-lmGetData/prospects/find_by_email/ohathawa@gmail.com?fields=all'
+const { data, status, error } = await useFetch(endpoint, {
+  headers: authHeader,
+  lazy: true
+}) 
 </script>
 
 <style scoped>

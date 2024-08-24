@@ -2,4 +2,4 @@ name = "ohlaw-msoffice-tools2"
 
 [env.stage]
 name =  "ohlaw-msoffice-tools2-stage"
-route = [ pattern = "ohlaw-msoffice-tools2-stage/*", zone-name = "ohlawcolorado.com" }
+route = [ pattern = "ohlaw-msoffice-tools2-stage/*", zone-name = "ohlawcolorado.com" ]

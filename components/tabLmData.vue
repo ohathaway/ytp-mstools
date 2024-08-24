@@ -86,7 +86,7 @@ const searchLm = async searchUrl => {
   }
 }
 
-const insertInfo = info => {
+const insertInfo = async info => {
   await Word.run(async context => {
     const range = context.document.getSelection()
     range.insertText(info, 'Before')

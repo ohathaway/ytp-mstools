@@ -1,4 +1,4 @@
-export const onRequestGet => context { 
+export const onRequestGet = context => { 
   /*
     setup constants
   */
@@ -46,7 +46,7 @@ export const onRequestGet => context {
       return new Response('', {
         status: 401,
         statusText: 'Not authorized'
-      }
+      })
     } 
 
     console.info('received event: ', JSON.stringify(context.request.url, null, 2))

@@ -1,4 +1,4 @@
-export const onRequestGet = context => { 
+export const onRequestGet = async context => { 
   /*
     setup constants
   */

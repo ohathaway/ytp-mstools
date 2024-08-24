@@ -32,7 +32,7 @@
           >
             <fluent-accordion-item
               v-for="contact in searchResults"
-              :key="contact.attributes.date_of_last_contact"
+              :key="contact.id"
               class="contact-item"
             >
               <span slot="heading">{{ contact.attributes.last_name }}, {{ contact.attributes.first_name }}</span>

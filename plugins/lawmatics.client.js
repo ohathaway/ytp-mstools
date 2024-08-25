@@ -1,8 +1,8 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  const { public: { lmUrl } } = useRuntimeConfig()
+  const { public: { lmFunction } } = useRuntimeConfig()
 
   const setSearchUrl = (searchType, searchTerm) => {
-    const baseUrl = `${lmUrl}/contacts`
+    const baseUrl = `${lmFunction}/contacts`
     
     const searchTypes = {
       last_name: 'last_name',

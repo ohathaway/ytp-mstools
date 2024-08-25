@@ -22,8 +22,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      lmBasicAuth: process.env.LM_GET_DATA_TOKEN,
-      lmUrl: process.env.LM_GET_DATA_URL
+      lmBasicAuth: process.env.BASIC_AUTH,
+      lmFunction: 'lmGetData'
     }
   },
   ssr: false,

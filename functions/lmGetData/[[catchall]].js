@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer'
+
 export const onRequestGet = async context => { 
   /*
     setup constants
@@ -42,7 +44,9 @@ export const onRequestGet = async context => {
   // main entrypoint
   try {
     // handle Auth
-    if (!checkAuthorization(context.request.headers.authorization)) {
+    const authHeader = context.request.headers.get("Authorization")
+    console.debug('authHeader: ', JSON.stringify(authHeader, null, 2))
+    if (!checkAuthorization(authHeader)) {
       return new Response('', {
         status: 401,
         statusText: 'Not authorized'
@@ -50,10 +54,15 @@ export const onRequestGet = async context => {
     } 
 
     console.info('received event: ', JSON.stringify(context.request.url, null, 2))
-    const lmUrl = context.request.url.split('/').slice(1).join('/')
+    const lmUrl = new URL(context.request.url)
+    const lmHost = new URL(LM_HOST)
+    lmUrl.host = lmHost.host
+    lmUrl.protocol = 'https'
+    lmUrl.port = ''
+    lmUrl.pathname = `/v1/${lmUrl.pathname.split('/').slice(2).join('/')}`
     console.info('lmUrl: ', lmUrl)
 
-    const result = await fetch(lmUrl, {
+    const result = await fetch(lmUrl.toString(), {
       headers: { Authorization: `Bearer ${LM_KEY}` },
     })
 
@@ -66,7 +75,8 @@ export const onRequestGet = async context => {
     console.error('Error request:', error.request)
     const message = 'error processing submission'
     console.error(`${message}: ${JSON.stringify(error, null, 2)}`)
-    res.status(500).send(`${message}: ${JSON.stringify(error, null, 2)}`)
-    throw error
+    return new Response(`${message}: ${JSON.stringify(error, null, 2)}`, {
+      status: 500
+    })
   }
 }

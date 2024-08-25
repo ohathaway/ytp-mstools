@@ -71,12 +71,12 @@ watchPostEffect(() => {
   lmUrl.value = $setSearchUrl(searchType.value, searchTerm.value)
 })
 
-const config = useRuntimeConfig()
+const { public: { lmBasicAuth } } = useRuntimeConfig()
 
 const searchLm = async searchUrl => {
   try {
   const { data, status, error } = await $fetch(searchUrl, {
-    headers: { authorization: `Basic ${config.public.lmBasicAuth}` },
+    headers: { authorization: `Basic ${lmBasicAuth}` },
     lazy: true
   }) 
   searchResults.value = data

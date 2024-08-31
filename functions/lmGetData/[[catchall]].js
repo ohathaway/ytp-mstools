@@ -45,7 +45,7 @@ export const onRequestGet = async context => {
   try {
     // handle Auth
     const authHeader = context.request.headers.get("Authorization")
-    console.debug('authHeader: ', JSON.stringify(authHeader, null, 2))
+    // console.debug('authHeader: ', JSON.stringify(authHeader, null, 2))
     if (!checkAuthorization(authHeader)) {
       return new Response('', {
         status: 401,
@@ -66,7 +66,7 @@ export const onRequestGet = async context => {
       headers: { Authorization: `Bearer ${LM_KEY}` }
     })
     const result = await response.json()
-    console.info('firsts lm API result attributes: ', JSON.stringify(result, null, 2))
+    console.info('lm API result count: ', result.data.length)
     return new Response(JSON.stringify(result.data), {
       status: response.status
     })

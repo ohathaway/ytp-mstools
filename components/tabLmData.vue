@@ -6,56 +6,30 @@
       </fluent-button>
     </div>
     <div class="lm-data" v-else>
-        <fluent-search
-          appearance="outline"
-          placeholder="Search ..."
-          v-model="searchTerm"
-        />
-        <fluent-radio-group
-          orientation="horizontal"
-          name="searchType" 
-          :value="searchType"
-          @change="event => searchType = event.target.value"
-        >
-          <fluent-radio value="last_name">lname</fluent-radio>
-          <fluent-radio value="first_name">fname</fluent-radio>
-          <fluent-radio value="email">email</fluent-radio>
-          <fluent-radio value="phone">phone</fluent-radio>
-        </fluent-radio-group>
-        <fluent-button @click="runSearch(lmUrl)" :disabled="!searchTerm">
-          Search Lawmatics
-        </fluent-button>
-        <div v-if="searchHasRun">
-          <fluent-card>
-            <div class='no-results' v-if="searchResults.length === 0">
-              No results found
-            </div>
-            <fluent-accordion
-              aria-labelledby="contactName"
-              style="width: 100%;"
-            >
-              <fluent-accordion-item
-                v-for="contact in searchResults"
-                :key="contact.id"
-                class="contact-item"
-              >
-                <span slot="heading">{{ contact.attributes.last_name }}, {{ contact.attributes.first_name }}</span>
-                <div class="panel">
-                  <fluent-button @click="insertInfo(contact.attributes.first_name)" :id="`fname-${contact.id}`">First Name</fluent-button>
-                  <!-- <fluent-tooltip :anchor="`fname-${contact.id}`">{{ contact.attributes.first_name }}</fluent-tooltip> -->
-                  <fluent-button :id="`lname-${contact.id}`">Last Name</fluent-button>
-                  <!-- <fluent-tooltip :anchor="`lname-${contact.id}`">{{ contact.attributes.last_name }}</fluent-tooltip> -->
-                  <fluent-button :id="`email-${contact.id}`">Email</fluent-button>
-                  <!-- <fluent-tooltip :anchor="`email-${contact.id}`">{{ contact.attributes.email }}</fluent-tooltip> -->
-                  <fluent-button :id="`phone-${contact-id}`">Phone</fluent-button>
-                  <!-- <fluent-tooltip :anchor="`phone-${contact.id}`">{{ contact.attributes.phone }}</fluent-tooltip> -->
-                  <fluent-button :id="`address-${contact.id}`">Address</fluent-button>
-                  <!-- <fluent-tooltip :anchor="`address-${contact.id}`">{{ contact.attributes.address }}</fluent-tooltip> -->
-                </div>
-              </fluent-accordion-item>
-            </fluent-accordion>
-          </fluent-card>
-        </div>
+      <fluent-search appearance="outline" placeholder="Search ..." v-model="searchTerm" />
+      <fluent-radio-group orientation="horizontal" name="searchType" :value="searchType"
+        @change="event => searchType = event.target.value">
+        <fluent-radio value="last_name">lname</fluent-radio>
+        <fluent-radio value="first_name">fname</fluent-radio>
+        <fluent-radio value="email">email</fluent-radio>
+        <fluent-radio value="phone">phone</fluent-radio>
+      </fluent-radio-group>
+      <fluent-button @click="runSearch(lmUrl)" :disabled="!searchTerm">
+        Search Lawmatics
+      </fluent-button>
+      <div v-if="searchHasRun">
+        <fluent-card>
+          <div class='no-results' v-if="searchResults.length === 0">
+            No results found
+          </div>
+          <fluent-accordion aria-labelledby="contactName" style="width: 100%;">
+            <LawmaticsContactAccordionItem
+              v-for="contact in searchResults"
+              :key="contact.id"
+              :contact="contact" />
+          </fluent-accordion>
+        </fluent-card>
+      </div>
     </div>
   </div>
 </template>

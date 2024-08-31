@@ -41,7 +41,7 @@
               >
                 <span slot="heading">{{ contact.attributes.last_name }}, {{ contact.attributes.first_name }}</span>
                 <div class="panel">
-                  <fluent-button @click="addInfo(contact.attributes.first_name)" :id="`fname-${contact.id}`">First Name</fluent-button>
+                  <fluent-button @click="insertInfo(contact.attributes.first_name)" :id="`fname-${contact.id}`">First Name</fluent-button>
                   <!-- <fluent-tooltip :anchor="`fname-${contact.id}`">{{ contact.attributes.first_name }}</fluent-tooltip> -->
                   <fluent-button :id="`lname-${contact.id}`">Last Name</fluent-button>
                   <!-- <fluent-tooltip :anchor="`lname-${contact.id}`">{{ contact.attributes.last_name }}</fluent-tooltip> -->
@@ -86,6 +86,7 @@ const runSearch = async url => {
 const insertInfo = async info => {
   await Word.run(async context => {
     const range = context.document.getSelection()
+    console.debug('retrieved document range: ', range)
     range.insertText(info, 'Before')
 
     await context.sync()

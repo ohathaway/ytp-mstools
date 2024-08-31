@@ -25,7 +25,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const searchLm = async searchUrl => {
     try {
-      console.debug('searching with url: ', searchUrl)
+      // console.debug('searching with url: ', searchUrl)
       // const { data, status } = await $fetch(searchUrl, {
       const functionResponse = await $fetch(searchUrl, {
         headers: { authorization: `Basic ${lmBasicAuth}` },

@@ -62,12 +62,13 @@ export const onRequestGet = async context => {
     lmUrl.pathname = `/v1/${lmUrl.pathname.split('/').slice(2).join('/')}`
     console.info('lmUrl: ', lmUrl)
 
-    const result = await fetch(lmUrl.toString(), {
-      headers: { Authorization: `Bearer ${LM_KEY}` },
+    const response = await fetch(lmUrl.toString(), {
+      headers: { Authorization: `Bearer ${LM_KEY}` }
     })
-
-    return new Response(result.body, {
-      status: result.status
+    const result = await response.json()
+    console.info('firsts lm API result attributes: ', JSON.stringify(result, null, 2))
+    return new Response(JSON.stringify(result.data), {
+      status: response.status
     })
   } catch (error) {
     console.error('Error details:', error)

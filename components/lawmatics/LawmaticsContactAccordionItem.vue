@@ -60,10 +60,10 @@
       </fluent-button>
       <fluent-button
         v-if="attributes.address"
-        @click="insertInfo(attributes.address)"
+        @click="insertInfo(stripCountry(attributes.address))"
         :id="`address-${contact.id}`"
       >
-        {{ attributes.address.replace(/,\sUnited\sStates.*/, '') }}
+        {{ stripCountry(attributes.address) }}
       </fluent-button>
     </div>
   </fluent-accordion-item>
@@ -72,4 +72,8 @@
 <script setup>
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
+
+const stripCountry = address => {
+  return address.replace(/,\sUnited\sStates.*/, '')
+}
 </script>

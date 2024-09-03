@@ -11,13 +11,9 @@ export default defineNuxtPlugin((nuxtApp) => {
       phone: 'phone'
     }
 
-    let fuzzyTerm = searchTerm.replace(/^\s/, '')
-                              .replace(/\s$/, '')
-    fuzzyTerm = `%${fuzzyTerm}%`
-
     const params = new URLSearchParams({
       filter_field: searchTypes[searchType] || 'last_name',
-      filter_value: fuzzyTerm,
+      filter_value: `%${searchTerm.trim()}%`,
       filter_operator: 'ilike',
       fields: 'all'
     })

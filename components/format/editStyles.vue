@@ -122,6 +122,7 @@ const ohlawStyles = {
   },
   'Heading 1': {
     font: {
+      color: '#000000',
       size: 16
     },
     list: {},

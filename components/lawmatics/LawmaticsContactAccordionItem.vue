@@ -65,6 +65,11 @@
       >
         {{ stripCountry(attributes.address) }}
       </fluent-button>
+      <fluent-button
+        @click="window.open(contactLink, '_blank')"
+      >
+        Open in Lawmatics
+      </fluent-button>
     </div>
   </fluent-accordion-item>
 </template>
@@ -72,7 +77,11 @@
 <script setup>
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
+const contactLink = computed(() => {
+  return `https://app.lawmatics.com/contacts/${contact.id}`
+})
 
+console.debug('contact.id: ', contact.id)
 const stripCountry = address => {
   return address.replace(/,\sUnited\sStates.*/, '')
 }

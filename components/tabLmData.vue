@@ -37,7 +37,7 @@
 <script setup>
 const { $searchLm, $setSearchUrl } = useNuxtApp()
 
-const searchTerm = ref()
+const searchTerm = ref('')
 const searchType = ref('last_name')
 const lmUrl = ref()
 const searchResults = ref([])

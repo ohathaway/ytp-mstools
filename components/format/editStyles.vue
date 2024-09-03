@@ -120,23 +120,6 @@ const ohlawStyles = {
     list: {},
     paragraph: {}
   },
-  'Heading 1': {
-    font: {
-      color: '#000000',
-      size: 16
-    },
-    list: {},
-    paragraph: {
-      alignment: 'Centered',
-      keepWithNext: true,
-      keepTogether: true,
-      lineSpacing: 20.0,
-      // nextParagraphStyle: 'Normal',
-      outlineLevel: 2,
-      spaceAfter: 18.0,
-      widowControl: true
-    }
-  },
   'Document Title': {
     font: {
       bold: true,
@@ -158,6 +141,7 @@ const ohlawStyles = {
   'Heading 1': {
     font: {
       bold: true,
+      color: '#000000',
       italic: false,
       name: 'Optima',
       size: 16
@@ -179,6 +163,7 @@ const ohlawStyles = {
   'Heading 2': {
     font: {
       bold: true,
+      color: '#000000',
       italic: false,
       name: 'Optima',
       size: 12
@@ -199,6 +184,7 @@ const ohlawStyles = {
   'Heading 3': {
     font: {
       bold: true,
+      color: '#000000',
       italic: false,
       name: 'Optima',
       size: 12
@@ -219,6 +205,7 @@ const ohlawStyles = {
   'Heading 4': {
     font: {
       bold: true,
+      color: '#000000',
       italic: false,
       name: 'Optima',
       size: 12

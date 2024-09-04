@@ -9,15 +9,17 @@
       <!-- <p><strong>Created At:</strong> {{ formattedCreatedAt }}</p> -->
       <!-- <p><strong>Updated At:</strong> {{ formattedUpdatedAt }}</p> -->
       <!-- Add more matter details as needed -->
-      <fluent-button @click="openNewWindow(matterLink)">
+      <fluent-button class="opener" @click="openNewWindow(matterLink)">
         Open in Lawmatics
-        <!-- <img src="https://www.lawmatics.com/wp-content/uploads/2024/05/Lawmatics-Logo_FC_Dark.svg" /> -->
+        <IconsIconWrapper :icon="IconOpen" width="12" />
       </fluent-button>
     </div>
   </fluent-accordion-item>
 </template>
 
 <script setup>
+import IconOpen from '@/components/icons/IconOpen.vue'
+
 const { matter } = defineProps({
   matter: {
     type: Object,

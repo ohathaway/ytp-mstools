@@ -39,13 +39,15 @@
       </fluent-button>
       <fluent-button @click="openNewWindow(contactLink)">
         Open in Lawmatics
-        <!-- <img src="https://www.lawmatics.com/wp-content/uploads/2024/05/Lawmatics-Logo_FC_Dark.svg" /> -->
+        <IconsIconWrapper :icon="IconOpen" width="12" />
       </fluent-button>
     </div>
   </fluent-accordion-item>
 </template>
 
 <script setup>
+import IconOpen from '@/components/icons/IconOpen.vue'
+
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
 const contactLink = computed(() => {

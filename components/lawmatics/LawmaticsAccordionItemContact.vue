@@ -1,6 +1,8 @@
 <template>
   <fluent-accordion-item class="contact-item">
-    <span slot="heading">{{ contact.attributes.last_name }}, {{ contact.attributes.first_name }}</span>
+    <span slot="heading">
+      {{ contact.attributes.last_name }}, {{ contact.attributes.first_name }}
+    </span>
     <div class="panel">
       <fluent-button v-if="attributes.first_name && attributes.last_name"
         @click="insertInfo(`${attributes.first_name} ${attributes.last_name}`)" :id="`first_last-${contact.id}`">
@@ -49,12 +51,4 @@ const attributes = contact.attributes
 const contactLink = computed(() => {
   return `https://app.lawmatics.com/contacts/${contact.id}/details`
 })
-
-const stripCountry = address => {
-  return address.replace(/,\sUnited\sStates.*/, '')
-}
-
-const openNewWindow = link => {
-  window.open(link, '_blank', 'noopener,noreferrer')
-}
 </script>

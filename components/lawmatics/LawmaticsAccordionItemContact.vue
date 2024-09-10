@@ -56,14 +56,24 @@
       >
         {{ attributes.phone }}
       </fluent-button>
-      <fluent-button
-        v-if="attributes.phone"
-        @click="insertInfo(attributes.birthdate)"
+      <fluent-menu
+        v-if="attributes.birthdate"
         :id="`birthdate-${contact - id}`"
+        open-on-hover=""
       >
-        {{ attributes.birthdate }}
-      </fluent-button>
-      <fluent-button v-if="attributes.address" @click="insertInfo(stripCountry(attributes.address))"
+        <fluent-menu-button aria-label="Toggle Dob Menu" slot="trigger">
+          Birthdate
+        </fluent-menu-button>
+        
+        <fluent-menu-list>
+          <fluent-menu-item @click="insertInfo(attributes.birthdate)">
+            dob: {{ attributes.birthdate }}
+          </fluent-menu-item>
+        </fluent-menu-list>
+      </fluent-menu>
+      <fluent-button
+        v-if="attributes.address"
+        @click="insertInfo(stripCountry(attributes.address))"
         :id="`address-${contact.id}`">
         {{ stripCountry(attributes.address) }}
       </fluent-button>
@@ -80,6 +90,9 @@ import IconOpen from '@/components/icons/IconOpen.vue'
 
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
+
+console.debug('contact.attributes: ', contact.attributes)
+
 const contactLink = computed(() => {
   return `https://app.lawmatics.com/contacts/${contact.id}/details`
 })

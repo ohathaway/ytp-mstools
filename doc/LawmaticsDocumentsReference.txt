@@ -1,0 +1,1199 @@
+Firm Name
+{{firm_name}}
+
+Firm Phone Number
+{{firm_phone_number}}
+
+Firm Email
+{{firm_email}}
+
+Firm Street
+{{firm_street}}
+
+Firm Street 2
+{{firm_street2}}
+
+Firm City
+{{firm_city}}
+
+Firm State
+{{firm_state}}
+
+Firm Zipcode
+{{firm_zipcode}}
+
+Firm Timezone
+{{firm_timezone}}
+
+Current Date: Month Day, Year
+{{current_date_format_a}}
+
+Current Date: MM/DD/YYYY
+{{current_date_format_b}}
+
+Contact ID
+{{contact_id}}
+
+First name
+{{first_name}}
+
+Last name
+{{last_name}}
+
+Birthdate
+{{birthdate}}
+
+Birthdate (Day of Week)
+{{birthdate_day_of_week}}
+
+Name prefix
+{{name_prefix}}
+
+Middle name
+{{middle_name}}
+
+Name suffix
+{{name_suffix}}
+
+Informal name
+{{informal_name}}
+
+Employer
+{{employer}}
+
+Occupation
+{{occupation}}
+
+Citizenship
+{{citizenship}}
+
+Social security
+{{social_security}}
+
+Driver license
+{{driver_license}}
+
+Gender
+{{gender}}
+
+Marital status
+{{marital_status}}
+
+Timezone
+{{timezone}}
+
+Hobbies
+{{hobbies}}
+
+Bio
+{{bio}}
+
+Title
+{{title}}
+
+Unsubscribed
+{{unsubscribed}}
+
+Last contacted date
+{{last_contacted_date}}
+
+Phone (Primary)
+{{phone}}
+
+Address (Primary) - Full Street
+{{full_street}}
+
+Address (Primary) - City, State, Zip
+{{city_state_zip}}
+
+Address (Primary) - Street
+{{street}}
+
+Address (Primary) - Street2
+{{street2}}
+
+Address (Primary) - City
+{{city}}
+
+Address (Primary) - State
+{{state}}
+
+Address (Primary) - Zipcode
+{{zipcode}}
+
+Address (Primary) - Country
+{{country}}
+
+Address (Primary)
+{{address}}
+
+Age
+{{age}}
+
+Days Since Last Contact
+{{days_since_last_contact}}
+
+Contact Type
+{{contact_type}}
+
+Custom Contact Type
+{{custom_contact_type}}
+
+Tags (Contact)
+{{contact_tags}}
+
+Full Name
+{{full_name}}
+
+Email (Primary)
+{{email}}
+
+Notes
+{{note}}
+
+Created By
+{{created_by}}
+
+Created At
+{{created_at}}
+
+Updated At
+{{updated_at}}
+
+AKA
+{{custom_field_381111}}
+
+Adopted?
+{{custom_field_445890}}
+
+Birth Place
+{{custom_field_445556}}
+
+Child of
+{{custom_field_428743}}
+
+County
+{{custom_field_392646}}
+
+Date of Death
+{{custom_field_381116}}
+
+Date of Death (Day of Week)
+{{custom_field_381116_w}}
+
+Date of Marriage
+{{custom_field_392650}}
+
+Date of Marriage (Day of Week)
+{{custom_field_392650_w}}
+
+Disinherit?
+{{custom_field_428744}}
+
+Either Grandparent Living?
+{{custom_field_463749}}
+
+Either Parent Living?
+{{custom_field_463748}}
+
+Has Children
+{{custom_field_392739}}
+
+Prefers Paper Forms
+{{custom_field_426183}}
+
+Recovery Client
+{{custom_field_381114}}
+
+Tax ID
+{{custom_field_381115}}
+
+Upright Client
+{{custom_field_381117}}
+
+Matter ID
+{{id}}
+
+Actual Value
+{{actual_value}}
+
+Estimated Value
+{{estimated_value}}
+
+Lead Cost
+{{lead_cost}}
+
+Referring Url
+{{referring_url}}
+
+Practice Area
+{{practice_area}}
+
+Stage
+{{stage}}
+
+Source
+{{source}}
+
+Status
+{{status}}
+
+Sub Status
+{{sub_status}}
+
+Campaign
+{{campaign}}
+
+Owned By
+{{owned_by}}
+
+Lead Attorney
+{{lead_attorney}}
+
+Originating Attorney
+{{originating_attorney}}
+
+Assigned Staff
+{{assigned_staff}}
+
+Converted At
+{{converted_date}}
+
+Case Title
+{{case_title}}
+
+Case Number
+{{case_number}}
+
+Case Blurb
+{{case_blurb}}
+
+Statute of Limitations
+{{statute_of_limitations}}
+
+Tags (Matter)
+{{matter_tags}}
+
+Type of Billing
+{{type_of_billing}}
+
+Days to Close
+{{days_to_close}}
+
+Has Portal Access
+{{has_portal}}
+
+Time in Homework Assigned
+{{time_in_stage_85606}}
+
+Time in Case File Opened
+{{time_in_stage_85607}}
+
+Time in Draft Complete
+{{time_in_stage_85611}}
+
+Time in Lost
+{{time_in_stage_85776}}
+
+Time in CIMI Sent
+{{time_in_stage_89622}}
+
+Time in CIMI In Progress
+{{time_in_stage_92022}}
+
+Time in Homework Assigned
+{{time_in_stage_85606}}
+
+Are there any written contracts between you and your business partners, if any?
+{{custom_field_381275}}
+
+BK13 Individual Amount
+{{custom_field_459196}}
+
+BK7 Individual Amount
+{{custom_field_459195}}
+
+Birth Date
+{{custom_field_384915}}
+
+Birth Date (Day of Week)
+{{custom_field_384915_w}}
+
+Business Legal Name
+{{custom_field_381963}}
+
+Child
+{{custom_field_378192}}
+
+Child (2)
+{{custom_field_392624}}
+
+Child (3)
+{{custom_field_416648}}
+
+Child (4)
+{{custom_field_433926}}
+
+Co-debtor
+{{custom_field_378787}}
+
+Contribution Percentage
+{{custom_field_381269}}
+
+Contribution Percentage 1
+{{custom_field_381270}}
+
+Contribution Percentage 2
+{{custom_field_381271}}
+
+Cpa or Tax Advisor
+{{custom_field_381257}}
+
+DOB
+{{custom_field_384909}}
+
+DOB (Day of Week)
+{{custom_field_384909_w}}
+
+DOB 1
+{{custom_field_384910}}
+
+DOB 1 (Day of Week)
+{{custom_field_384910_w}}
+
+DOB 2
+{{custom_field_384911}}
+
+DOB 2 (Day of Week)
+{{custom_field_384911_w}}
+
+DOB 3
+{{custom_field_384912}}
+
+DOB 3 (Day of Week)
+{{custom_field_384912_w}}
+
+DOB 4
+{{custom_field_384913}}
+
+DOB 4 (Day of Week)
+{{custom_field_384913_w}}
+
+DOB 5
+{{custom_field_384914}}
+
+DOB 5 (Day of Week)
+{{custom_field_384914_w}}
+
+Date of Birth
+{{custom_field_384895}}
+
+Date of Birth (Day of Week)
+{{custom_field_384895_w}}
+
+Date of Birth 1
+{{custom_field_384896}}
+
+Date of Birth 1 (Day of Week)
+{{custom_field_384896_w}}
+
+Date of Birth 2
+{{custom_field_384897}}
+
+Date of Birth 2 (Day of Week)
+{{custom_field_384897_w}}
+
+Date of Birth 3
+{{custom_field_384898}}
+
+Date of Birth 3 (Day of Week)
+{{custom_field_384898_w}}
+
+Date of Birth 4
+{{custom_field_384899}}
+
+Date of Birth 4 (Day of Week)
+{{custom_field_384899_w}}
+
+Deceased Spouse
+{{custom_field_433382}}
+
+Domestic Partner
+{{custom_field_433392}}
+
+Estimated Total Debt
+{{custom_field_381162}}
+
+Ex-Spouse
+{{custom_field_433381}}
+
+Fiduciary
+{{custom_field_443660}}
+
+Fiduciary (2)
+{{custom_field_443662}}
+
+For what compensation
+{{custom_field_381274}}
+
+Full Legal Name
+{{custom_field_384903}}
+
+Full Legal Name 1
+{{custom_field_384904}}
+
+Full Legal Name 2
+{{custom_field_384905}}
+
+Full Legal Name 3
+{{custom_field_384906}}
+
+Full Legal Name 4
+{{custom_field_384907}}
+
+Full Legal Name 5
+{{custom_field_384908}}
+
+Full Legal Name 6
+{{custom_field_384916}}
+
+Grandchild
+{{custom_field_378193}}
+
+Grandchild (2)
+{{custom_field_416652}}
+
+Grandchild (3)
+{{custom_field_416654}}
+
+Grandchild (4)
+{{custom_field_416657}}
+
+Grandchild (5)
+{{custom_field_416665}}
+
+Grandchild (6)
+{{custom_field_416667}}
+
+How many owner
+{{custom_field_381250}}
+
+In what capacities
+{{custom_field_381273}}
+
+Individual or Business?
+{{custom_field_381136}}
+
+Ineligible for Ch 13
+{{custom_field_381163}}
+
+Name
+{{custom_field_384880}}
+
+Name 1
+{{custom_field_384881}}
+
+Name 10
+{{custom_field_384891}}
+
+Name 11
+{{custom_field_384892}}
+
+Name 12
+{{custom_field_384893}}
+
+Name 2
+{{custom_field_384882}}
+
+Name 3
+{{custom_field_384883}}
+
+Name 4
+{{custom_field_384884}}
+
+Name 5
+{{custom_field_384885}}
+
+Name 7
+{{custom_field_384889}}
+
+Name 8
+{{custom_field_384886}}
+
+Name 9
+{{custom_field_384890}}
+
+Niece/Nephew
+{{custom_field_433393}}
+
+Niece/Nephew (10)
+{{custom_field_470104}}
+
+Niece/Nephew (11)
+{{custom_field_471098}}
+
+Niece/Nephew (12)
+{{custom_field_471099}}
+
+Niece/Nephew (13)
+{{custom_field_471108}}
+
+Niece/Nephew (14)
+{{custom_field_471110}}
+
+Niece/Nephew (15)
+{{custom_field_471111}}
+
+Niece/Nephew (16)
+{{custom_field_471112}}
+
+Niece/Nephew (17)
+{{custom_field_471113}}
+
+Niece/Nephew (18)
+{{custom_field_471115}}
+
+Niece/Nephew (19)
+{{custom_field_471116}}
+
+Niece/Nephew (2)
+{{custom_field_433394}}
+
+Niece/Nephew (20)
+{{custom_field_471118}}
+
+Niece/Nephew (21)
+{{custom_field_471119}}
+
+Niece/Nephew (22)
+{{custom_field_471120}}
+
+Niece/Nephew (23)
+{{custom_field_471121}}
+
+Niece/Nephew (24)
+{{custom_field_471123}}
+
+Niece/Nephew (25)
+{{custom_field_471124}}
+
+Niece/Nephew (3)
+{{custom_field_470095}}
+
+Niece/Nephew (4)
+{{custom_field_470096}}
+
+Niece/Nephew (5)
+{{custom_field_470097}}
+
+Niece/Nephew (6)
+{{custom_field_470099}}
+
+Niece/Nephew (7)
+{{custom_field_470101}}
+
+Niece/Nephew (8)
+{{custom_field_470102}}
+
+Niece/Nephew (9)
+{{custom_field_470103}}
+
+OTHER INFORMATION YOU’D LIKE TO PROVIDE
+{{custom_field_381277}}
+
+Owner
+{{custom_field_409827}}
+
+Owner (2)
+{{custom_field_409828}}
+
+Owner Name
+{{custom_field_381262}}
+
+Owner Name 1
+{{custom_field_381264}}
+
+Owner Name 2
+{{custom_field_381265}}
+
+Ownership Percentage
+{{custom_field_381266}}
+
+Ownership Percentage 1
+{{custom_field_381267}}
+
+Ownership Percentage 2
+{{custom_field_381268}}
+
+Ownership percentage
+{{custom_field_381252}}
+
+Parent
+{{custom_field_378194}}
+
+Please provide a copy
+{{custom_field_381276}}
+
+Related Contact
+{{custom_field_381118}}
+
+Related Contact (2)
+{{custom_field_381119}}
+
+Related Contact (3)
+{{custom_field_381120}}
+
+Related Contact (4)
+{{custom_field_381121}}
+
+Related Contact (5)
+{{custom_field_381122}}
+
+Related Contact (6)
+{{custom_field_381123}}
+
+Sibling
+{{custom_field_388931}}
+
+Sibling (2)
+{{custom_field_471125}}
+
+Sibling (3)
+{{custom_field_471126}}
+
+Sibling (4)
+{{custom_field_471128}}
+
+Sibling (5)
+{{custom_field_471129}}
+
+Sibling (6)
+{{custom_field_471130}}
+
+Spouse
+{{custom_field_378114}}
+
+Step-child
+{{custom_field_445889}}
+
+Step-child (2)
+{{custom_field_445891}}
+
+Step-child (3)
+{{custom_field_471158}}
+
+Title or position with the entity
+{{custom_field_381248}}
+
+Today’s Date
+{{custom_field_381962}}
+
+Today’s Date (Day of Week)
+{{custom_field_381962_w}}
+
+Which of the owners are expected to be employed by the business
+{{custom_field_381272}}
+
+keep
+{{custom_field_382872}}
+
+Company Name
+{{company_name}}
+
+Company E-mail (Primary)
+{{company_email}}
+
+Company Phone (Primary)
+{{company_phone}}
+
+Company Address (Primary)
+{{company_address}}
+
+Company Address (Primary) - City, State, Zip
+{{company_city_state_zip}}
+
+Company Address (Primary) - Street
+{{company_street}}
+
+Company Address (Primary) - Street2
+{{company_street2}}
+
+Company Address (Primary) - Full Street
+{{company_full_street}}
+
+Company Address (Primary) - City
+{{company_city}}
+
+Company Address (Primary) - State
+{{company_state}}
+
+Company Address (Primary) - Zipcode
+{{company_zipcode}}
+
+Company Address (Primary) - Country
+{{company_country}}
+
+Point of Contact Name
+{{poc_name}}
+
+Point of Contact First Name
+{{poc_first_name}}
+
+Point of Contact Last Name
+{{poc_last_name}}
+
+Point of Contact E-mail
+{{poc_email}}
+
+Point of Contact Phone
+{{poc_phone}}
+
+Point of Contact Address
+{{poc_address}}
+
+Point of Contact Address - Full Street
+{{poc_full_street}}
+
+Point of Contact Address - City, State, Zip
+{{poc_city_state_zip}}
+
+Point of Contact Address - Street
+{{poc_street}}
+
+Point of Contact Address - Street2
+{{poc_street2}}
+
+Point of Contact Address - City
+{{poc_city}}
+
+Point of Contact Address - State
+{{poc_state}}
+
+Point of Contact Address - Zipcode
+{{poc_zipcode}}
+
+Point of Contact Address - Country
+{{poc_country}}
+
+keep
+{{custom_field_382878}}
+
+# of times filing BK
+{{custom_field_381135}}
+
+180 day resident
+{{custom_field_378545}}
+
+3 yr resident
+{{custom_field_378546}}
+
+Date - 341
+{{custom_field_380961}}
+
+Date - 341 (Day of Week)
+{{custom_field_380961_w}}
+
+Date - Discharge
+{{custom_field_426069}}
+
+Date - Discharge (Day of Week)
+{{custom_field_426069_w}}
+
+Date - Filing
+{{custom_field_426067}}
+
+Date - Filing (Day of Week)
+{{custom_field_426067_w}}
+
+Joint Plan
+{{custom_field_392733}}
+
+Pending any foreclosures, repossessions or garnishments?
+{{custom_field_381139}}
+
+Previous Cases
+{{custom_field_378549}}
+
+Previous Residences
+{{custom_field_378547}}
+
+Previously Filed BK?
+{{custom_field_381134}}
+
+Related to Student Loans
+{{custom_field_381137}}
+
+Who do you owe?
+{{custom_field_381138}}
+
+atvInfo
+{{custom_field_378759}}
+
+atvOwner
+{{custom_field_378758}}
+
+bkCaseNo
+{{custom_field_426014}}
+
+boatsInfo
+{{custom_field_378753}}
+
+boatsOwner
+{{custom_field_378752}}
+
+dependentsInfo
+{{custom_field_378551}}
+
+employDebtor1Length
+{{custom_field_378591}}
+
+expenseAutoMaint
+{{custom_field_378612}}
+
+expenseCharity
+{{custom_field_378614}}
+
+expenseChildCare
+{{custom_field_378599}}
+
+expenseClothing
+{{custom_field_378608}}
+
+expenseDSO
+{{custom_field_378594}}
+
+expenseElectricity
+{{custom_field_378605}}
+
+expenseGas
+{{custom_field_378606}}
+
+expenseGasoline
+{{custom_field_378611}}
+
+expenseHomeInsurance
+{{custom_field_378596}}
+
+expenseInsAuto
+{{custom_field_378615}}
+
+expenseInsLife
+{{custom_field_378616}}
+
+expenseInsMedical
+{{custom_field_378617}}
+
+expenseLaundry
+{{custom_field_378609}}
+
+expenseMedical
+{{custom_field_378610}}
+
+expenseOther
+{{custom_field_378618}}
+
+expenseOtherSupport
+{{custom_field_378597}}
+
+expensePersonalCare
+{{custom_field_378604}}
+
+expenseRealEstateTaxes
+{{custom_field_378595}}
+
+expenseRecreation
+{{custom_field_378613}}
+
+expenseSchool
+{{custom_field_378600}}
+
+expenseStudentLoan
+{{custom_field_378602}}
+
+expenseSubscriptions
+{{custom_field_378603}}
+
+expenseTaxes
+{{custom_field_378593}}
+
+expenseTrash
+{{custom_field_378771}}
+
+expenseTuition
+{{custom_field_378601}}
+
+expenseUnionDues
+{{custom_field_378598}}
+
+expenseWater
+{{custom_field_378607}}
+
+firearmInfo
+{{custom_field_378573}}
+
+hasAtv
+{{custom_field_378757}}
+
+hasBoats
+{{custom_field_378748}}
+
+hasDependents
+{{custom_field_378550}}
+
+hasFirearms
+{{custom_field_378570}}
+
+hasOtherNames
+{{custom_field_378552}}
+
+hasPreviousBk
+{{custom_field_378548}}
+
+hasRealEstate
+{{custom_field_378554}}
+
+hasRv
+{{custom_field_378754}}
+
+hasVehicle1
+{{custom_field_378576}}
+
+hasVehicle2
+{{custom_field_378577}}
+
+hasVehicle3
+{{custom_field_378578}}
+
+hasVehicle4
+{{custom_field_378582}}
+
+homeContractBalance
+{{custom_field_378768}}
+
+homeContractInfo
+{{custom_field_378769}}
+
+homeContractInsurance
+{{custom_field_378776}}
+
+homeContractPayment
+{{custom_field_378775}}
+
+homeOwnEscrow
+{{custom_field_378773}}
+
+homeOwnInfo
+{{custom_field_378767}}
+
+homeOwnLoanBalance
+{{custom_field_378766}}
+
+homeOwnPayment
+{{custom_field_378772}}
+
+homeRentDepositAmount
+{{custom_field_378764}}
+
+homeRentLandlordInfo
+{{custom_field_378765}}
+
+homeRentPayment
+{{custom_field_378774}}
+
+incomeDSO
+{{custom_field_378586}}
+
+incomeGovernmentAssistance
+{{custom_field_378588}}
+
+incomeInterestDividends
+{{custom_field_378585}}
+
+incomeOther
+{{custom_field_378590}}
+
+incomeRentalProperty
+{{custom_field_378584}}
+
+incomeRetirement
+{{custom_field_378589}}
+
+incomeSocialSecurity
+{{custom_field_378587}}
+
+joint case
+{{custom_field_378541}}
+
+listElectronics
+{{custom_field_378740}}
+
+otherNames
+{{custom_field_378553}}
+
+realEstateBalance
+{{custom_field_378779}}
+
+realEstateEscrow
+{{custom_field_378778}}
+
+realEstateInfo
+{{custom_field_378555}}
+
+realEstatePayment
+{{custom_field_378777}}
+
+rentOrOwn
+{{custom_field_378761}}
+
+rvInfo
+{{custom_field_378756}}
+
+rvOwner
+{{custom_field_378755}}
+
+valueBedroomFurniture
+{{custom_field_378560}}
+
+valueClothing
+{{custom_field_378564}}
+
+valueCollectibles
+{{custom_field_378565}}
+
+valueComputerEquipment
+{{custom_field_378563}}
+
+valueCookware
+{{custom_field_378557}}
+
+valueDiningRoomFurniture
+{{custom_field_378559}}
+
+valueGameConsoles
+{{custom_field_378566}}
+
+valueJewelry
+{{custom_field_378562}}
+
+valueKitchenAppliances
+{{custom_field_378556}}
+
+valueLivingRoomFurniture
+{{custom_field_378558}}
+
+valueOfficeFurniture
+{{custom_field_378561}}
+
+valueOtherElectronics
+{{custom_field_378567}}
+
+valueSportsEquip
+{{custom_field_379439}}
+
+valueTools
+{{custom_field_378568}}
+
+vehicle1Info
+{{custom_field_378579}}
+
+vehicle1Owner
+{{custom_field_378741}}
+
+vehicle2Info
+{{custom_field_378580}}
+
+vehicle2Owner
+{{custom_field_378742}}
+
+vehicle3Info
+{{custom_field_378581}}
+
+vehicle3Owner
+{{custom_field_378744}}
+
+vehicle4Info
+{{custom_field_378583}}
+
+vehicle4Owner
+{{custom_field_378745}}
+
+Spouse
+{{rel_spouse|<Merge Field>}}
+
+Child
+{{rel_child|<Merge Field>}}
+
+Grandchild
+{{rel_grandchild|<Merge Field>}}
+
+Parent
+{{rel_parent|<Merge Field>}}
+
+Co-debtor
+{{rel_co-debtor|<Merge Field>}}
+
+Related Contact
+{{rel_related_contact|<Merge Field>}}
+
+Cpa or Tax Advisor
+{{rel_cpa_or_tax_advisor|<Merge Field>}}
+
+Sibling
+{{rel_sibling|<Merge Field>}}
+
+Owner
+{{rel_owner|<Merge Field>}}
+
+Ex-Spouse
+{{rel_ex-spouse|<Merge Field>}}
+
+Deceased Spouse
+{{rel_deceased_spouse|<Merge Field>}}
+
+Domestic Partner
+{{rel_domestic_partner|<Merge Field>}}
+
+Niece/Nephew
+{{rel_niece/nephew|<Merge Field>}}
+
+Fiduciary
+{{rel_fiduciary|<Merge Field>}}
+
+Step-child
+{{rel_step-child|<Merge Field>}}
+
+Required Signature Field
+{{sig|req|<Role Name>}}
+
+Signature Field
+{{sig|noreq|<Role Name>}}
+
+Required Firm Signature Field
+{{sigfirm|req|<Role Name>}}
+
+Firm Signature Field
+{{sigfirm|noreq|<Role Name>}}
+
+Required Date Field
+{{date|req|<Role Name>}}
+
+Date Field
+{{date|noreq|<Role Name>}}
+
+Required Checkbox Field
+{{check|req|<Role Name>}}
+
+Checkbox Field
+{{check|noreq|<Role Name>}}
+
+Required Text Field
+{{text|req|<Role Name>}}
+
+Text Field
+{{text|noreq|<Role Name>}}
+
+Required Initials Field
+{{initial|req|<Role Name>}}
+
+Initials Field
+{{initial|noreq|<Role Name>}}

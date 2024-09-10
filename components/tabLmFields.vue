@@ -42,7 +42,7 @@
                 <strong>{{ item.field_label }}:</strong><br />{{ item.field_macro }}
               </div>
               <div class="button-column">
-                <fluent-button class="icon" @click="handleInsert(item.field_macro)">
+                <fluent-button class="icon" @click="handleInsert(item)">
                   <IconsIconWrapper :icon="IconAddSquare" />
                 </fluent-button>
                 <fluent-button @click="copyToClipboard(item)">

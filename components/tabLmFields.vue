@@ -43,7 +43,7 @@
                 <strong>{{ item.field_label }}:</strong><br />{{ item.field_macro }}
               </div>
               <div class="button-column">
-                <fluent-button @click="insertInfo(`${currentRelType}item.field_macro`)">
+                <fluent-button @click="insertInfo(item.field_macro.replace(/^\{\{/, `\{\{${currentRelType}`))">
                   <IconsIconWrapper :icon="IconAddSquare" />
                 </fluent-button>
                 <fluent-button @click="copyToClipboard(item.field_macro)">

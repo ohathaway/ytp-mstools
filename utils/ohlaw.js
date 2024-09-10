@@ -5,3 +5,7 @@ export const openNewWindow = link => {
 export const stripCountry = address => {
   return address.replace(/\,\sUnited\sStates.*/, '')
 }
+
+export const relType = input => 
+  (input === "Client" && "") || 
+  `rel_${input.toLowerCase().replace(/ /g, "*")}|`;

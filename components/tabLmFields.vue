@@ -23,6 +23,19 @@
             &#x2715;
           </button>
         </div>
+        <fluent-select
+          v-if="relationships"
+          title="Select a relationship"
+          v-model="currentRelType"
+        >
+          <fluent-option
+            v-for="rel in relationship_types"
+            :key="rel.id"
+            :value="relType(rel.attributes.name)"
+          >
+            {{ rel.attributes.name }}
+          </fluent-option>
+        </fluent-select>
         <ul class="filtered-list">
           <li v-for="item in filteredItems" :key="item.field_label" class="list-item">
             <div class="grid-container">
@@ -30,7 +43,7 @@
                 <strong>{{ item.field_label }}:</strong><br />{{ item.field_macro }}
               </div>
               <div class="button-column">
-                <fluent-button @click="insertInfo(item.field_macro)">
+                <fluent-button @click="insertInfo(`${currentRelType}item.field_macro`)">
                   <IconsIconWrapper :icon="IconAddSquare" />
                 </fluent-button>
                 <fluent-button @click="copyToClipboard(item.field_macro)">
@@ -51,7 +64,8 @@ import IconAddSquare from '@/components/icons/IconAddSquare.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconCopyOutline from '@/components/icons/IconCopyOutline.vue'
 
-const { $toast } = useNuxtApp()
+const { $toast, $searchLm } = useNuxtApp()
+const { public: { lmFunction } } = useRuntimeConfig()
 // Replace with actual authentication logic
 const props = defineProps({
   items: {
@@ -60,11 +74,17 @@ const props = defineProps({
   }
 })
 
-const isLmAuthenticated = computed(() => true)
-
 const filterText = ref('')
+const currentRelType = ref('Client')
 const copyButtonPressed = ref(false)
 
+const relationships = await $searchLm(`${lmFunction}/relationship_types`)
+const relationship_types = computed(() => {
+  return [{ id: 0, attributes: { name: 'Client' }}, ...relationships ]
+})
+console.debug('relationship_types: ', relationship_types)
+
+const isLmAuthenticated = computed(() => true)
 const filteredItems = computed(() => {
   const searchTerm = filterText.value.toLowerCase()
   return props.items.filter(item => 

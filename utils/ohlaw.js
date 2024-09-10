@@ -8,4 +8,4 @@ export const stripCountry = address => {
 
 export const relType = input => 
   (input === 'Client' && '') || 
-  `rel_${input.toLowerCase().replace(/ /g, '_')}|`;
+  `rel_${input.toLowerCase().replace(/ /g, '_')}|`

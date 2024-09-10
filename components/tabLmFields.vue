@@ -13,7 +13,6 @@
             placeholder="Filter fields..."
             v-model="filterText"
             @input="updateFilter"
-            @keyup="handleKeyUp"
           />
           <button
             v-if="filterText"
@@ -31,7 +30,7 @@
           <fluent-option
             v-for="rel in relationship_types"
             :key="rel.id"
-            :value="relType(rel.attributes.name)"
+            :value="rel.attributes.name"
           >
             {{ rel.attributes.name }}
           </fluent-option>
@@ -43,18 +42,12 @@
                 <strong>{{ item.field_label }}:</strong><br />{{ item.field_macro }}
               </div>
               <div class="button-column">
-                <fluent-button @click="insertInfo(item.field_macro.replace(/^\{\{/, `\{\{${currentRelType}`))">
-                  <IconsIconWrapper :icon="IconAddSquare" class="icon icon-add"/>
+                <fluent-button class="icon" @click="handleInsert(item.field_macro)">
+                  <IconsIconWrapper :icon="IconAddSquare" />
                 </fluent-button>
-                <fluent-button @click="copyToClipboard(item.field_macro)">
+                <fluent-button @click="copyToClipboard(item)">
                   <IconsIconWrapper
-                    v-if="copyButtonPressed"
-                    :icon="IconCopyOutline"
-                    class="icon icon-copy"
-                  />
-                  <IconsIconWrapper
-                    v-else
-                    :icon="IconCopy"
+                    :icon="item.copyButtonPressed ? IconCopyOutline : IconCopy"
                     class="icon icon-copy"
                   />
                 </fluent-button>
@@ -84,7 +77,6 @@ const props = defineProps({
 
 const filterText = ref('')
 const currentRelType = ref('Client')
-const copyButtonPressed = ref(false)
 
 const relationships = await $searchLm(`${lmFunction}/relationship_types`)
 const relationship_types = computed(() => {
@@ -93,9 +85,13 @@ const relationship_types = computed(() => {
 console.debug('relationship_types: ', relationship_types)
 
 const isLmAuthenticated = computed(() => true)
+
 const filteredItems = computed(() => {
   const searchTerm = filterText.value.toLowerCase()
-  return props.items.filter(item => 
+  return props.items.map(item => ({
+    ...item,
+    copyButtonPressed: false
+  })).filter(item => 
     item.field_label.toLowerCase().includes(searchTerm) ||
     item.field_macro.toLowerCase().includes(searchTerm)
   )
@@ -109,12 +105,18 @@ const clearFilter = () => {
   filterText.value = ''
 }
 
-const copyToClipboard = (text) => {
-  navigator.clipboard.writeText(text).then(() => {
-    copyButtonPressed.value = true
+const handleInsert = (item) => {
+  const relTypePrefix = currentRelType.value === 'Client' ? '' : relType(currentRelType.value)
+  const macroToInsert = item.field_macro.replace(/^\{\{/, `{{${relTypePrefix}`)
+  insertInfo(macroToInsert)
+}
+
+const copyToClipboard = item => {
+  navigator.clipboard.writeText(item.field_macro).then(() => {
+    item.copyButtonPressed = true
     $toast.addToast('Copied to clipboard', 'success')
     setTimeout(() => {
-      copyButtonPressed.value = false
+      item.copyButtonPressed = false
     }, 2000)
   }).catch(err => {
     console.error('Failed to copy text: ', err)

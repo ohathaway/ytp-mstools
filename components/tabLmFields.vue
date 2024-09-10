@@ -44,11 +44,19 @@
               </div>
               <div class="button-column">
                 <fluent-button @click="insertInfo(item.field_macro.replace(/^\{\{/, `\{\{${currentRelType}`))">
-                  <IconsIconWrapper :icon="IconAddSquare" />
+                  <IconsIconWrapper :icon="IconAddSquare" class="icon icon-add"/>
                 </fluent-button>
                 <fluent-button @click="copyToClipboard(item.field_macro)">
-                  <IconsIconWrapper v-if="copyButtonPressed" :icon="IconCopyOutline" />
-                  <IconsIconWrapper v-else :icon="IconCopy" />
+                  <IconsIconWrapper
+                    v-if="copyButtonPressed"
+                    :icon="IconCopyOutline"
+                    class="icon icon-copy"
+                  />
+                  <IconsIconWrapper
+                    v-else
+                    :icon="IconCopy"
+                    class="icon icon-copy"
+                  />
                 </fluent-button>
               </div>
             </div>
@@ -147,6 +155,10 @@ const copyToClipboard = (text) => {
   cursor: pointer;
   font-size: 18px;
   color: #888;
+}
+
+.icon {
+  color: #244091;
 }
 
 .filtered-list {

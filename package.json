@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "npx nuxi build --prerender",
+    "build:dev": "npx nuxi build --prerender --mode development",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -17,6 +18,7 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxtjs/svg": "latest"
+    "@nuxtjs/svg": "latest",
+    "sass-embedded": "^1.78.0"
   }
 }

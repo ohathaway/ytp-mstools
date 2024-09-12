@@ -205,8 +205,8 @@ $button-background-color: #f3f3f3;
   flex: 1;
   display: flex;
   align-items: stretch;
-  border: 1px solid $border-color;
-  border-radius: 2px;
+  border: 0.8px solid $border-color;
+  border-radius: 4px;
   height: $field-height;
   overflow: hidden;
 }

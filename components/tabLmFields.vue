@@ -289,6 +289,7 @@ $button-background-color: #f3f3f3;
   margin-top: 16px;
 
   .list-item {
+    background: #f8f8f8;
     border: 1px solid $border-color;
     padding: 8px;
     margin-bottom: 8px;

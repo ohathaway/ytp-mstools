@@ -104,11 +104,6 @@ const relationship_types = computed(() => [
   ...relationships
 ])
 
-const isCurrentRelTypeRepeatable = computed(() => {
-  const currentRel = relationships.find(rel => rel.attributes.name === currentRelType.value)
-  return Boolean(currentRel?.attributes.is_repeatable)
-})
-
 const filteredItems = computed(() => {
   const searchTerm = filterText.value.toLowerCase()
   return props.items.map(item => ({
@@ -140,8 +135,15 @@ const decrementIndex = () => {
   }
 }
 
-const handleInsert = (item) => {
-  const currentRel = relationships.data.find(
+const isCurrentRelTypeRepeatable = computed(() => {
+  const currentRel = relationships.find(
+    rel => rel.attributes.name === currentRelType.value
+  )
+  return Boolean(currentRel?.attributes.is_repeatable)
+})
+
+const getRelationshipPrefix = () => {
+  const currentRel = relationships.find(
     rel => rel.attributes.name === currentRelType.value
   )
   const relTypePrefix = currentRelType.value === 'Client'
@@ -150,15 +152,26 @@ const handleInsert = (item) => {
   const indexSuffix = currentRel?.attributes.is_repeatable
     ? `_${repeatableIndex.value}`
     : ''
+  return `${relTypePrefix}${indexSuffix}`
+}
+
+const handleInsert = (item) => {
+  const prefix = getRelationshipPrefix()
   const macroToInsert = item.field_macro.replace(
-    /^\{\{/, `{{${relTypePrefix}${indexSuffix}|`
+    /^\{\{/, `{{${prefix}${prefix ? '|' : ''}`
   )
 
   insertInfo(macroToInsert)
 }
 
 const copyToClipboard = item => {
-  navigator.clipboard.writeText(item.field_macro)
+  const prefix = getRelationshipPrefix()
+  console.debug('prefix: ', prefix)
+  const macroToCopy = item.field_macro.replace(
+    /^\{\{/, `{{${prefix}${prefix ? '|' : ''}`
+  )
+  console.debug('macroToCopy: ', macroToCopy)
+  navigator.clipboard.writeText(macroToCopy)
     .then(() => {
       item.copyButtonPressed = true
       $toast.addToast('Copied to clipboard', 'success')
@@ -178,7 +191,7 @@ $border-color: #d1d1d1;
 $hover-color: #e1e1e1;
 $active-color: #d1d1d1;
 $disabled-opacity: 0.5;
-$field-height: 32px;
+$field-height: 20;
 $button-background-color: #f3f3f3;
 
 .ohl-tab-panel {
@@ -194,6 +207,7 @@ $button-background-color: #f3f3f3;
   display: flex;
   gap: 10px;
   align-items: stretch;
+  margin: 8px 0;
 }
 
 ::v-deep(fluent-select) {

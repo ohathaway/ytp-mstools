@@ -6,6 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 
 [vars]
 LAWMATICS_URL = "https://api.lawmatics.com"
+NODE_VERSION = 20.17.0
 
 [env.production.vars]
 LAWMATICS_URL = "https://api.lawmatics.com"

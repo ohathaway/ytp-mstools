@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "ohlaw-mstools-2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,17 +12,15 @@
   },
   "dependencies": {
     "@fluentui/web-components": "^2.6.1",
-    "@microsoft/fast-element": "^1.13.0",
-    "@pinia/nuxt": "latest",
+    "@microsoft/fast-element": "^2.0.0",
+    "@pinia/nuxt": "^0.5.4",
     "fuse.js": "^7.0.0",
-    "lodash": "^4.17.21",
-    "lodash-es": "latest",
-    "nuxt": "latest",
-    "vue": "latest"
+    "lodash-es": "^4.17.21",
+    "nuxt": "^3.13.2"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/svg": "latest",
-    "sass-embedded": "^1.78.0"
+    "@nuxt/devtools": "^1.4.2",
+    "@nuxtjs/svg": "^0.4.1",
+    "sass-embedded": "^1.79.1"
   }
 }

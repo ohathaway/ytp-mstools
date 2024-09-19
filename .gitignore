@@ -26,3 +26,6 @@ logs
 
 # cloudflare cli and local development
 .wrangler
+
+# troubleshooting files
+package-old.json

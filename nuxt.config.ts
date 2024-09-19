@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '@/assets/css/global.css'
   ],
   devtools: { enabled: true },
+  modules: ['@pinia/nuxt'],
   runtimeConfig: {
     public: {
       lmBasicAuth: process.env.BASIC_AUTH,

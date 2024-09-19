@@ -25,7 +25,8 @@
         <TabLmData />
       </fluent-tab-panel>
       <fluent-tab-panel id="lmFieldsPanel">
-        <TabLmFields :items="$lmFields"/>
+        <!-- <TabLmFieldsOld /> -->
+        <TabLmFields />
       </fluent-tab-panel>
     </fluent-tabs>
   </main>

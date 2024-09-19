@@ -2,6 +2,7 @@
   "name": "ohlaw-mstools-2",
   "private": true,
   "type": "module",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "npx nuxi build --prerender",
     "build:dev": "npx nuxi build --prerender --mode development",

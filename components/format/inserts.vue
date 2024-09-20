@@ -9,9 +9,24 @@
   >
     Insert Owen's Signature
   </fluent-button>
+  <fluent-button
+    @click="insertInfo(juratBase)"
+  >
+    Insert jurat
+  </fluent-button>
 </template>
 
 <script setup>
+const juratBase =  `
+STATE OF COLORADO	)
+	) ss.
+COUNTY OF LARIMER	)
+This instrument was acknowledged before me on {{current_date_format_a}}, by {{full_name}}.
+	[Seal]		
+		Owen Hathaway, Notary Public
+		My commission expires: November 24, 2024
+`
+
 const insertImage = async path => {
   const image = await fetch(path)
   const imageBuffer = await image.arrayBuffer()

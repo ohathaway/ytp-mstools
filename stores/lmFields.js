@@ -1,3 +1,5 @@
+import Fuse from 'fuse.js'
+
 export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
   const fields = ref([])
   const filterText = ref('')
@@ -5,6 +7,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
   const repeatableIndex = ref(1)
   const relationshipTypes = ref([])
   const isLoading = ref(false)
+  const fuse = ref(null)
 
   const sortedRelationshipTypes = computed(() => {
     const clientType = { id: 0, attributes: { name: 'Client' }}
@@ -12,12 +15,14 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
   })
 
   const filteredFields = computed(() => {
-    return fields.value.filter(field => {
-      const label = (field?.field_label ??'').toLowerCase()
-      const macro = (field?.field_macro ?? '').toLowerCase()
-      const searchText = (filterText.value ?? '').toLowerCase()
-      return label.includes(searchText) || macro.includes(searchText)
-    })
+    const searchText = (filterText.value ?? '').toLowerCase()
+    return (searchText && fuse.value)
+      ? fuse.value.search(searchText).map(result => result.item)
+      : fields.value.filter(field => {
+          const label = (field?.field_label ??'').toLowerCase()
+          const macro = (field?.field_macro ?? '').toLowerCase()
+          return label.includes(searchText) || macro.includes(searchText)
+        })
   })
 
   const isCurrentRelTypeRepeatable = computed(() => {
@@ -45,6 +50,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     switch (key) {
       case 'fields':
         fields.value = value
+        initFuse()
         break
       case 'filterText':
         filterText.value = value
@@ -117,6 +123,14 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     } finally {
       isLoading.value = false
     }
+  }
+
+  const initFuse = () => {
+    fuse.value = new Fuse(fields.value, {
+      keys: ['field_label', 'field_macro'],
+      threshold: 0.4,
+      ignoreLocation: true
+    })
   }
 
   return {

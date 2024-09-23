@@ -5,7 +5,6 @@
       id="relationship-selector"
       appearance="outline"
       v-model="store.currentRelType"
-      title="Select a relationship type"
       aria-label="Select a relationship type"
     >
       <fluent-option
@@ -16,36 +15,50 @@
         {{ rel.attributes.name }}
       </fluent-option>
     </fluent-select>
+    <fluent-tooltip
+      anchor="relationship-selector"
+      fixed-placement="false"
+    >
+      Select a relationship type
+    </fluent-tooltip>
     <div class="custom-number-field">
       <input
+        id="repeatable-index"
         type="number"
         v-model="store.repeatableIndex"
         :disabled="!store.isCurrentRelTypeRepeatable"
         min="1"
         max="5"
         step="1"
-        title="If the relationship is repeatable, select an index (1-5)"
         aria-label="If the relationship is repeatable, select an index (1-5)"
         class="wide-number-field"
       />
+      <fluent-tooltip
+        anchor="repeatable-index"
+        fixed-placement="false"
+      >
+        If the relationship is repeatable, select an index (1-5)
+      </fluent-tooltip>
     </div>
     <div class="number-controls">
       <button
+        id="increment-index"
         @click="incrementIndex"
         :disabled="!canIncrementIndex"
-        title="Increase index"
         aria-label="Increase index"
       >
         ▲
       </button>
+      <fluent-tooltip anchor="increment-index">Increase index</fluent-tooltip>
       <button
+        id="decrement-index"
         @click="decrementIndex"
         :disabled="!canDecrementIndex"
-        title="Decrease index"
         aria-label="Decrease index"
       >
         ▼
       </button>
+      <fluent-tooltip anchor="decrement-index">Decrease index</fluent-tooltip>
     </div>
   </div>
 </template>

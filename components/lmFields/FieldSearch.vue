@@ -2,6 +2,7 @@
   <div class="input-wrapper">
     <label>Filter Fields</label>
     <fluent-search
+      id="search-bar"
       appearance="outline"
       placeholder="Search for a field..."
       v-model="store.filterText"
@@ -9,6 +10,7 @@
       aria-label="Type to filter available fields"
       @change="debouncedSetFilterText"
     />
+    <fluent-tooltip anchor="search-bar">Type to filter available fields</fluent-tooltip>
   </div>
 </template>
 

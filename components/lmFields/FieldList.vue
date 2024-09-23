@@ -8,16 +8,21 @@
     >
       <div class="grid-container">
         <div class="content-column">
-          <strong>{{ item.field_label }}:</strong><br />
-          <span class="preview-macro">
+          <div :id="toKebabCase(item.field_label)">
+            <strong>{{ item.field_label }}:</strong><br />
+            <span class="preview-macro">
+              {{ getPreviewMacro(item) }}
+            </span>
+          </div>
+          <fluent-tooltip :anchor="toKebabCase(item.field_label)">
             {{ getPreviewMacro(item) }}
-          </span>
+          </fluent-tooltip>
         </div>
         <div class="button-column">
           <fluent-button
+            id="insert-button"
             class="icon"
             @click="handleInsert(item)"
-            :title="`Add ${item.field_label} to the document`"
             :aria-label="`Add ${item.field_label} to the document`"
           >
             <IconsIconWrapper
@@ -26,9 +31,14 @@
               height="16"
             />
           </fluent-button>
+          <fluent-tooltip
+            anchor="insert-button"
+          >
+            {{ `Add ${item.field_label} to the document` }}
+          </fluent-tooltip>
           <fluent-button
+            id="copy-button"
             @click="copyToClipboard(item)"
-            :title="item.copyButtonPressed ? 'Copied!' : 'Copy this field to clipboard'"
             :aria-label="item.copyButtonPressed ? 'Copied!' : 'Copy this field to clipboard'"
           >
             <IconsIconWrapper
@@ -38,6 +48,11 @@
               height="16"
             />
           </fluent-button>
+          <fluent-tooltip
+            anchor="copy-button"
+          >
+            {{ item.copyButtonPressed ? 'Copied!' : 'Copy this field to clipboard' }}
+          </fluent-tooltip>
         </div>
       </div>
     </li>

@@ -134,9 +134,10 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     })
   }
 
-  const addToMRU = (field) => {
+  const addToMRU = (field, fullMacro) => {
+    const newMruItem = { ...field, fullMacro }
     mruFields.value = [
-      field,
+      newMruItem,
       ...mruFields.value.filter(f => f.field_label !== field.field_label)
     ].slice(0,3)
   }

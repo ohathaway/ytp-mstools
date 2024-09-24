@@ -8,6 +8,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
   const relationshipTypes = ref([])
   const isLoading = ref(false)
   const fuse = ref(null)
+  const mruFields = ref([])
 
   const sortedRelationshipTypes = computed(() => {
     const clientType = { id: 0, attributes: { name: 'Client' }}
@@ -133,7 +134,15 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     })
   }
 
+  const addToMRU = (field) => {
+    mruFields.value = [
+      field,
+      ...mruFields.value.filter(f => f.field_label !== field.field_label)
+    ].slice(0,3)
+  }
+
   return {
+    addToMRU,
     currentRelType,
     fetchFields,
     fetchRelationshipTypes,
@@ -142,6 +151,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     filteredFields,
     isCurrentRelTypeRepeatable,
     isLoading,
+    mruFields,
     setCurrentRelType,
     setFields,
     setFilterText,

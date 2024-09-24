@@ -17,7 +17,7 @@
     </fluent-select>
     <fluent-tooltip
       anchor="relationship-selector"
-      fixed-placement="false"
+      position="top"
     >
       Select a relationship type
     </fluent-tooltip>

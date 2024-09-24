@@ -4,6 +4,7 @@
       <div class="filter-component">
         <LmFieldsRelationshipSelector />
         <LmFieldsFieldSearch />
+        <LmFieldsFieldListMRU />
         <LmFieldsFieldList />
       </div>
     </div>

@@ -496,6 +496,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     {
       "field_label": "Cpa or Tax Advisor",
       "field_macro": "{{custom_field_381257}}"
+    },
+    {
+      "field_label": "Trust Name",
+      "field_macro": "{{custom_field_494870}}"
     }
   ]
 

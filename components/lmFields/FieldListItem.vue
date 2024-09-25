@@ -79,12 +79,10 @@ const getPreviewMacro = item => {
 const handleInsert = item => {
   const macroToInsert = getPreviewMacro(item)
   insertInfo(macroToInsert)
-  store.addToMRU(item)
+  store.addToMRU(item, macroToInsert)
 }
 
 const getDisplayMacro = item => {
-  console.debug('evaluating macro for item: ', item)
-  console.debug('is it an MRU item? ', isMruItem)
   const prefix = store.relationshipPrefix
   return isMruItem && item.fullMacro
     ? item.fullMacro
@@ -101,7 +99,7 @@ const copyToClipboard = item => {
         item.copyButtonPressed = false
       }, 2000)
     })
-  store.addToMRU(item)
+  store.addToMRU(item, macroToCopy)
 }
 </script>
 

@@ -83,6 +83,8 @@ const handleInsert = item => {
 }
 
 const getDisplayMacro = item => {
+  console.debug('evaluating macro for item: ', item)
+  console.debug('is it an MRU item? ', isMruItem)
   const prefix = store.relationshipPrefix
   return isMruItem && item.fullMacro
     ? item.fullMacro

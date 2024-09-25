@@ -6,8 +6,10 @@
         v-for="item in store.mruFields"
         :key="item.field_label"
         :item="item"
+        :isMruItem="true"
       />
     </ul>
+    <hr class="mru-separator" />
   </div>
 </template>
 
@@ -27,6 +29,12 @@ const store = useLawmaticsFieldsStore()
   .mru-list {
     list-style-type: none;
     padding: 0;
+  }
+  .mru-separator {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    margin: 16px 0;
   }
 }
 </style>

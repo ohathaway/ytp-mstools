@@ -5,11 +5,11 @@
         <div :id="toKebabCase(item.field_label)">
           <strong>{{ item.field_label }}:</strong><br />
           <span class="preview-macro">
-            {{ getPreviewMacro(item) }}
+            {{ getDisplayMacro(item) }}
           </span>
         </div>
         <fluent-tooltip :anchor="toKebabCase(item.field_label)">
-          {{ getPreviewMacro(item) }}
+          {{ getDisplayMacro(item) }}
         </fluent-tooltip>
       </div>
       <div class="button-column">
@@ -59,6 +59,10 @@ const { item } = defineProps({
   item: {
     type: Object,
     required: true
+  },
+  isMruItem: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -76,6 +80,13 @@ const handleInsert = item => {
   const macroToInsert = getPreviewMacro(item)
   insertInfo(macroToInsert)
   store.addToMRU(item)
+}
+
+const getDisplayMacro = item => {
+  const prefix = store.relationshipPrefix
+  return props.isMruItem && item.fullMacro
+    ? item.fullMacro
+    : itemfield_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
 }
 
 const copyToClipboard = item => {

@@ -55,7 +55,7 @@ import IconAddSquare from '@/components/icons/IconAddSquare.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconCopyOutline from '@/components/icons/IconCopyOutline.vue'
 
-const { item } = defineProps({
+const { item, isMruItem } = defineProps({
   item: {
     type: Object,
     required: true
@@ -84,9 +84,9 @@ const handleInsert = item => {
 
 const getDisplayMacro = item => {
   const prefix = store.relationshipPrefix
-  return props.isMruItem && item.fullMacro
+  return isMruItem && item.fullMacro
     ? item.fullMacro
-    : itemfield_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
+    : item.field_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
 }
 
 const copyToClipboard = item => {

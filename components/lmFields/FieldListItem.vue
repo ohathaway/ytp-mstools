@@ -68,6 +68,7 @@ const { item, isMruItem } = defineProps({
 
 const store = useLawmaticsFieldsStore()
 const { $toast } = useNuxtApp()
+const copyButtonPressed = ref(false)
 
 const getPreviewMacro = item => {
   const prefix = store.relationshipPrefix
@@ -84,19 +85,21 @@ const handleInsert = item => {
 
 const getDisplayMacro = item => {
   const prefix = store.relationshipPrefix
-  return isMruItem && item.fullMacro
+  const returnValue = isMruItem && item.fullMacro
     ? item.fullMacro
     : item.field_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
+  console.debug('getDisplayMacro returnValue: ', returnValue)
+  return returnValue
 }
 
 const copyToClipboard = item => {
   const macroToCopy = getPreviewMacro(item)
   navigator.clipboard.writeText(macroToCopy)
     .then(() => {
-      item.copyButtonPressed = ref(true)
+      copyButtonPressed = ref(true)
       $toast.addToast('Copied to clipboard', 'success')
       setTimeout(() => {
-        item.copyButtonPressed = false
+        copyButtonPressed = false
       }, 2000)
     })
   store.addToMRU(item, macroToCopy)

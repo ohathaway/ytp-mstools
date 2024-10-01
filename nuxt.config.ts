@@ -19,12 +19,19 @@ export default defineNuxtConfig({
     }
   },
   buildModules: ['@nuxtjs/svg'],
+  build: {
+    transpile: [
+      'vue-toastification'
+    ]
+  },
   compatibilityDate: '2024-04-03',
   css: [
     '~/assets/css/global.scss'
   ],
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt'],
+  modules: [
+    '@pinia/nuxt'
+  ],
   runtimeConfig: {
     public: {
       lmBasicAuth: process.env.BASIC_AUTH,

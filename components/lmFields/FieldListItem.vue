@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+// import { useToast } from 'vue-toastification'
 import IconAddSquare from '@/components/icons/IconAddSquare.vue'
 import IconCopy from '@/components/icons/IconCopy.vue'
 import IconCopyOutline from '@/components/icons/IconCopyOutline.vue'
@@ -67,7 +68,8 @@ const { item, isMruItem } = defineProps({
 })
 
 const store = useLawmaticsFieldsStore()
-const { $toast } = useNuxtApp()
+// const toast = useToast()
+const { toastSuccess, toastError } = useMainStore()
 const copyButtonPressed = ref(false)
 
 const getPreviewMacro = item => {
@@ -88,7 +90,6 @@ const getDisplayMacro = item => {
   const returnValue = isMruItem && item.fullMacro
     ? item.fullMacro
     : item.field_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
-  console.debug('getDisplayMacro returnValue: ', returnValue)
   return returnValue
 }
 
@@ -97,7 +98,7 @@ const copyToClipboard = item => {
   navigator.clipboard.writeText(macroToCopy)
     .then(() => {
       copyButtonPressed = ref(true)
-      $toast.addToast('Copied to clipboard', 'success')
+      toastSuccess({ message: `Copied ${macroToCopy} to clipboard` })
       setTimeout(() => {
         copyButtonPressed = false
       }, 2000)

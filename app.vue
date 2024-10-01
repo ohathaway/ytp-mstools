@@ -1,16 +1,5 @@
 <template>
   <Header />
-  <div class="toast-container">
-    <template v-if="toasts && toasts.activeToasts.length > 0">
-      <Toast
-        v-for="toast in toasts.activeToasts"
-        :key="toast.id"
-        :message="toast.message"
-        :type="toast.type"
-        @close="toasts.removeToast(toast.id)"
-      />
-    </template>
-  </div>
   <main id="app-body" class="ms-welcome__main">
     <NuxtRouteAnnouncer />
     <fluent-tabs activeid="format">

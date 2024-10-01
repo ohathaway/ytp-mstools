@@ -33,7 +33,6 @@
 
 <script setup>
 Office.onReady()
-const toasts = useToast()
 </script>
 
 <style scoped>

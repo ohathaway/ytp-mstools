@@ -56,21 +56,11 @@
       >
         {{ attributes.phone }}
       </fluent-button>
-      <fluent-menu
+      <LawmaticsDobField
         v-if="attributes.birthdate"
-        :id="`birthdate-${contact - id}`"
-        open-on-hover=""
-      >
-        <fluent-menu-button aria-label="Toggle Dob Menu" slot="trigger">
-          Birthdate
-        </fluent-menu-button>
-        
-        <fluent-menu-list>
-          <fluent-menu-item @click="insertInfo(attributes.birthdate)">
-            dob: {{ attributes.birthdate }}
-          </fluent-menu-item>
-        </fluent-menu-list>
-      </fluent-menu>
+        :birthdate="attributes.birthdate"
+        :contactId="contact.id"
+      />
       <fluent-button
         v-if="attributes.address"
         @click="insertInfo(stripCountry(attributes.address))"

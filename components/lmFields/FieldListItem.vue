@@ -31,6 +31,7 @@
         <fluent-button
           id="copy-button"
           @click="copyToClipboard(item)"
+          :shakeOnClick="true"
           :aria-label="item.copyButtonPressed ? 'Copied!' : 'Copy this field to clipboard'"
         >
           <IconsIconWrapper
@@ -97,10 +98,10 @@ const copyToClipboard = item => {
   const macroToCopy = getPreviewMacro(item)
   navigator.clipboard.writeText(macroToCopy)
     .then(() => {
-      copyButtonPressed = ref(true)
+      copyButtonPressed.value = ref(true)
       toastSuccess({ message: `Copied ${macroToCopy} to clipboard` })
       setTimeout(() => {
-        copyButtonPressed = false
+        copyButtonPressed.value = false
       }, 2000)
     })
   store.addToMRU(item, macroToCopy)

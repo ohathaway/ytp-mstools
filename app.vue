@@ -1,23 +1,26 @@
 <template>
-  <Header />
-  <main id="app-body" class="ms-welcome__main">
-    <NuxtRouteAnnouncer />
-    <fluent-tabs activeid="format">
-      <fluent-tab id="format">Format</fluent-tab>
-      <fluent-tab id="lmData">LM Data</fluent-tab>
-      <fluent-tab id="lmFields">LM Fields</fluent-tab>
+  <v-app>
+    <Header />
+    <v-btn>Testing</v-btn>
+    <main id="app-body" class="ms-welcome__main">
+      <NuxtRouteAnnouncer />
+      <fluent-tabs activeid="format">
+        <fluent-tab id="format">Format</fluent-tab>
+        <fluent-tab id="lmData">LM Data</fluent-tab>
+        <fluent-tab id="lmFields">LM Fields</fluent-tab>
 
-      <fluent-tab-panel id="formatPanel">
-        <TabFormat />
-      </fluent-tab-panel>
-      <fluent-tab-panel id="lmDataPanel">
-        <TabLmData />
-      </fluent-tab-panel>
-      <fluent-tab-panel id="lmFieldsPanel">
-        <TabLmFields />
-      </fluent-tab-panel>
-    </fluent-tabs>
-  </main>
+        <fluent-tab-panel id="formatPanel">
+          <TabFormat />
+        </fluent-tab-panel>
+        <fluent-tab-panel id="lmDataPanel">
+          <TabLmData />
+        </fluent-tab-panel>
+        <fluent-tab-panel id="lmFieldsPanel">
+          <TabLmFields />
+        </fluent-tab-panel>
+      </fluent-tabs>
+    </main>
+  </v-app>
 </template>
 
 <script setup>

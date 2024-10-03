@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -18,19 +20,25 @@ export default defineNuxtConfig({
       ]
     }
   },
-  buildModules: ['@nuxtjs/svg'],
   build: {
     transpile: [
-      'vue-toastification'
+      'vue-toastification',
+      'vuetify'
     ]
   },
+  buildModules: ['@nuxtjs/svg'],
   compatibilityDate: '2024-04-03',
   css: [
     '~/assets/css/global.scss'
   ],
   devtools: { enabled: true },
   modules: [
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', config => {
+        config.plugins?.push(vuetify({ autoImport: true }))
+      })
+    }
   ],
   runtimeConfig: {
     public: {
@@ -46,6 +54,11 @@ export default defineNuxtConfig({
     preprocessorOptions: {
       scss: { 
         api: 'modern-compiler'
+      }
+    },
+    vue: {
+      template: {
+        transformAssetUrls
       }
     }
   },

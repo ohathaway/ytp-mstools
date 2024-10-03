@@ -56,7 +56,7 @@
       >
         {{ attributes.phone }}
       </fluent-button>
-      <LawmaticsDobField
+      <LawmaticsDobButton
         v-if="attributes.birthdate"
         :birthdate="attributes.birthdate"
         :contactId="contact.id"
@@ -80,8 +80,6 @@ import IconOpen from '@/components/icons/IconOpen.vue'
 
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
-
-console.debug('contact.attributes: ', contact.attributes)
 
 const contactLink = computed(() => {
   return `https://app.lawmatics.com/contacts/${contact.id}/details`

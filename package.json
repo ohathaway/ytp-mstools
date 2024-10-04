@@ -21,14 +21,14 @@
     "lodash-es": "^4.17.21",
     "nuxt": "^3.13.2",
     "pina": "^0.20.2204228",
-    "vue-toastification": "2.0.0-rc.5"
+    "vue-toastification": "2.0.0-rc.5",
+    "vuetify-nuxt-module": "^0.18.3"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.4.2",
     "@nuxtjs/svg": "^0.4.1",
     "sass": "^1.79.1",
     "sass-loader": "^16.0.1",
-    "vite-plugin-vuetify": "^2.0.4",
     "vuetify": "^3.7.2"
   }
 }

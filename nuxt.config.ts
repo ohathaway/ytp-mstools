@@ -29,16 +29,13 @@ export default defineNuxtConfig({
   buildModules: ['@nuxtjs/svg'],
   compatibilityDate: '2024-04-03',
   css: [
-    '~/assets/css/global.scss'
+    '~/assets/css/global.scss',
+    'vuetify/styles'
   ],
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', config => {
-        config.plugins?.push(vuetify({ autoImport: true }))
-      })
-    }
+    'vuetify-nuxt-module'
   ],
   runtimeConfig: {
     public: {
@@ -56,11 +53,6 @@ export default defineNuxtConfig({
         api: 'modern-compiler'
       }
     },
-    vue: {
-      template: {
-        transformAssetUrls
-      }
-    }
   },
   vue: {
     compilerOptions: {

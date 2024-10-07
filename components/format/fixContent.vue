@@ -1,5 +1,7 @@
 <template>
-  <fluent-button @click="removeEmptyParagraphs"
+  <fluent-button @click="removeEmptyParagraphs">
+    Remove Empty &para;&para;
+  </fluent-button>
 </template>
 
 <script setup>

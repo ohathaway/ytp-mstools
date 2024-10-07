@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import vuetify from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   app: {
@@ -29,13 +29,22 @@ export default defineNuxtConfig({
   buildModules: ['@nuxtjs/svg'],
   compatibilityDate: '2024-04-03',
   css: [
-    '~/assets/css/global.scss',
-    'vuetify/styles'
+    'vuetify/styles',
+    '~/assets/css/global.scss'
   ],
   devtools: { enabled: true },
   modules: [
     '@pinia/nuxt',
-    'vuetify-nuxt-module'
+    async (options, nuxt) => {
+      nuxt.hooks.hook(
+        'vite:extendConfig', config => config.plugins.push(vuetify({
+          autoImport: true,
+          styles: {
+            configFile: 'assets/css/vuetify.scss'
+          }
+        })
+      ))
+    }
   ],
   runtimeConfig: {
     public: {
@@ -50,13 +59,19 @@ export default defineNuxtConfig({
     },
     preprocessorOptions: {
       scss: { 
+        additionalData: `
+          @use "@/assets/css/_colors.scss" as *;
+          @use "@/assets/css/_variables.scss" as *;
+          @use "@vuetify/lib/styles/settings/variables" as;
+        `,
         api: 'modern-compiler'
       }
     },
+    ssr: { noExternal: ['vuetify']}
   },
   vue: {
     compilerOptions: {
-      isCustomElement: tag => tag.includes('-')
+      isCustomElement: tag => tag.includes('fluent-')
     }
   }
 })

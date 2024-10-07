@@ -17,3 +17,7 @@
     <FormatResources />
   </div>
 </template>
+
+<style scoped>
+h2 { margin: 0.83em 0; }
+</style>

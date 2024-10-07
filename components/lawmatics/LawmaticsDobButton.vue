@@ -1,28 +1,26 @@
 <template>
   <!-- <v-btn :id="`birthdate-button-${contactId}`"> -->
-  <v-btn>
+  <v-btn
+    class="text-none"
+    rounded="sm"
+    density="comfortable"
+    variant="tonal"
+  >
     Date of Birth
-    <!--
     <v-menu
       :id="`birthdate-menu-${contactId}`"
       activator="parent"
     >
       <v-list>
-        <v-list-item @click="insertFormattedDate('MM/DD/YYYY')">
-          <v-list-item-title>MM/DD/YYYY</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="insertFormattedDate('MMMM DD, YYYY')">
-          <v-list-item-title>Month D, YYYY</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="insertFormattedDate('D MMMM YYYY')">
-          <v-list-item-title>D MMMM YYYY</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="insertFormattedDate('YYYY-MM-DD')">
-          <v-list-item-title>YYYY-MM-DD</v-list-item-title>
+        <v-list-item
+          v-for="format in formats"
+          :key="format"
+          @click="insertFormattedDate(format)"
+        >
+          <v-list-item-title>{{ dayjs(birthdate).format(format) }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
-    -->
   </v-btn>
 </template>
 
@@ -39,6 +37,13 @@ const props = defineProps({
     required: true
   }
 })
+
+const formats = [
+  'MM/DD/YYYY',
+  'MMMM DD, YYYY',
+  'D MMMM YYYY',
+  'YYYY-MM-DD'
+]
 
 const insertFormattedDate = format => {
   const formattedDate = dayjs(props.birthdate).format(format)

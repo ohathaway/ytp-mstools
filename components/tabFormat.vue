@@ -5,6 +5,10 @@
     <FormatEditStyles/>
 
     <hr width="100" />
+    
+    <FormatFixContent />
+
+    <hr width="100" />
 
     <FormatFonts />
 

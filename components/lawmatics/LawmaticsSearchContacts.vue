@@ -6,12 +6,14 @@
       </fluent-button>
     </div>
     <div class="lm-data" v-else>
-      <fluent-search
-        appearance="outline"
-        placeholder="Search Contacts..."
-        v-model="searchTerm"
-        @keyup="handleKeyUp"
-      />
+      <ClientOnly>
+        <fluent-search
+          appearance="outline"
+          placeholder="Search Contacts..."
+          v-model="searchTerm"
+          @keyup="handleKeyUp"
+        />
+      </ClientOnly>
       <fluent-radio-group 
         orientation="horizontal" 
         name="searchType" 

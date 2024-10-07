@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import vuetify from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -18,19 +20,31 @@ export default defineNuxtConfig({
       ]
     }
   },
-  buildModules: ['@nuxtjs/svg'],
   build: {
     transpile: [
-      'vue-toastification'
+      'vue-toastification',
+      'vuetify'
     ]
   },
+  buildModules: ['@nuxtjs/svg'],
   compatibilityDate: '2024-04-03',
   css: [
+    'vuetify/styles',
     '~/assets/css/global.scss'
   ],
   devtools: { enabled: true },
   modules: [
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    async (options, nuxt) => {
+      nuxt.hooks.hook(
+        'vite:extendConfig', config => config.plugins.push(vuetify({
+          autoImport: true,
+          styles: {
+            configFile: 'assets/css/vuetify.scss'
+          }
+        })
+      ))
+    }
   ],
   runtimeConfig: {
     public: {
@@ -45,13 +59,19 @@ export default defineNuxtConfig({
     },
     preprocessorOptions: {
       scss: { 
+        additionalData: `
+          @use "@/assets/css/_colors.scss" as *;
+          @use "@/assets/css/_variables.scss" as *;
+          @use "@vuetify/lib/styles/settings/variables" as;
+        `,
         api: 'modern-compiler'
       }
-    }
+    },
+    ssr: { noExternal: ['vuetify']}
   },
   vue: {
     compilerOptions: {
-      isCustomElement: tag => tag.includes('-')
+      isCustomElement: tag => tag.includes('fluent-')
     }
   }
 })

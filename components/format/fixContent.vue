@@ -12,7 +12,7 @@ const removeEmptyParagraphs = async () => {
     await context.sync()
 
     // paragraphs.map(para => {
-      console.debug('paragraph: ', paragraphs)
+      console.debug('paragraph: ', paragraphs.n)
     // })
 
   })

@@ -19,7 +19,8 @@ const removeEmptyParagraphs = async () => {
     // context.document.body.clear()
 
     filteredParas.map(para => {
-      console.debug('para contentControls: ', para.getContentControls())
+      const controls = para.getContentControls()
+      console.debug('para contentControls: ', controls.paragraphs)
       // context.document.body.insertParagraph(para.text, 'End')
     })
 

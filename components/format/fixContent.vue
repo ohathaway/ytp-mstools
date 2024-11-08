@@ -2,6 +2,9 @@
   <fluent-button @click="removeEmptyParagraphs">
     Remove Empty &para;&para;
   </fluent-button>
+  <fluent-button @click="replaceDoubleSpacesWithSingleSpace">
+    Only one space after a sentence
+  </fluent-button>
 </template>
 
 <script setup>
@@ -12,15 +15,15 @@ const removeEmptyParagraphs = async () => {
     await context.sync()
 
     const filteredParas = paragraphs.items.filter(para => {
-      console.debug('text: ', para.text.length)
       return para.text.length > 0
     })
 
     // context.document.body.clear()
+    filteredParas.map(async para => {
+      const ooxml = para.getOoxml()
+      context.sync()
 
-    filteredParas.map(para => {
-      const controls = para.getContentControls()
-      console.debug('para contentControls: ', controls.paragraphs)
+      console.debug('para ooxml: ', ooxml.value)
       // context.document.body.insertParagraph(para.text, 'End')
     })
 

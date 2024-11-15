@@ -1,6 +1,6 @@
 <template>
   <div class="spacing-control">
-    <fluent-number-field v-model.number="beforeSpace"></fluent-number-field>
+    <fluent-number-field v-model.number="beforeSpace" step="3"></fluent-number-field>
     <fluent-button
       class="apply-button"
       @click="setParaSpace('before', beforeSpace)"
@@ -15,7 +15,7 @@
     </fluent-button>
   </div>
   <div class="spacing-control">
-    <fluent-number-field v-model.number="afterSpace"></fluent-number-field>
+    <fluent-number-field v-model.number="afterSpace" step="3"></fluent-number-field>
     <fluent-button
       class="apply-button"
       @click="setParaSpace('after', afterSpace)"
@@ -44,7 +44,7 @@
 </template>
 
 <script setup>
-const beforeDefault = 12
+const beforeDefault = 0
 const afterDefault = 6
 const beforeSpace = ref(beforeDefault)
 const afterSpace = ref(afterDefault)

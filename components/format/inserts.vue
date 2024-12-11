@@ -14,6 +14,11 @@
   >
     Insert jurat
   </fluent-button>
+  <fluent-button
+    @click="insertXofY()"
+  >
+    Insert Page X of Y (Section)
+  </fluent-button>
 </template>
 
 <script setup>
@@ -24,7 +29,7 @@ COUNTY OF LARIMER	)
 This instrument was acknowledged before me on {{current_date_format_a}}, by {{full_name}}.
 	[Seal]		
 		Owen Hathaway, Notary Public
-		My commission expires: November 24, 2024
+		My commission expires: November 24, 2028
 `
 
 const insertImage = async path => {
@@ -79,5 +84,18 @@ const insertSignatureBlock2 = async () => {
 
     await context.sync()
   })
+
+}
+
+const insertXofY = async () => {
+  try {
+    insertInfo('Page ')
+    insertField('Page')
+    insertInfo(' of ')
+    insertField('SectionPages')
+  } catch (error) {
+    console.error('Failed to insert Page X of Y', error)
+    throw error
+  }
 }
 </script>

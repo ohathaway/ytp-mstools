@@ -10,7 +10,7 @@ export const insertInfo = async info => {
 export const insertField = async fieldName => {
   await Word.run(async context => {
     const range = context.document.getSelection()
-    range.insertField(fieldName, 'Before')
+    range.insertField('Before', fieldName)
 
     await context.sync()
   })

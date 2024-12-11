@@ -89,10 +89,10 @@ const insertSignatureBlock2 = async () => {
 
 const insertXofY = async () => {
   try {
-    insertInfo('Page ')
-    insertField('Page')
-    insertInfo(' of ')
-    insertField('SectionPages')
+    await insertInfo('Page ')
+    await insertField('Page')
+    await insertInfo(' of ')
+    await insertField('SectionPages')
   } catch (error) {
     console.error('Failed to insert Page X of Y', error)
     throw error

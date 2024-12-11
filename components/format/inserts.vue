@@ -15,9 +15,9 @@
     Insert jurat
   </fluent-button>
   <fluent-button
-    @click="insertXofY()"
+    @click="insertField('SectionPages')"
   >
-    Insert Page X of Y (Section)
+    Insert SectionPages
   </fluent-button>
 </template>
 

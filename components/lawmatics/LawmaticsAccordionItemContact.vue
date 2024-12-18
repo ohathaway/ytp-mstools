@@ -97,17 +97,14 @@
         :birthdate="attributes.birthdate"
         :contactId="contact.id"
       />
-      <v-btn
-        v-if="attributes.address"
-        class="text-none"
-        rounded="sm"
-        density="comfortable"
-        variant="tonal"
-        @click="insertInfo(stripCountry(attributes.address))"
-        :id="`address-${contact.id}`"
+      <LawmaticsAddressButton
+        v-if="addressIds.length > 0"
+        :addressIds="addressIds"
+        :contactId="contact.id"
+        :id="`addresses-${contact.id}`"
       >
         {{ stripCountry(attributes.address) }}
-      </v-btn>
+      </LawmaticsAddressButton>
       <v-btn
         class="text-none"
         rounded="sm"
@@ -127,6 +124,7 @@ import IconOpen from '@/components/icons/IconOpen.vue'
 
 const { contact } = defineProps(['contact'])
 const attributes = contact.attributes
+const addressIds = computed(() => contact.relationships?.addresses?.data?.map(({ id }) => id) ?? [])
 
 const contactLink = computed(() => {
   return `https://app.lawmatics.com/contacts/${contact.id}/details`

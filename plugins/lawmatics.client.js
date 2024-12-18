@@ -32,6 +32,44 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   }
 
+  const getLmObject = async (id, objectType = 'contact' ) => {
+    console.info('fetching lm object')
+
+    const validationErrors = {
+      id: !id && 'ID parameter is required',
+      objectType: !lmModules.includes(objectType) && `Invalid objectType: ${objectType}. Must be one of: ${lmModules.join(', ')}`
+    };
+  
+    const error = Object.values(validationErrors).find(Boolean);
+    try {
+      console.assert(!error, error)
+      const functionResponse = await $fetch(`${lmFunction}/${objectType}/${id}`, {
+        headers: { authorization: `Basic ${lmBasicAuth}` },
+        lazy: true
+      }) 
+      return JSON.parse(functionResponse)
+    } catch (error) {
+      console.error(error.message)
+      throw error
+    }
+  }
+
+  const lmModules = [
+    'activities',
+    'addresses',
+    'companies',
+    'contacts',
+    'email_addresses',
+    'events',
+    'files',
+    'folders',
+    'invoices',
+    'notes',
+    'phone_numbers',
+    'prospects',
+    'tasks'
+  ]
+
   const lmFields = [
     {
       "field_label": "Firm Name",
@@ -506,6 +544,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   return {
     provide: {
       lmFields,
+      getLmObject,
       searchLm,
       setSearchUrl
     }

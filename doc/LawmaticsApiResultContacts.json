@@ -1,0 +1,2638 @@
+{
+  "data": [
+      {
+          "id": "17187774",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Al",
+              "last_name": "Rubelmann",
+              "email": "alrubelmann57@gmail.com",
+              "email_address": "alrubelmann57@gmail.com",
+              "phone": "(970) 324-7648",
+              "phone_number": "(970) 324-7648",
+              "address": "15785 County Rd. 84, Ault, CO 80610",
+              "birthdate": null,
+              "name_prefix": "Mr.",
+              "middle_name": "",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-13T09:28:36.201-08:00",
+              "days_since_last_contact": 1,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-12T14:02:49.885-08:00",
+              "updated_at": "2024-12-13T09:28:36.201-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10142740",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23574125",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23574126",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "7059307",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19961",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17177425",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Ala",
+              "last_name": "Johnson",
+              "email": "alajo1212@gmail.com",
+              "email_address": "alajo1212@gmail.com",
+              "phone": "916-821-4592",
+              "phone_number": "916-821-4592",
+              "address": null,
+              "birthdate": null,
+              "name_prefix": "Ms.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-11T13:18:31.721-08:00",
+              "days_since_last_contact": 3,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 125000,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-11T13:18:31.571-08:00",
+              "updated_at": "2024-12-11T13:18:31.721-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10128667",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23557539",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23557540",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17173724",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Carl",
+              "last_name": "Bachenberg",
+              "email": "mr.bachenbergibba@gmail.com",
+              "email_address": "mr.bachenbergibba@gmail.com",
+              "phone": "970-793-7138",
+              "phone_number": "970-793-7138",
+              "address": null,
+              "birthdate": null,
+              "name_prefix": "Mr.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-11T13:30:22.405-08:00",
+              "days_since_last_contact": 3,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-11T08:54:01.060-08:00",
+              "updated_at": "2024-12-11T13:30:22.405-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10125422",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23551550",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23551551",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17162944",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Krysta",
+              "last_name": "Felhmann",
+              "email": "krysta.fehlmann.1@gmail.com",
+              "email_address": "krysta.fehlmann.1@gmail.com",
+              "phone": "970-599-0051",
+              "phone_number": "970-599-0051",
+              "address": null,
+              "birthdate": null,
+              "name_prefix": "Ms.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-13T09:29:55.625-08:00",
+              "days_since_last_contact": 1,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 125000,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Client",
+              "created_at": "2024-12-10T09:36:18.538-08:00",
+              "updated_at": "2024-12-13T09:29:55.625-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10116287",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23534302",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23534303",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": {
+                      "id": "1457244",
+                      "type": "client"
+                  }
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17150162",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Freshta",
+              "last_name": "Kamandy",
+              "email": "freshtakamandy@yahoo.com",
+              "email_address": "freshtakamandy@yahoo.com",
+              "phone": "(970) 443-8335",
+              "phone_number": "(970) 443-8335",
+              "address": null,
+              "birthdate": null,
+              "name_prefix": "Mrs.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-09T16:56:42.368-08:00",
+              "days_since_last_contact": 5,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-09T14:44:59.471-08:00",
+              "updated_at": "2024-12-09T16:56:42.368-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10111261",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23511297",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23511298",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17149388",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Edward",
+              "last_name": "Smith",
+              "email": "doubled4418@yahoo.com",
+              "email_address": "doubled4418@yahoo.com",
+              "phone": "813-494-7949",
+              "phone_number": "813-494-7949",
+              "address": "8218 5th St, Wellington, CO 80549",
+              "birthdate": null,
+              "name_prefix": "Mr.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": "Jr.",
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-09T13:42:32.744-08:00",
+              "days_since_last_contact": 5,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 125000,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-09T13:42:32.533-08:00",
+              "updated_at": "2024-12-09T13:57:18.313-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10110530",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23510070",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23510071",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "7035765",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17088247",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Lori",
+              "last_name": "Gissel",
+              "email": "lgissel2@gmail.com",
+              "email_address": "lgissel2@gmail.com",
+              "phone": null,
+              "phone_number": null,
+              "address": "[object Object] United States",
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "463748",
+                      "name": "Either Parent Living?",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  },
+                  {
+                      "id": "463749",
+                      "name": "Either Grandparent Living?",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              ],
+              "custom_field_values": {
+                  "463748": {
+                      "id": "463748",
+                      "name": "Either Parent Living?",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  },
+                  "463749": {
+                      "id": "463749",
+                      "name": "Either Grandparent Living?",
+                      "field_type": "boolean",
+                      "value": false,
+                      "formatted_value": "No"
+                  }
+              },
+              "contact_type": "Contact",
+              "created_at": "2024-12-06T12:47:20.754-08:00",
+              "updated_at": "2024-12-06T12:47:20.808-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23398628",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987968",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17076078",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Everett",
+              "last_name": "Ball",
+              "email": null,
+              "email_address": null,
+              "phone": null,
+              "phone_number": null,
+              "address": "2444 Ivy Way, Erie, CO 80516, United States",
+              "birthdate": "2011-05-08",
+              "name_prefix": "Mr.",
+              "middle_name": "Gordon",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 13,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-06T10:29:08.504-08:00",
+              "updated_at": "2024-12-06T10:29:54.559-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": []
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987378",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17076067",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Wyatt",
+              "last_name": "Ball",
+              "email": null,
+              "email_address": null,
+              "phone": null,
+              "phone_number": null,
+              "address": "2444 Ivy Way, Erie, CO 80516, United States",
+              "birthdate": "2008-02-14",
+              "name_prefix": "Mr.",
+              "middle_name": "Holt",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 16,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-06T10:28:22.681-08:00",
+              "updated_at": "2024-12-06T10:30:53.093-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": []
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987373",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17075297",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Brian",
+              "last_name": "Croft",
+              "email": null,
+              "email_address": null,
+              "phone": null,
+              "phone_number": null,
+              "address": null,
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-06T09:29:55.529-08:00",
+              "updated_at": "2024-12-06T09:29:55.529-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": []
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17075280",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Karen",
+              "last_name": "Croft",
+              "email": "bkcroft@hotmail.com",
+              "email_address": "bkcroft@hotmail.com",
+              "phone": "970-690-5324",
+              "phone_number": "970-690-5324",
+              "address": "",
+              "birthdate": null,
+              "name_prefix": "Mrs.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-06T09:29:09.566-08:00",
+              "days_since_last_contact": 8,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-06T09:29:09.436-08:00",
+              "updated_at": "2024-12-06T09:29:09.566-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10059793",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23394748",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23394749",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987079",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17075267",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Geri",
+              "last_name": "Staggers",
+              "email": "jimgeristaggers@comcast.net",
+              "email_address": "jimgeristaggers@comcast.net",
+              "phone": "(303) 775-3537",
+              "phone_number": "(303) 775-3537",
+              "address": "Loveland, CO",
+              "birthdate": null,
+              "name_prefix": "Ms.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Widowed",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-06T09:27:57.473-08:00",
+              "days_since_last_contact": 8,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-06T09:27:57.298-08:00",
+              "updated_at": "2024-12-06T09:27:57.473-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10059784",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23394726",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23394727",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987074",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17066468",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Joshua",
+              "last_name": "Jackson",
+              "email": "jomijackson@gmail.com",
+              "email_address": "jomijackson@gmail.com",
+              "phone": null,
+              "phone_number": null,
+              "address": "3950 Woodview Ct., Fort Collins, CO 80526, United States",
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-05T10:00:24.834-08:00",
+              "updated_at": "2024-12-05T10:00:24.871-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23380564",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6983464",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17066437",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Jessica",
+              "last_name": "Jackson",
+              "email": "joshica9812@gmail.com",
+              "email_address": "joshica9812@gmail.com",
+              "phone": null,
+              "phone_number": null,
+              "address": "3950 Woodview Ct., Fort Collins, CO 80526, United States",
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-05T09:58:41.431-08:00",
+              "updated_at": "2024-12-05T09:58:41.476-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23380521",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6983455",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17050051",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Hannah",
+              "last_name": "Blackwelder",
+              "email": "hannahblackwelder98@gmail.com",
+              "email_address": "hannahblackwelder98@gmail.com",
+              "phone": "308-874-6066",
+              "phone_number": "308-874-6066",
+              "address": "",
+              "birthdate": null,
+              "name_prefix": "Ms.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-04T15:33:40.051-08:00",
+              "days_since_last_contact": 10,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 125000,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-04T15:33:39.945-08:00",
+              "updated_at": "2024-12-04T15:33:40.051-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10046371",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23351233",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23351234",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6980642",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17044752",
+          "type": "contact",
+          "attributes": {
+              "first_name": "James",
+              "last_name": "Gissel",
+              "email": "rotboy1958@gmail.com",
+              "email_address": "rotboy1958@gmail.com",
+              "phone": "970-889-1898",
+              "phone_number": "970-889-1898",
+              "address": "2626 Bianco Dr, Fort Collins, CO 80521",
+              "birthdate": null,
+              "name_prefix": "Mr.",
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Married",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-06T12:47:20.860-08:00",
+              "days_since_last_contact": 8,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 125000,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              ],
+              "custom_field_values": {
+                  "426183": {
+                      "id": "426183",
+                      "name": "Prefers Paper Forms",
+                      "field_type": "boolean",
+                      "value": true,
+                      "formatted_value": "Yes"
+                  }
+              },
+              "contact_type": "Lead",
+              "created_at": "2024-12-04T09:29:56.058-08:00",
+              "updated_at": "2024-12-06T12:47:20.412-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10041930",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23343438",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23343439",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6987967",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19961",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17033468",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Nathaniel",
+              "last_name": "Maier",
+              "email": "nathaniel.b.maier@gmail.com",
+              "email_address": "nathaniel.b.maier@gmail.com",
+              "phone": "303-260-9030",
+              "phone_number": "303-260-9030",
+              "address": "10209 Schaffer Dr., Truckee, CA 96161, United States",
+              "birthdate": "1988-06-16",
+              "name_prefix": "Mr.",
+              "middle_name": "Burns",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 36,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-03T10:50:29.649-08:00",
+              "updated_at": "2024-12-03T10:52:37.228-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23325104",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23325105",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6972858",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17033451",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Catherine",
+              "last_name": "Heym",
+              "email": "heymcath@icloud.com",
+              "email_address": "heymcath@icloud.com",
+              "phone": "48515915104",
+              "phone_number": "48515915104",
+              "address": "Simonygasse 2/10, Vienna, 1180, Austria",
+              "birthdate": "1980-07-07",
+              "name_prefix": "Ms.",
+              "middle_name": "Elizabeth",
+              "name_suffix": null,
+              "informal_name": "Catie",
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 44,
+              "driver_license": null,
+              "gender": "Female",
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-12-03T10:49:04.268-08:00",
+              "updated_at": "2024-12-03T10:51:21.936-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23325076",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23325077",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6972851",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17030964",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Janet",
+              "last_name": "Thompson",
+              "email": "jan-0405@hotmail.com",
+              "email_address": "jan-0405@hotmail.com",
+              "phone": "720-620-0408",
+              "phone_number": "720-620-0408",
+              "address": "8741 Norwich St, Westminster, CO 80031, United States",
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Client",
+              "created_at": "2024-12-03T08:24:27.239-08:00",
+              "updated_at": "2024-12-03T08:25:52.838-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23321397",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23321398",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6972031",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": {
+                      "id": "21292",
+                      "type": "custom_contact_type"
+                  }
+              }
+          }
+      },
+      {
+          "id": "17027463",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Virginia",
+              "last_name": "Maciel",
+              "email": "glitterdust49@yahoo.com",
+              "email_address": "glitterdust49@yahoo.com",
+              "phone": "805-978-2177",
+              "phone_number": "805-978-2177",
+              "address": "4153 North Park Dr. Unit 202, CO",
+              "birthdate": "1982-07-07",
+              "name_prefix": "Ms.",
+              "middle_name": "Ann",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": "609-26-1382",
+              "age": 42,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": "Single",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-12-12T15:14:46.264-08:00",
+              "days_since_last_contact": 2,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Lead",
+              "created_at": "2024-12-02T19:10:10.442-08:00",
+              "updated_at": "2024-12-12T15:14:46.264-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "10028382",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23315645",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23315646",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6984319",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19961",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "17021554",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Dmitriy",
+              "last_name": "Mironichenko",
+              "email": null,
+              "email_address": null,
+              "phone": null,
+              "phone_number": null,
+              "address": "8912 N. Kellogg St, Unit 16, Portland, OR 97203, United States",
+              "birthdate": "1989-09-13",
+              "name_prefix": "Mr.",
+              "middle_name": "Ilich",
+              "name_suffix": null,
+              "informal_name": "Mitto",
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 35,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": "Married",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Client",
+              "created_at": "2024-12-02T10:10:25.322-08:00",
+              "updated_at": "2024-12-02T10:12:11.827-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": []
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6968473",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19961",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": {
+                      "id": "21292",
+                      "type": "custom_contact_type"
+                  }
+              }
+          }
+      },
+      {
+          "id": "16905551",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Tim",
+              "last_name": "Stawicki",
+              "email": "timothy.r.stawicki@gmail.com",
+              "email_address": "timothy.r.stawicki@gmail.com",
+              "phone": "951-807-0290",
+              "phone_number": "951-807-0290",
+              "address": null,
+              "birthdate": null,
+              "name_prefix": null,
+              "middle_name": null,
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": null,
+              "driver_license": null,
+              "gender": null,
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": "2024-11-22T11:37:28.395-08:00",
+              "days_since_last_contact": 22,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Lead",
+              "created_at": "2024-11-22T11:37:28.219-08:00",
+              "updated_at": "2024-11-22T11:37:28.395-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": [
+                      {
+                          "id": "9951645",
+                          "type": "prospect"
+                      }
+                  ]
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23165892",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23165893",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19961",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "16881738",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Cassandra",
+              "last_name": "Pearson",
+              "email": "cassipearson12@gmail.com",
+              "email_address": "cassipearson12@gmail.com",
+              "phone": "619-681-4031",
+              "phone_number": "619-681-4031",
+              "address": "6782 Birchwood St, San Diego, CA 92120, United States",
+              "birthdate": "1973-01-28",
+              "name_prefix": "Ms.",
+              "middle_name": "Lyn",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 51,
+              "driver_license": null,
+              "gender": "Female",
+              "marital_status": "Married",
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-11-21T09:00:48.195-08:00",
+              "updated_at": "2024-11-25T09:12:02.431-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23167909",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23167910",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6935336",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "16881734",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Darton",
+              "last_name": "Simons",
+              "email": null,
+              "email_address": null,
+              "phone": null,
+              "phone_number": null,
+              "address": null,
+              "birthdate": "1969-11-13",
+              "name_prefix": "Mr.",
+              "middle_name": "Jay",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 55,
+              "driver_license": null,
+              "gender": "Male",
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [
+                  {
+                      "id": "381116",
+                      "name": "Date of Death",
+                      "field_type": "date",
+                      "value": "2017-11-01",
+                      "formatted_value": "November 1, 2017"
+                  }
+              ],
+              "custom_field_values": {
+                  "381116": {
+                      "id": "381116",
+                      "name": "Date of Death",
+                      "field_type": "date",
+                      "value": "2017-11-01",
+                      "formatted_value": "November 1, 2017"
+                  }
+              },
+              "contact_type": "Contact",
+              "created_at": "2024-11-21T09:00:27.678-08:00",
+              "updated_at": "2024-11-22T13:19:07.492-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": []
+              },
+              "phone_numbers": {
+                  "data": []
+              },
+              "addresses": {
+                  "data": []
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      },
+      {
+          "id": "16881719",
+          "type": "contact",
+          "attributes": {
+              "first_name": "Shannon",
+              "last_name": "Simons",
+              "email": "ssimonswinb@yahoo.com",
+              "email_address": "ssimonswinb@yahoo.com",
+              "phone": "816-806-7896",
+              "phone_number": "816-806-7896",
+              "address": "3923 S. Willis #34, Independence, MO 64055, United States",
+              "birthdate": "1967-08-04",
+              "name_prefix": "Ms.",
+              "middle_name": "Rae",
+              "name_suffix": null,
+              "informal_name": null,
+              "employer": null,
+              "occupation": null,
+              "citizenship": null,
+              "bio": null,
+              "title": null,
+              "hobbies": null,
+              "social_security": null,
+              "age": 57,
+              "driver_license": null,
+              "gender": "Female",
+              "marital_status": null,
+              "timezone": null,
+              "tracking_source_id": null,
+              "date_of_last_contact": null,
+              "days_since_last_contact": 0,
+              "total_actual_value_cents": 0,
+              "total_estimated_value_cents": 0,
+              "unsubscribed": false,
+              "photo_url": null,
+              "custom_fields": [],
+              "custom_field_values": {},
+              "contact_type": "Contact",
+              "created_at": "2024-11-21T08:59:34.250-08:00",
+              "updated_at": "2024-11-22T13:17:32.916-08:00"
+          },
+          "relationships": {
+              "prospects": {
+                  "data": []
+              },
+              "tags": {
+                  "data": []
+              },
+              "emails": {
+                  "data": [
+                      {
+                          "id": "23167840",
+                          "type": "email_address"
+                      }
+                  ]
+              },
+              "phone_numbers": {
+                  "data": [
+                      {
+                          "id": "23167841",
+                          "type": "phone_number"
+                      }
+                  ]
+              },
+              "addresses": {
+                  "data": [
+                      {
+                          "id": "6935323",
+                          "type": "address"
+                      }
+                  ]
+              },
+              "notes": {
+                  "data": []
+              },
+              "files": {
+                  "data": []
+              },
+              "folders": {
+                  "data": []
+              },
+              "created_by": {
+                  "data": {
+                      "id": "19963",
+                      "type": "user"
+                  }
+              },
+              "client": {
+                  "data": null
+              },
+              "company": {
+                  "data": null
+              },
+              "custom_contact_type": {
+                  "data": null
+              }
+          }
+      }
+  ],
+  "meta": {
+      "total_pages": 25,
+      "limit_per_page": 25,
+      "total_entries": 619
+  },
+  "links": {
+      "self": "/v1/contacts?page=1",
+      "next": "/v1/contacts?page=2"
+  }
+}

@@ -1,0 +1,23 @@
+// plugins/00.auth.js
+import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
+import { useRuntimeConfig } from 'nuxt/app'
+
+export default defineNuxtPlugin(async nuxtApp => {
+  console.info('initializing auth plugin')
+  // Firebase setup
+  const config = useRuntimeConfig().public
+  const app = initializeApp(config.firebase)
+  const auth = getAuth(app)
+  
+
+  // Initialize auth store
+  const authStore = useAuthStore()
+  await authStore.initAuth()
+
+  return {
+    provide: {
+      auth
+    }
+  }
+})

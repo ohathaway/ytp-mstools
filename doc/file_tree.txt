@@ -1,0 +1,98 @@
+.
+├── README.md
+├── app
+│   ├── app.vue
+│   ├── app.vue.bad
+│   ├── assets
+│   │   ├── css
+│   │   │   ├── global.scss
+│   │   │   └── vuetify.scss
+│   │   └── ohlaw_icon_circle_outline.svg
+│   ├── components
+│   │   ├── format
+│   │   │   ├── editStyles.vue
+│   │   │   ├── fixContent.vue
+│   │   │   ├── fonts.client.vue
+│   │   │   ├── inserts.vue
+│   │   │   └── resources.vue
+│   │   ├── header.vue
+│   │   ├── icons
+│   │   │   ├── IconAddSquare.vue
+│   │   │   ├── IconCopy.vue
+│   │   │   ├── IconCopyOutline.vue
+│   │   │   ├── IconOpen.vue
+│   │   │   ├── IconWrapper.vue
+│   │   │   └── IconWrite.vue
+│   │   ├── lawmatics
+│   │   │   ├── LawmaticsAccordionItemContact.vue
+│   │   │   ├── LawmaticsAccordionItemMatter.vue
+│   │   │   ├── LawmaticsAddressButton.vue
+│   │   │   ├── LawmaticsDobButton.vue
+│   │   │   ├── LawmaticsSearchContacts.client.vue
+│   │   │   ├── LawmaticsSearchMatters.client.vue
+│   │   │   └── search.vue
+│   │   ├── lmFields
+│   │   │   ├── FieldList.vue
+│   │   │   ├── FieldListItem.vue
+│   │   │   ├── FieldListMRU.vue
+│   │   │   ├── FieldSearch.client.vue
+│   │   │   └── RelationshipSelector.client.vue
+│   │   ├── tabFormat.vue
+│   │   ├── tabLmData.vue
+│   │   ├── tabLmFields.vue
+│   │   └── tabLmFieldsOld.vue
+│   ├── layouts
+│   │   └── default.vue
+│   ├── pages
+│   │   └── index.vue
+│   ├── plugins
+│   │   ├── 00.error-handler.js.bad
+│   │   ├── 01.auth.js.bad
+│   │   ├── fluent.client.js
+│   │   ├── lawmatics.client.js.bad
+│   │   ├── ohlawStyles.js.bad
+│   │   ├── toasts.client.js.bad
+│   │   └── vuetify.ts
+│   ├── stores
+│   │   ├── authStore.ts.bad
+│   │   ├── lmFields.js.pad
+│   │   └── mainStore.js.bad
+│   └── utils
+│       ├── ohlaw.js
+│       ├── ohlawTS.ts
+│       └── word.js
+├── doc
+│   ├── LawmaticsApiResultContacts.json
+│   ├── LawmaticsDocumentsReference.html
+│   ├── LawmaticsDocumentsReference.json
+│   ├── LawmaticsDocumentsReference.txt
+│   └── file_tree.txt
+├── functions
+│   ├── helloWorld.js
+│   └── lmGetData
+│       └── [[catchall]].js
+├── nuxt.config.ts
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── img
+│   │   ├── ohlaw_icon_circle_outline-16.png
+│   │   ├── ohlaw_icon_circle_outline-32.png
+│   │   ├── ohlaw_icon_circle_outline-64.png
+│   │   ├── ohlaw_icon_circle_outline-80.png
+│   │   └── owen_signature-trans.png
+│   ├── manifest.xml
+│   ├── ohlaw_icon.svg
+│   └── robots.txt
+├── server
+│   ├── api
+│   │   └── auth
+│   │       ├── logout.post.ts.bad
+│   │       ├── sessions.post.ts.bad
+│   │       └── validate.get.ts.bad
+│   └── tsconfig.json
+├── tsconfig.json
+├── wrangler.toml
+└── yarn.lock
+
+22 directories, 74 files

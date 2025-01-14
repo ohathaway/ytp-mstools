@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isLoading = ref(false)
   const error = ref<Error | null>(null)
   const isAuthenticated = computed(() => !!user.value)
-  
+
   // Actions
   const loginWithGoogle = () => {
     return new Promise((resolve, reject) => {

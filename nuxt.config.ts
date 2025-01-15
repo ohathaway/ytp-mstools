@@ -12,7 +12,7 @@ export default defineNuxtConfig({
         }
       ],
       script: [
-        { src: 'https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js' },
+        // { src: 'https://appsforoffice.microsoft.com/lib/1/hosted/office.js' },
         { 
           type: 'module',
           src: 'https://unpkg.com/@fluentui/web-components'
@@ -32,30 +32,63 @@ export default defineNuxtConfig({
     'vuetify/styles',
     '~/assets/css/global.scss'
   ],
-  devtools: { enabled: true },
+  devServer: {
+    https: {
+      key: './doc/devkey.pem',
+      cert: './doc/devcert.pem'
+    },
+    host: 'localhost'
+  },
+  devtools: { enabled: true, force: true },
+  future: { 
+    compatibilityVersion: 4,
+    typescriptBundlerResolution: true
+  },
+  hub: {
+    database: true,
+    kv: true
+  },
+  logLevel: 'verbose',
   modules: [
+    '@nuxthub/core',
     '@pinia/nuxt',
-    async (options, nuxt) => {
-      nuxt.hooks.hook(
-        'vite:extendConfig', config => config.plugins.push(vuetify({
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins?.push(vuetify({ 
           autoImport: true,
-          styles: {
-            configFile: 'assets/css/vuetify.scss'
-          }
-        })
-      ))
+        }))
+      })
     }
   ],
+  router: {
+    options: {
+      // Office Add-ins require hash mode
+      hashMode: false
+    }
+  },
   runtimeConfig: {
     public: {
       lmBasicAuth: process.env.BASIC_AUTH,
-      lmFunction: 'lmGetData'
+      lmFunction: 'lmGetData',
+      firebase: {
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.FIREBASE_APP_ID,
+      },
     }
   },
   ssr: false,
   vite: {
+    build: {
+      target: 'es2015'
+    },
+    devtools: true,
     optimizeDeps: {
-      include: ['@fluentui/web-components']
+      include: ['@fluentui/web-components', '@microsoft/fast-foundation']
     },
     preprocessorOptions: {
       scss: { 

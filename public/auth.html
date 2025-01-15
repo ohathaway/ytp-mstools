@@ -1,0 +1,281 @@
+<!-- public/auth.html -->
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>Authentication</title>
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <script type="module">
+    window.addEventListener('load', (event) => {
+      console.debug('Page loaded with URL:', {
+        href: window.location.href,
+        search: window.location.search,
+        referrer: document.referrer,
+        hasAuthInProgress: !!sessionStorage.getItem('authInProgress')
+      })
+    })
+    Office.onReady().then(async () => {
+      console.debug('Office.js is ready')
+      const { initializeApp } = await import('https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js')
+      const { 
+        getAuth, 
+        signInWithRedirect,
+        signInWithPopup,
+        getRedirectResult,
+        GoogleAuthProvider,
+        onAuthStateChanged
+      } = await import('https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js')
+
+      // Initialize Firebase
+      const firebaseConfig = {
+        apiKey: "AIzaSyCJA5CuyZIl0txUH9tA0XAngcej9kju2gI",
+        authDomain: location.host,
+        projectId: "flourish-financial-care",
+        storageBucket: "flourish-financial-care.firebasestorage.app",
+        messagingSenderId: "274986080130",
+        appId: "1:274986080130:web:43d88fe4fbe3216747219b"
+      }
+
+      const initializeFirebase = async () => {
+        try {
+          console.debug('Starting Firebase initialization')
+          const app = initializeApp(firebaseConfig)
+          console.debug('Firebase core initialized')
+          
+          const auth = getAuth(app)
+          console.debug('Firebase auth initialized')
+          
+          return { app, auth }
+        } catch (error) {
+          console.error('Firebase initialization error:', error)
+          throw error
+        }
+      }
+
+      const { app, auth } = await initializeFirebase()
+      const provider = new GoogleAuthProvider()
+      provider.addScope('profile')
+      provider.addScope('email')
+      provider.setCustomParameters({
+        prompt: 'select_account',
+        // Important: full URL including protocol
+        // redirect_uri: 'https://localhost:3000/auth.html',
+        // Preserve Office parameters through redirect
+        state: window.location.search,
+        // Force SSL
+        hd: 'localhost',
+        ssl: 'true'
+      })
+
+      // Function for sending messages back to main app window
+      const sendMessageToParent = (message) => {
+        if (Office?.context?.ui?.messageParent) {
+            Office.context.ui.messageParent(JSON.stringify(message))
+        } else if (window.opener) {
+            window.opener.postMessage(message, '*')
+        } else {
+            console.error('No way to communicate with parent window')
+        }
+      }
+
+      // Check if we're returning from a redirect
+      const checkRedirectResult = async () => {
+        try {
+          const params = new URLSearchParams(window.location.search)
+          console.debug('Checking redirect with full context:', {
+            url: window.location.href,
+            referer: document.referrer,
+            state: params.get('state'),
+            error: params.get('error'),
+            authInProgress: sessionStorage.getItem('authInProgress'),
+            hasCode: params.has('code'),
+            hasToken: window.location.hash.includes('access_token')
+          })
+
+          const result = await getRedirectResult(auth)
+          console.debug('getRedirectResult result:', {
+            hasResult: !!result,
+            hasUser: !!result?.user,
+            operationType: result?.operationType,
+            credential: result?.credential ? 'present' : 'absent'
+          })
+
+          // Also check current user in case we missed the redirect result
+          const currentUser = auth.currentUser
+          console.debug('Current user:', currentUser)
+
+          if (result?.user || currentUser) {
+            const user = result?.user || currentUser
+            console.log('Auth succeeded, attempting to message parent')
+            sendMessageToParent({
+              type: 'authComplete',
+              user: {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName
+              }
+            })
+          } else {
+            // Only treat this as an error if we were expecting a result
+            if (sessionStorage.getItem('authInProgress')) {
+              console.error('Auth failed, attempting to message parent')
+              sendMessageToParent({
+                type: 'authError',
+                error: {
+                  message: 'No auth result after redirect'
+                }
+              })
+            } else {
+              console.log('No auth result but none expected')
+              // Show sign-in button
+              const loadingEl = document.getElementById('loading')
+              const buttonEl = document.getElementById('signInButton')
+              loadingEl.style.display = 'none'
+              buttonEl.style.display = 'block'
+            }
+          }
+        } catch (error) {
+          console.error('Redirect result error: ', {
+            code: error.code,
+            message: error.message,
+            stack: error.stack
+          })
+          sendMessageToParent({
+            type: 'authError',
+            error: {
+              code: error.code,
+              message: error.message
+            }
+          }, '*')
+          // window.close()
+        }
+      }
+
+      const initializePage = () => {
+        const loadingEl = document.getElementById('loading')
+        const buttonEl = document.getElementById('signInButton')
+        
+        if (sessionStorage.getItem('authInProgress')) {
+          buttonEl.style.display = 'none'
+          loadingEl.style.display = 'block'
+          checkRedirectResult()
+        } else {
+          loadingEl.style.display = 'none'
+          buttonEl.style.display = 'block'
+          buttonEl.addEventListener('click', handleGoogleSignIn)
+        }
+      }
+
+      // Start sign in flow
+      const handleGoogleSignIn = async () => {
+        try {
+          console.info('Initiating signInWithGoogle')
+          sessionStorage.setItem('authInProgress', 'true')
+          
+          // Store the current URL before redirect
+          sessionStorage.setItem('redirectUrl', window.location.href)
+          
+          // Configure Google sign-in with explicit redirect URI
+          provider.setCustomParameters({
+            prompt: 'select_account',
+            redirect_uri: window.location.href, // Explicitly set redirect URI
+            response_type: 'token'
+          })
+
+          console.debug('Starting redirect with params:', {
+            currentUrl: window.location.href,
+            authDomain: auth.config.authDomain,
+            providerId: provider.providerId
+          })
+
+          await signInWithRedirect(auth, provider)
+          // await signInWithPopup(auth, provider)
+          console.debug('Redirect initiated')
+        } catch (error) {
+          console.error('Failed to signIn with Google:', {
+            code: error.code,
+            message: error.message,
+            stack: error.stack
+          })
+          sessionStorage.removeItem('authInProgress')
+          sendMessageToParent({
+            type: 'authError',
+            error: {
+              code: error.code,
+              message: error.message
+            }
+          })
+        }
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        console.debug('Auth state changed: ', auth)
+        if (user && sessionStorage.getItem('authInProgress')) {
+          console.debug('User signed in after redirect')
+          sendMessageToParent({
+            type: 'authComplete',
+            user: {
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName
+            }
+          })
+          sessionStorage.removeItem('authInProgress')
+        }
+      })
+
+      // When page loads
+      if (document.readyState !== 'loading') {
+        initializePage()
+      }  else {
+        document.addEventListener('DOMContentLoaded', initializePage())
+      }
+    })
+  </script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    #signInButton {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #signInButton:hover {
+      background: #3367d6;
+    }
+    #loading {
+      display: none;
+      text-align: center;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      margin: 8px auto;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <p>Signing you in...</p>
+  </div>
+  <button id="signInButton">Sign in with Google</button>
+</body>
+</html>

@@ -1,3 +1,4 @@
+// functions/lmGetData/[[catchall]].js
 import { Buffer } from 'node:buffer'
 
 export const onRequestGet = async context => { 

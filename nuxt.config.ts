@@ -71,9 +71,13 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
+    basicAuth: process.env.BASIC_AUTH,
+    lawmaticsToken: process.env.LAWMATICS_TOKEN,
+    lawmaticsUrl: process.env.LAWMATICS_URL,
     public: {
       lmBasicAuth: process.env.BASIC_AUTH,
-      lmFunction: 'lmGetData',
+      // lmFunction: 'lmGetData',
+      lmFunction: 'api/lawmatics',
       firebase: {
         apiKey: process.env.FIREBASE_API_KEY,
         authDomain: process.env.FIREBASE_AUTH_DOMAIN,

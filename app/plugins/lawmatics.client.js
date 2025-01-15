@@ -25,9 +25,9 @@ export default defineNuxtPlugin((nuxtApp) => {
         headers: { authorization: `Basic ${lmBasicAuth}` },
         lazy: true
       }) 
-      return JSON.parse(functionResponse)
+      return functionResponse
     } catch (error) {
-      console.error(error.message)
+      console.error('Error fetching data from Lawmatics: ', error)
       throw error
     }
   }

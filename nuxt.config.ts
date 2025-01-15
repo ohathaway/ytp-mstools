@@ -61,6 +61,9 @@ export default defineNuxtConfig({
       })
     }
   ],
+  nitro: {
+    preset: 'cloudflare'
+  },
   router: {
     options: {
       // Office Add-ins require hash mode

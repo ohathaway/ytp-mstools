@@ -1,6 +1,4 @@
 // server/api/auth/validate.get.ts
-import { pick } from 'lodash-es'
-
 export default defineEventHandler(async (event) => {
   try {
     const sessionId = getCookie(event, 'session')
@@ -11,41 +9,40 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    console.info('typeof useKV', typeof useKV)
-    const kv = useKV()
-    console.info('initialized KV')
-    const session = await kv.get(`session:${sessionId}`)
-    console.debug('')
+    const kv = hubKV()
+    const sessionData = await kv.get(`session:${sessionId}`)
     
-    if (!session) {
+    if (!sessionData) {
       return {
         statusCode: 401,
         message: 'Invalid session'
       }
     }
 
+    const session: UserSession = JSON.parse(sessionData as string)
+
     if (session.expiresAt < Date.now()) {
-      await kv.delete(`session:${sessionId}`)
+      await kv.del(`session:${sessionId}`)
       return {
         statusCode: 401,
         message: 'Session expired'
       }
     }
 
-    const db = useDrizzle()
-    const user = await db.query.users.findFirst({
-      where: eq(tables.users.id, session.userId)
-    })
-
-    if (!user) {
+    // Additional domain validation
+    if (!session.email.endsWith('@ohlawcolorado.com')) {
+      await kv.delete(`session:${sessionId}`)
       return {
-        statusCode: 401,
-        message: 'User not found'
+        statusCode: 403,
+        message: 'Invalid email domain'
       }
     }
 
     return {
-      user: pick(user, ['id', 'email', 'name', 'avatar', 'isAdmin'])
+      user: {
+        email: session.email,
+        displayName: session.displayName
+      }
     }
   } catch (error) {
     console.error('Session validation error:', error)

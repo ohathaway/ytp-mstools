@@ -1,131 +1,105 @@
 // app/stores/authStore.ts
-import { defineStore } from 'pinia'
 import type { User } from 'firebase/auth'
-import type { AsyncResult, Dialog } from '@microsoft/office-js'
 
-interface AuthState {
-  user: User | null
-  isLoading: boolean
-  error: Error | null
-  isAuthenticated: boolean
+interface AuthUser {
+  email: string
+  displayName: string | null
+  uid: string
 }
 
 export const useAuthStore = defineStore('auth', () => {
-  // State
-  const user = ref<User | null>(null)
+  const user = ref<AuthUser | null>(null)
+  const isAuthenticated = ref(false)
   const isLoading = ref(false)
-  const error = ref<Error | null>(null)
-  const isAuthenticated = computed(() => !!user.value)
 
-  // Actions
-  const loginWithGoogle = () => {
-    return new Promise((resolve, reject) => {
-      isLoading.value = true
-      error.value = null
+  const loginWithGoogle = async () => {
+    isLoading.value = true
+    try {
+      // Open the Office dialog for Firebase auth
+      const result = await new Promise((resolve, reject) => {
+        Office.context.ui.displayDialogAsync(
+          `${window.location.origin}/auth.html`,
+          { height: 60, width: 30, promptBeforeOpen: false },
+          (result) => {
+            if (result.status === Office.AsyncResultStatus.Failed) {
+              reject(new Error(result.error.message))
+              return
+            }
 
-      // Use the absolute URL to your auth page
-      const dialogUrl = import.meta.env.VITE_AUTH_URL || 'https://localhost:3000/auth.html'
-      
-      const dialogSettings = {
-        height: 60,
-        width: 30,
-        displayInIframe: false
-      }
-
-      // Handle messages from dialog
-      const messageHandler = (event: MessageEvent) => {
-        console.log('Received message in parent:', {
-          data: event.data,
-          origin: event.origin,
-          expectedOrigin: (new URL(dialogUrl)).origin,
-          isOriginMatch: event.origin === (new URL(dialogUrl)).origin
-        })
-
-        // Only accept messages from our auth page
-        if (event.origin !== (new URL(dialogUrl)).origin) return
-        
-        if (event.data.type === 'authComplete') {
-          window.removeEventListener('message', messageHandler)
-          user.value = event.data.user
-          isLoading.value = false
-          resolve(event.data.user)
-        } else if (event.data.type === 'authError') {
-          window.removeEventListener('message', messageHandler)
-          error.value = new Error(event.data.error.message)
-          isLoading.value = false
-          reject(error.value)
-        }
-      }
-
-      window.addEventListener('message', messageHandler)
-
-      // Open the dialog
-      Office.context.ui.displayDialogAsync(
-        dialogUrl,
-        dialogSettings,
-        (result: AsyncResult<Dialog>) => {
-          if (result.status === Office.AsyncResultStatus.Failed) {
-            error.value = new Error(result.error.message)
-            isLoading.value = false
-            reject(error.value)
-            return
-          }
-
-          // Get dialog instance
-          const dialog = result.value
-
-          // Handle messages from dialog
-          dialog.addEventHandler(Office.EventType.DialogMessageReceived, (arg) => {
-            console.info('Received message from dialog: ', arg)
-            try {
+            const dialog = result.value
+            dialog.addEventHandler(Office.EventType.DialogMessageReceived, (arg) => {
               const message = JSON.parse(arg.message)
               if (message.type === 'authComplete') {
-                user.value = message.user
-                isLoading.value = false
-                dialog.close()
                 resolve(message.user)
               } else if (message.type === 'authError') {
-                error.value = new Error(message.error)
-                isLoading.value = false
-                dialog.close()
-                reject(error.value)
+                reject(message.error)
               }
-            } catch (error) {
-              console.error('Error parsing dialog message: ', error)
-              error.value = newError('Invalid message from auth dialog')
-              isLoading.value = false
-              // dialog.close()
-              reject(error.value)
-            }
-          })
+              dialog.close()
+            })
+          }
+        )
+      })
+
+      // Validate and create session
+      if (!result.email?.endsWith('@ohlawcolorado.com')) {
+        throw new Error('Invalid email domain. Must be @ohlawcolorado.com')
+      }
+
+      const response = await $fetch('/api/auth/sessions', {
+        method: 'POST',
+        body: {
+          email: result.email,
+          displayName: result.displayName
         }
-      )
-    })
+      })
+
+      if (response.success) {
+        user.value = {
+          email: result.email,
+          displayName: result.displayName,
+          uid: result.uid
+        }
+        isAuthenticated.value = true
+      }
+    } catch (error) {
+      console.error('Login error:', error)
+      throw error
+    } finally {
+      isLoading.value = false
+    }
   }
 
-  const logout = () => {
-    user.value = null
+  const checkSession = async () => {
+    try {
+      const response = await $fetch('/api/auth/validate')
+      if (response.user) {
+        user.value = response.user
+        isAuthenticated.value = true
+      }
+    } catch (error) {
+      user.value = null
+      isAuthenticated.value = false
+    }
   }
 
-  const setError = (newError: Error) => {
-    error.value = newError
-    isLoading.value = false
+  const logout = async () => {
+    try {
+      await $fetch('/api/auth/logout', { method: 'POST' })
+    } finally {
+      user.value = null
+      isAuthenticated.value = false
+    }
   }
 
-  // Return composed store
   return {
     // State
-    user: readonly(user),
-    isLoading: readonly(isLoading),
-    error: readonly(error),
+    user,
     isAuthenticated,
-
+    isLoading,
+    
     // Actions
     loginWithGoogle,
-    logout,
-    setError
+    checkSession,
+    logout
   }
 })
-
-// Type for external use
-export type AuthStoreType = ReturnType<typeof useAuthStore>

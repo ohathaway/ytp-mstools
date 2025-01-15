@@ -1,47 +1,29 @@
 // server/api/auth/sessions.post.ts
-import { pick } from 'lodash-es'
 import { createId } from '@paralleldrive/cuid2'
 
 export default defineEventHandler(async (event) => {
   try {
-    const { id, email, name, avatar, providerId } = await readBody(event)
-    const db = useDrizzle()
-    const kv = useKV()
+    const { email, displayName } = await readBody(event)
     
-    // Create or update user
-    const user = await db.insert(tables.users)
-      .values({
-        id,
-        email,
-        name,
-        avatar,
-        providerId,
-        isAdmin: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
+    // Validate email domain
+    if (!email.endsWith('@ohlawcolorado.com')) {
+      throw createError({
+        statusCode: 403,
+        message: 'Invalid email domain. Must be @ohlawcolorado.com'
       })
-      .onConflictDoUpdate({
-        target: tables.users.id,
-        set: {
-          email,
-          name,
-          avatar,
-          providerId,
-          updatedAt: new Date()
-        }
-      })
-      .returning()
-      .get()
+    }
 
-    // Create session
     const sessionId = createId()
-    const session = {
+    const session: UserSession = {
       id: sessionId,
-      userId: id,
+      email,
+      displayName,
       createdAt: Date.now(),
       expiresAt: Date.now() + (7 * 24 * 60 * 60 * 1000) // 1 week
     }
 
+    // Store session in KV store
+    const kv = hubKV()
     await kv.set(
       `session:${sessionId}`,
       JSON.stringify(session),
@@ -59,13 +41,16 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      user: pick(user, ['id', 'email', 'name', 'avatar', 'isAdmin'])
+      user: {
+        email: session.email,
+        displayName: session.displayName
+      }
     }
   } catch (error) {
     console.error('Session creation error:', error)
     throw createError({
-      statusCode: 500,
-      message: 'Failed to create session'
+      statusCode: error.statusCode || 500,
+      message: error.message || 'Failed to create session'
     })
   }
 })

@@ -3,8 +3,8 @@ export default defineEventHandler(async (event) => {
   try {
     const sessionId = getCookie(event, 'session')
     if (sessionId) {
-      const kv = useKV()
-      await kv.delete(`session:${sessionId}`)
+      const kv = hubKV()
+      await kv.del(`session:${sessionId}`)
     }
 
     deleteCookie(event, 'session', {

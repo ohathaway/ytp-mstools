@@ -29,7 +29,6 @@
       color="primary"
       size="large"
       @click="handleLogin"
-      :loading="isLoading"
     >
       Login with Google
     </v-btn>
@@ -52,7 +51,7 @@ const handleLogin = async () => {
 }
 
 watchEffect(() => {
-  if (authStore && isAuthenticated) authInit.value = true
+  if (authStore && isAuthenticated.value) authInit.value = true
 })
 
 const setFocus = event => {

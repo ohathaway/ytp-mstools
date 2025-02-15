@@ -8,14 +8,14 @@ export default defineEventHandler(async (event: H3Event) => {
     event.path.startsWith('/api/_hub') ||
     !event.path.startsWith('/api')
   ) {
-    console.debug('public route requested')
+    // console.debug('public route requested')
     return
   }
 
   try {
-    console.debug('private route requested')
+    // console.debug('private route requested')
     // First check for bearer token
-    console.debug('first checking for bearer token...')
+    // console.debug('first checking for basic auth...')
     const authHeader = getHeader(event, 'authorization')
     if (authHeader?.startsWith('Basic ')) {
       const token = authHeader.split(' ')[1]
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event: H3Event) => {
         console.debug('valid token found')
         // Set a default session context for API token auth
         event.context.session = {
-          userId: 'api-token',
+          userId: 'basic-auth',
           isAdmin: true
         }
         return

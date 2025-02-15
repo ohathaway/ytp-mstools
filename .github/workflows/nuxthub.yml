@@ -1,7 +1,7 @@
 name: Deploy to NuxtHub
 on: push
 env:
-  API_TOKEN: ${{ secrets.API_TOKEN }}
+  BASIC_AUTH: ${{ secrets.BASIC_AUTH }}
   FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
 
   NUXT_HUB_PROJECT_KEY: ${{ vars.NUXT_HUB_PROJECT_KEY }}

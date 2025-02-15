@@ -4,7 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@9.15.1",
   "scripts": {
-    "build": "nuxt build --prerender",
+    "build": "nuxt build",
     "build:dev": "npx nuxi build --prerender --mode development && npx wrangler pages dev dist",
     "dev": "nuxt dev",
     "generate": "nuxt generate",

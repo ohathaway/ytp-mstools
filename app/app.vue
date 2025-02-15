@@ -1,9 +1,8 @@
 <template>
-  <template v-if="authInit">
+  <!-- <template v-if="authInit"> -->
     <v-app>
       <Header />
       <main id="app-body" class="ms-welcome__main">
-        <NuxtPage />
         <fluent-tabs activeid="format" id="appTabs">
           <fluent-tab id="format">Format</fluent-tab>
           <!-- <fluent-tab id="lmData" @click="setFocus($event)">LM Data</fluent-tab> -->
@@ -22,37 +21,20 @@
         </fluent-tabs>
       </main>
     </v-app>
-  </template>
-  <template v-else>
-    <h1 class="text-h3 mb-6">Welcome to OHLaw Tools</h1>
-    <v-btn
-      color="primary"
-      size="large"
-      @click="handleLogin"
-    >
-      Login with Google
-    </v-btn>
-  </template>
+  <!-- </template> -->
+  <!-- <template v-else> -->
+    <!-- <h1 class="text-h3 mb-6">Welcome to OHLaw Tools</h1> -->
+    <!-- <v-btn -->
+      <!-- color="primary" -->
+      <!-- size="large" -->
+      <!-- @click="handleLogin" -->
+    <!-- > -->
+      <!-- Login with Google -->
+    <!-- </v-btn> -->
+  <!-- </template> -->
 </template>
 
 <script setup>
-const authStore = useAuthStore()
-import.meta.client && Office.onReady()
-
-const { isAuthenticated } = storeToRefs(authStore)
-const authInit = ref(false)
-
-const handleLogin = async () => {
-  try {
-    await authStore.loginWithGoogle()
-  } catch (error) {
-    console.error('Login error:', error)
-  }
-}
-
-watchEffect(() => {
-  if (authStore && isAuthenticated.value) authInit.value = true
-})
 
 const setFocus = event => {
   // const panelRoot = document.querySelector(`fluent-tab-panel#${event.target.id}Panel`)

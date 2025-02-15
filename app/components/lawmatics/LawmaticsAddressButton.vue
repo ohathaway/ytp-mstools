@@ -1,5 +1,6 @@
 <template>
   <v-btn
+    v-if="addresses.length > 0"
     v-for="address in addresses"
     :key="address.id"
     class="text-none"
@@ -9,7 +10,7 @@
   >
     {{ address.label }} Address
     <v-menu
-      :id="`address-menu-${addressId}`"
+      :id="`address-menu-${address.id}`"
       activator="parent"
     >
       <v-list>
@@ -42,6 +43,8 @@ const { addressIds, contactId } = defineProps({
   }
 })
 
+const { toastError } = useToastStore()
+
 const addresses = ref([])
 
 const transformAddress = (response) => {
@@ -56,10 +59,17 @@ const transformAddress = (response) => {
 }
 
 const fetchAddresses = async () => {
-  const responses = await Promise.all(
-    addressIds.map(id => $getLmObject(id, 'addresses'))
-  )
-  addresses.value = responses.map(transformAddress)
+  try {
+    const responses = await Promise.all(
+      addressIds.map(id => $getLmObject(id, 'addresses'))
+    )
+    console.debug('fetch address responses: ', responses)
+    addresses.value = responses.map(transformAddress)
+  } catch (error) {
+    console.error('error fetching addresses: ', error)
+    toastError(`Error fetching addresses:
+    ${error}`)
+  }
 }
 
 const joinParts = parts => {
@@ -72,7 +82,7 @@ const joinParts = parts => {
 
 // Use watchEffect to handle the async operation
 watchEffect(async () => {
-  if (addressIds.length) {
+  if (addressIds.length > 0) {
     await fetchAddresses()
   }
 })

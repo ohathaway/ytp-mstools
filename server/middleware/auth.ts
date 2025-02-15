@@ -1,0 +1,68 @@
+// server/middleware/auth.ts
+import { H3Event } from 'h3'
+
+export default defineEventHandler(async (event: H3Event) => {
+  // Skip auth check for public routes and auth endpoints
+  if (
+    event.path.startsWith('/api/auth') ||
+    event.path.startsWith('/api/_hub') ||
+    // !event.path.startsWith('/api')
+    event.path.startsWith('/api') // temporary
+  ) {
+    console.debug('public route requested')
+    return
+  }
+
+  try {
+    console.debug('private route requested')
+    // First check for bearer token
+    console.debug('first checking for bearer token...')
+    const authHeader = getHeader(event, 'authorization')
+    if (authHeader?.startsWith('Bearer ')) {
+      const token = authHeader.split(' ')[1]
+      
+      // For development/testing - check if token matches env variable
+      if (process.env.API_TOKEN && token === process.env.API_TOKEN) {
+        console.debug('valid token found')
+        // Set a default session context for API token auth
+        event.context.session = {
+          userId: 'api-token',
+          isAdmin: true
+        }
+        return
+      }
+    }
+
+    // Fall back to session cookie
+    console.debug('no bearer token found')
+    console.debug('checking for authorized session...')
+    const session = getCookie(event, 'session')
+    
+    if (!session) {
+      throw createError({
+        statusCode: 401,
+        message: 'Unauthorized'
+      })
+    }
+
+    // Quick session check in KV
+    const kv = event.context.cloudflare.env.KV
+    const sessionData = await kv.get(`session:${session}`)
+
+    if (!sessionData) {
+      throw createError({
+        statusCode: 401,
+        message: 'Invalid session'
+      })
+    }
+
+    // Store session data in context for route handlers
+    event.context.session = JSON.parse(sessionData)
+  } catch (error) {
+    console.error('error checking authorization: ', error)
+    throw createError({
+      statusCode: 401,
+      message: 'Authentication failed'
+    })
+  }
+})

@@ -43,11 +43,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     const error = Object.values(validationErrors).find(Boolean);
     try {
       console.assert(!error, error)
-      const functionResponse = await $fetch(`${lmFunction}/${objectType}/${id}`, {
+      const response = await $fetch(`${lmFunction}/${objectType}/${id}`, {
         headers: { authorization: `Basic ${lmBasicAuth}` },
         lazy: true
       }) 
-      return JSON.parse(functionResponse)
+      return response
     } catch (error) {
       console.error(error.message)
       throw error

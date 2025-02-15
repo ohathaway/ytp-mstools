@@ -88,7 +88,7 @@
         density="comfortable"
         variant="tonal"
         @click="insertInfo(attributes.phone)"
-        :id="`phone-${contact - id}`"
+        :id="`phone-${contact.id}`"
       >
         {{ attributes.phone }}
       </v-btn>
@@ -101,7 +101,6 @@
         v-if="addressIds.length > 0"
         :addressIds="addressIds"
         :contactId="contact.id"
-        :id="`addresses-${contact.id}`"
       >
         {{ stripCountry(attributes.address) }}
       </LawmaticsAddressButton>

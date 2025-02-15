@@ -2,9 +2,9 @@
 interface OfficePluginState {
   isReady: boolean
   error: Error | null
+  isOfficeEnvironment: boolean
 }
 
-// Can expand this interface based on which Office.js types you need
 interface OfficeApi {
   onReady: (callback: () => void) => Promise<void>
   context: any
@@ -19,8 +19,20 @@ declare global {
 export default defineNuxtPlugin(async (nuxtApp) => {
   const state = reactive<OfficePluginState>({
     isReady: false,
-    error: null
+    error: null,
+    isOfficeEnvironment: false
   })
+
+  const checkOfficeEnvironment = (): boolean => {
+    // Office Add-ins include these URL parameters
+    const urlParams = new URLSearchParams(window.location.search)
+    return !!(
+      urlParams.get('_host_Info') || 
+      urlParams.get('_hostname') ||
+      // Can also check for other Office-specific parameters
+      urlParams.get('wdApplicationId')
+    )
+  }
 
   const loadOfficeJs = async (): Promise<void> => {
     try {
@@ -29,7 +41,6 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         script.src = 'https://appsforoffice.microsoft.com/lib/1/hosted/office.js'
         script.async = true
         script.onload = () => {
-          // Once the script loads, wait for Office to be ready
           window.Office?.onReady(() => {
             state.isReady = true
             resolve()
@@ -47,8 +58,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   // Wait for router and other critical plugins
   await nuxtApp.isHydrating
 
-  // Load Office.js
-  await loadOfficeJs()
+  // Check if we're in Office environment
+  state.isOfficeEnvironment = checkOfficeEnvironment()
+
+  // Only load Office.js if we're in Office environment
+  if (state.isOfficeEnvironment) {
+    await loadOfficeJs()
+  } else {
+    state.isReady = true // Mark as ready even without Office.js
+  }
 
   return {
     provide: {

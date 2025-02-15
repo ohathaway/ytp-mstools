@@ -2,6 +2,7 @@
   "name": "ohlaw-mstools-2",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@9.15.1",
   "scripts": {
     "build": "npx nuxi build --prerender",
     "build:dev": "npx nuxi build --prerender --mode development && npx wrangler pages dev dist",

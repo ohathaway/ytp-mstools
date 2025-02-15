@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import debounce from 'lodash/debounce'
+import { debounce } from 'lodash-es'
 const store= useLawmaticsFieldsStore()
 
 const debouncedSetFilterText = debounce(

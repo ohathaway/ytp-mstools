@@ -6,8 +6,7 @@ export default defineEventHandler(async (event: H3Event) => {
   if (
     event.path.startsWith('/api/auth') ||
     event.path.startsWith('/api/_hub') ||
-    // !event.path.startsWith('/api')
-    event.path.startsWith('/api') // temporary
+    !event.path.startsWith('/api')
   ) {
     console.debug('public route requested')
     return
@@ -18,11 +17,11 @@ export default defineEventHandler(async (event: H3Event) => {
     // First check for bearer token
     console.debug('first checking for bearer token...')
     const authHeader = getHeader(event, 'authorization')
-    if (authHeader?.startsWith('Bearer ')) {
+    if (authHeader?.startsWith('Basic ')) {
       const token = authHeader.split(' ')[1]
       
       // For development/testing - check if token matches env variable
-      if (process.env.API_TOKEN && token === process.env.API_TOKEN) {
+      if (process.env.BASIC_AUTH && token === process.env.BASIC_AUTH) {
         console.debug('valid token found')
         // Set a default session context for API token auth
         event.context.session = {

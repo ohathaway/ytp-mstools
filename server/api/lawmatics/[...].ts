@@ -1,54 +1,20 @@
 // server/api/lawmatics/[...].ts
 import { type H3Event } from 'h3'
-import { Buffer } from 'node:buffer'
-import type { LawmaticsResponse, LawmaticsError } from '../types/lawmatics'
-
-/*
-const checkAuthorization = (authHeader: string | null, basicAuth: string): boolean => {
-  if (!authHeader) return false
-  
-  try {
-    return authHeader === `Basic ${basicAuth}` ||
-      Buffer.from(
-        authHeader.replace(/^Basic /, ''), 'base64')
-          .toString('utf8')
-          .split(':')[1] === basicAuth
-  } catch (error) {
-    console.error('error authenticating request: ', error)
-    return false
-  }
-}
-*/
+import type { LawmaticsResponse, LawmaticsError } from '../../types/lawmatics'
 
 export default defineEventHandler(async (event: H3Event) => {
   const config = useRuntimeConfig()
-  const BASIC_AUTH = config.basicAuth
   const LM_KEY = config.lawmaticsToken
   const LM_HOST = config.lawmaticsUrl
 
   try {
-    // Handle Auth
-    /*
-    const authHeader = getHeader(event, 'Authorization')
-    if (!checkAuthorization(authHeader, BASIC_AUTH)) {
-      throw createError({
-        statusCode: 401,
-        statusMessage: 'Not authorized'
-      })
-    }
-    */
-
     // Get current URL and transform it
     const rawUrl = getRequestURL(event)
-    console.info('rawUrl: ', rawUrl)
     const lmUrl = new URL(LM_HOST)
-    console.info('lmUrl: ', lmUrl)
     lmUrl.pathname = `/v1/${rawUrl.pathname.split('/').slice(3).join('/')}`
-    console.info('pathname: ', lmUrl.pathname)
     lmUrl.search = rawUrl.search
-    console.info('search: ', lmUrl.search)
 
-    console.info('Proxying request to:', lmUrl.toString())
+    // console.info('Proxying request to:', lmUrl.toString())
 
     // Make request to Lawmatics
     const response = await $fetch<LawmaticsResponse | LawmaticsError>(lmUrl.toString(), {

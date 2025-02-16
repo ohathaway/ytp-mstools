@@ -56,6 +56,7 @@
 
 <script setup>
 const { $searchLm, $setSearchUrl } = useNuxtApp()
+const { toastError } = useToastStore()
 
 const searchTerm = ref('')
 const searchType = ref('last_name')
@@ -77,8 +78,12 @@ const lmUrl = computed(() =>
 const isLmAuthenticated = computed(() => true)
 
 const runSearch = async () => {
-  searchHasRun.value = true
-  searchResults.value = await $searchLm(lmUrl.value)
+  try {
+    searchHasRun.value = true
+    searchResults.value = await $searchLm(lmUrl.value)
+  } catch (error) {
+    toastError(error)
+  }
 }
 
 const handleKeyUp = (event) => {

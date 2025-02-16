@@ -3,6 +3,7 @@ import { type H3Event } from 'h3'
 import { Buffer } from 'node:buffer'
 import type { LawmaticsResponse, LawmaticsError } from '../types/lawmatics'
 
+/*
 const checkAuthorization = (authHeader: string | null, basicAuth: string): boolean => {
   if (!authHeader) return false
   
@@ -17,6 +18,7 @@ const checkAuthorization = (authHeader: string | null, basicAuth: string): boole
     return false
   }
 }
+*/
 
 export default defineEventHandler(async (event: H3Event) => {
   const config = useRuntimeConfig()
@@ -26,6 +28,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
   try {
     // Handle Auth
+    /*
     const authHeader = getHeader(event, 'Authorization')
     if (!checkAuthorization(authHeader, BASIC_AUTH)) {
       throw createError({
@@ -33,12 +36,17 @@ export default defineEventHandler(async (event: H3Event) => {
         statusMessage: 'Not authorized'
       })
     }
+    */
 
     // Get current URL and transform it
     const rawUrl = getRequestURL(event)
+    console.info('rawUrl: ', rawUrl)
     const lmUrl = new URL(LM_HOST)
+    console.info('lmUrl: ', lmUrl)
     lmUrl.pathname = `/v1/${rawUrl.pathname.split('/').slice(3).join('/')}`
+    console.info('pathname: ', lmUrl.pathname)
     lmUrl.search = rawUrl.search
+    console.info('search: ', lmUrl.search)
 
     console.info('Proxying request to:', lmUrl.toString())
 

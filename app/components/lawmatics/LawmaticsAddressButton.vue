@@ -54,6 +54,12 @@ const transformAddress = (response) => {
   const parts = Object.entries(addressParts)
     .filter(([_, value]) => value !== null && value !== '')
     .map(([label, value]) => ({ label, value }))
+
+  const city = parts.find(part => part.label === 'city') || ''
+  const state  = parts.find(part => part.label === 'state') || ''
+  const zip  = parts.find(part => part.label === 'zipcode') || ''
+
+  parts.push({ label: 'City, State Zip', value: `${city.value}, ${state.value} ${zip.value}` })
     
   return { id, label, parts }
 }

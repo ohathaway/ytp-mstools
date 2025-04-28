@@ -1,8 +1,24 @@
 export default defineNuxtPlugin(nuxtApp => {
   // define styles to update
   return {
+    'Body Text': {
+      font: {
+        name: 'Optima'
+      },
+      list: {},
+      paragraph: {
+        alignment: 'Left',
+        firstLineIndent: 0,
+        keepTogether: true,
+        leftIndent: 18,
+        lineSpacing: 1.15,
+        spaceAfter: 6
+      }
+    },
     'Body Text First Indent': {
-      font: {},
+      font: {
+        name: 'Optima'
+      },
       list: {},
       paragraph: {
         alignment: 'Justified',
@@ -14,7 +30,9 @@ export default defineNuxtPlugin(nuxtApp => {
       }
     },
     'Body Text First Indent 2': {
-      font: {},
+      font: {
+        name: 'Optima'
+      },
       list: {},
       paragraph: {
         alignment: 'Justified',

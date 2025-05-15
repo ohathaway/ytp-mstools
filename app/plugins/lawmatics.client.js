@@ -538,6 +538,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     {
       "field_label": "Trust Name",
       "field_macro": "{{custom_field_494870}}"
+    },
+    {
+      "field_label": "Trust or Will Date",
+      "field_macro": "{{custom_field_545808}}"
     }
   ]
 

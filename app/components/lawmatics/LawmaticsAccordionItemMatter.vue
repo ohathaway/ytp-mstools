@@ -6,7 +6,7 @@
     <div class="matter-details">
       <!-- <p><strong>Matter ID:</strong> {{ id }}</p> -->
       <p><strong>Status:</strong> {{ attributes.status }}</p>
-      <p><strong>Joint Plan?:</strong> {{ jointPlan.formatted_value }}</p>
+      <p><strong>Joint Plan?:</strong> {{ jointPlan }}</p>
       <!-- <p><strong>Created At:</strong> {{ formattedCreatedAt }}</p> -->
       <!-- <p><strong>Updated At:</strong> {{ formattedUpdatedAt }}</p> -->
       <!-- Add more matter details as needed -->
@@ -71,19 +71,20 @@ const formatDate = (dateString) => {
 const trustName = computed(() => {
   return attributes.custom_fields.filter(att => {
     return att.name === 'Trust Name'
-  })[0]
+  })[0] || ''
 })
 
 const trustOrWillDate = computed(() => {
   return attributes.custom_fields.filter(att => {
     return att.name === 'Trust or Will Date'
-  })[0]
+  })[0] || ''
 })
 
 const jointPlan = computed(() => {
-  return attributes.custom_fields.filter(att => {
+  const jointPlan = attributes.custom_fields.filter(att => {
     return att.name === 'Joint Plan'
-  })[0]
+  })[0] 
+  return jointPlan?.formatted_value || 'No'
 })
 </script>
 

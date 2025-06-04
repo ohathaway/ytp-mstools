@@ -6,18 +6,43 @@
     <div class="matter-details">
       <!-- <p><strong>Matter ID:</strong> {{ id }}</p> -->
       <p><strong>Status:</strong> {{ attributes.status }}</p>
+      <p><strong>Joint Plan?:</strong> {{ jointPlan.formatted_value }}</p>
       <!-- <p><strong>Created At:</strong> {{ formattedCreatedAt }}</p> -->
       <!-- <p><strong>Updated At:</strong> {{ formattedUpdatedAt }}</p> -->
       <!-- Add more matter details as needed -->
-      <fluent-button class="opener" @click="openNewWindow(matterLink)">
+      <v-btn
+        v-if="trustName"
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
+        variant="tonal"
+        @click="insertInfo(trustName.formatted_value)"
+        :id="`trust_name-${matter.id}`"
+      >
+        {{ trustName.formatted_value }}
+      </v-btn>
+      <LawmaticsDateButton
+        v-if="trustOrWillDate"
+        :date="trustOrWillDate.formatted_value"
+        :objectId="matter.id"
+        label="Trust or Will Date"
+      />
+      <v-btn
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
+        variant="tonal"
+        @click="openNewWindow(matterLink)"
+      >
         Open in Lawmatics
         <IconsIconWrapper :icon="IconOpen" width="12" />
-      </fluent-button>
+      </v-btn>
     </div>
   </fluent-accordion-item>
 </template>
 
 <script setup>
+import { startCase } from 'lodash-es'
 import IconOpen from '@/components/icons/IconOpen.vue'
 
 const { matter } = defineProps({
@@ -33,8 +58,6 @@ const matterLink = computed(() => {
   return `https://app.lawmatics.com/matters/${matter.id}/details`
 })
 
-console.debug('attributes.case_title: ', attributes.case_title)
-
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A'
   const date = new Date(dateString)
@@ -45,8 +68,23 @@ const formatDate = (dateString) => {
   })
 }
 
-const formattedCreatedAt = computed(() => formatDate(created_at))
-const formattedUpdatedAt = computed(() => formatDate(updated_at))
+const trustName = computed(() => {
+  return attributes.custom_fields.filter(att => {
+    return att.name === 'Trust Name'
+  })[0]
+})
+
+const trustOrWillDate = computed(() => {
+  return attributes.custom_fields.filter(att => {
+    return att.name === 'Trust or Will Date'
+  })[0]
+})
+
+const jointPlan = computed(() => {
+  return attributes.custom_fields.filter(att => {
+    return att.name === 'Joint Plan'
+  })[0]
+})
 </script>
 
 <style scoped>

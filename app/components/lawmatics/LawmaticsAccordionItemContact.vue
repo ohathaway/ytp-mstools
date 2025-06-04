@@ -21,10 +21,21 @@
         rounded="sm"
         density="comfortable"
         variant="tonal"
-        @click="insertInfo(`${attributes.first_name} ${attributes.middle_name} ${attributes.last_name}`)"
+        @click="insertInfo(fullName)"
         :id="`fullname-${contact.id}`"
       >
-        {{ attributes.first_name }} {{ attributes.middle_name }} {{ attributes.last_name }}
+        {{ fullName }}
+      </v-btn>
+      <v-btn
+        v-if="attributes.name_prefix"
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
+        variant="tonal"
+        @click="insertInfo(attributes.name_prefix)"
+        :id="`suffix-${contact.id}`"
+      >
+        {{ attributes.name_prefix }}
       </v-btn>
       <v-btn
         v-if="attributes.first_name"
@@ -60,15 +71,15 @@
         {{ attributes.last_name }}
       </v-btn>
       <v-btn
-        v-if="attributes.suffix"
+        v-if="attributes.name_suffix"
         class="text-none"
         rounded="sm"
         density="comfortable"
         variant="tonal"
-        @click="insertInfo(attributes.suffix_name)"
+        @click="insertInfo(attributes.name_suffix)"
         :id="`suffix-${contact.id}`"
       >
-        {{ attributes.suffix }}
+        {{ attributes.name_suffix }}
       </v-btn>
       <v-btn
         v-if="attributes.email"
@@ -92,10 +103,11 @@
       >
         {{ attributes.phone }}
       </v-btn>
-      <LawmaticsDobButton
+      <LawmaticsDateButton
         v-if="attributes.birthdate"
-        :birthdate="attributes.birthdate"
-        :contactId="contact.id"
+        :date="attributes.birthdate"
+        :objectId="contact.id"
+        label="Date of Birth"
       />
       <LawmaticsAddressButton
         v-if="addressIds.length > 0"
@@ -127,5 +139,11 @@ const addressIds = computed(() => contact.relationships?.addresses?.data?.map(({
 
 const contactLink = computed(() => {
   return `https://app.lawmatics.com/contacts/${contact.id}/details`
+})
+
+const fullName = computed(() => {
+  let fullName = `${attributes.first_name} ${attributes.middle_name} ${attributes.last_name}`
+  if (attributes.name_suffix) fullName = `${fullName}, ${attributes.name_suffix}`
+  return fullName
 })
 </script>

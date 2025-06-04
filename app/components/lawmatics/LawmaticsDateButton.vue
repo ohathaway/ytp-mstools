@@ -6,9 +6,9 @@
     density="comfortable"
     variant="tonal"
   >
-    Date of Birth
+    {{ label }}
     <v-menu
-      :id="`birthdate-menu-${contactId}`"
+      :id="`birthdate-menu-${objectId}`"
       activator="parent"
     >
       <v-list>
@@ -17,7 +17,7 @@
           :key="format"
           @click="insertFormattedDate(format)"
         >
-          <v-list-item-title>{{ dayjs(birthdate).format(format) }}</v-list-item-title>
+          <v-list-item-title>{{ dayjs(date).format(format) || label }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
@@ -28,13 +28,16 @@
 import dayjs from 'dayjs'
 
 const props = defineProps({
-  birthdate: {
+  date: {
     type: String,
     required: true
   },
-  contactId: {
+  objectId: {
     type: [String, Number],
     required: true
+  },
+  label: {
+    type: String
   }
 })
 
@@ -46,13 +49,13 @@ const formats = [
 ]
 
 const insertFormattedDate = format => {
-  const formattedDate = dayjs(props.birthdate).format(format)
+  const formattedDate = dayjs(props.date).format(format)
   insertInfo(formattedDate)
 }
 </script>
 
 <style scoped>
-.date-of-birth-field {
+.lawmatics-date-field {
   position: relative;
   display: inline-block;
 }

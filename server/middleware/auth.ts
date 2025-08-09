@@ -8,57 +8,90 @@ export default defineEventHandler(async (event: H3Event) => {
     event.path.startsWith('/api/_hub') ||
     !event.path.startsWith('/api')
   ) {
-    // console.debug('public route requested')
     return
   }
 
   try {
-    // console.debug('private route requested')
-    // First check for bearer token
-    // console.debug('first checking for basic auth...')
     const authHeader = getHeader(event, 'authorization')
+    
+    // Check for Basic auth (for development/testing)
     if (authHeader?.startsWith('Basic ')) {
       const token = authHeader.split(' ')[1]
       
-      // For development/testing - check if token matches env variable
       if (process.env.BASIC_AUTH && token === process.env.BASIC_AUTH) {
-        console.debug('valid token found')
-        // Set a default session context for API token auth
-        event.context.session = {
+        event.context.auth = {
           userId: 'basic-auth',
+          email: 'basic-auth@ohlawcolorado.com',
           isAdmin: true
         }
         return
       }
     }
 
-    // Fall back to session cookie
-    console.debug('no bearer token found')
-    console.debug('checking for authorized session...')
-    const session = getCookie(event, 'session')
-    
-    if (!session) {
-      throw createError({
-        statusCode: 401,
-        message: 'Unauthorized'
-      })
+    // Check for Firebase ID token
+    if (authHeader?.startsWith('Bearer ')) {
+      const idToken = authHeader.split(' ')[1]
+      
+      try {
+        // Validate Firebase ID token by calling Firebase REST API
+        const response = await fetch(`https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${process.env.FIREBASE_API_KEY}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            idToken: idToken
+          })
+        })
+
+        if (!response.ok) {
+          throw new Error('Token validation failed')
+        }
+
+        const data = await response.json()
+        const user = data.users?.[0]
+        
+        if (!user) {
+          throw new Error('No user found in token')
+        }
+
+        // Validate email domain
+        if (!user.email?.endsWith('@ohlawcolorado.com')) {
+          throw createError({
+            statusCode: 403,
+            message: 'Invalid email domain'
+          })
+        }
+
+        // Store user data in context for route handlers
+        event.context.auth = {
+          userId: user.localId,
+          email: user.email,
+          displayName: user.displayName,
+          emailVerified: user.emailVerified
+        }
+        return
+
+      } catch (error) {
+        console.error('Firebase token validation error:', error)
+        throw createError({
+          statusCode: 401,
+          message: 'Invalid authentication token'
+        })
+      }
     }
 
-    // Quick session check in KV
-    const kv = event.context.cloudflare.env.KV
-    const sessionData = await kv.get(`session:${session}`)
+    // No valid authentication found
+    throw createError({
+      statusCode: 401,
+      message: 'Authentication required'
+    })
 
-    if (!sessionData) {
-      throw createError({
-        statusCode: 401,
-        message: 'Invalid session'
-      })
-    }
-
-    // Store session data in context for route handlers
-    event.context.session = JSON.parse(sessionData)
   } catch (error) {
-    console.error('error checking authorization: ', error)
+    if (error.statusCode) {
+      throw error
+    }
+    console.error('Authentication middleware error:', error)
     throw createError({
       statusCode: 401,
       message: 'Authentication failed'

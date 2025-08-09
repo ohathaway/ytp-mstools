@@ -1,0 +1,177 @@
+{
+  "data": [
+      {
+          "id": "40358",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Step-child",
+              "is_repeatable": true,
+              "created_at": "2024-05-22T14:41:52.867-07:00",
+              "updated_at": "2024-05-22T14:43:36.591-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "40080",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Fiduciary",
+              "is_repeatable": true,
+              "created_at": "2024-05-16T14:44:23.403-07:00",
+              "updated_at": "2024-05-16T14:44:23.403-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "39535",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Niece/Nephew",
+              "is_repeatable": true,
+              "created_at": "2024-04-25T10:35:29.819-07:00",
+              "updated_at": "2024-04-25T10:35:29.819-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "39534",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Domestic Partner",
+              "is_repeatable": false,
+              "created_at": "2024-04-25T10:33:01.355-07:00",
+              "updated_at": "2024-04-25T10:33:01.355-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "39530",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Deceased Spouse",
+              "is_repeatable": true,
+              "created_at": "2024-04-25T09:59:35.893-07:00",
+              "updated_at": "2024-04-25T09:59:35.893-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "39529",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Ex-Spouse",
+              "is_repeatable": true,
+              "created_at": "2024-04-25T09:59:17.678-07:00",
+              "updated_at": "2024-04-25T09:59:17.678-07:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "36996",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Owner",
+              "is_repeatable": true,
+              "created_at": "2024-02-28T10:55:16.399-08:00",
+              "updated_at": "2024-02-28T10:55:16.399-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "36135",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Sibling",
+              "is_repeatable": true,
+              "created_at": "2024-01-23T15:45:49.287-08:00",
+              "updated_at": "2024-01-23T15:45:49.287-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35482",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Cpa or Tax Advisor",
+              "is_repeatable": false,
+              "created_at": "2024-01-08T21:01:56.595-08:00",
+              "updated_at": "2024-01-08T21:01:56.595-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35474",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Related Contact",
+              "is_repeatable": true,
+              "created_at": "2024-01-08T14:21:49.392-08:00",
+              "updated_at": "2024-01-08T14:21:49.392-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35289",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Co-debtor",
+              "is_repeatable": true,
+              "created_at": "2023-12-30T14:07:27.377-08:00",
+              "updated_at": "2023-12-30T14:07:27.377-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35257",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Parent",
+              "is_repeatable": true,
+              "created_at": "2023-12-28T10:49:07.703-08:00",
+              "updated_at": "2023-12-30T14:06:35.357-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35256",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Grandchild",
+              "is_repeatable": true,
+              "created_at": "2023-12-28T10:49:02.492-08:00",
+              "updated_at": "2023-12-30T14:06:30.865-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35255",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Child",
+              "is_repeatable": true,
+              "created_at": "2023-12-28T10:48:58.259-08:00",
+              "updated_at": "2023-12-28T10:48:58.259-08:00"
+          },
+          "relationships": {}
+      },
+      {
+          "id": "35237",
+          "type": "relationship_type",
+          "attributes": {
+              "name": "Spouse",
+              "is_repeatable": false,
+              "created_at": "2023-12-28T09:48:57.094-08:00",
+              "updated_at": "2023-12-28T09:48:57.094-08:00"
+          },
+          "relationships": {}
+      }
+  ],
+  "meta": {
+      "total_pages": 1,
+      "limit_per_page": 25,
+      "total_entries": 15
+  },
+  "links": {
+      "self": "/v1/relationship_types?page=1"
+  }
+}

@@ -3,6 +3,7 @@ import Fuse from 'fuse.js'
 export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
   const fields = ref([])
   const filterText = ref('')
+  const fieldTypeFilter = ref('All')
   const currentRelType = ref('Client')
   const repeatableIndex = ref(1)
   const relationshipTypes = ref([])
@@ -17,13 +18,24 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
 
   const filteredFields = computed(() => {
     const searchText = (filterText.value ?? '').toLowerCase()
-    return (searchText && fuse.value)
-      ? fuse.value.search(searchText).map(result => result.item)
-      : fields.value.filter(field => {
-          const label = (field?.field_label ??'').toLowerCase()
-          const macro = (field?.field_macro ?? '').toLowerCase()
-          return label.includes(searchText) || macro.includes(searchText)
-        })
+    let fieldsToFilter = fields.value
+
+    // Apply field type filter first
+    if (fieldTypeFilter.value !== 'All') {
+      fieldsToFilter = fieldsToFilter.filter(field => field.field_type === fieldTypeFilter.value)
+    }
+
+    // Apply text search
+    if (searchText && fuse.value) {
+      return fuse.value.search(searchText).map(result => result.item)
+        .filter(field => fieldTypeFilter.value === 'All' || field.field_type === fieldTypeFilter.value)
+    }
+
+    return fieldsToFilter.filter(field => {
+      const label = (field?.field_label ??'').toLowerCase()
+      const macro = (field?.field_macro ?? '').toLowerCase()
+      return label.includes(searchText) || macro.includes(searchText)
+    })
   })
 
   const isCurrentRelTypeRepeatable = computed(() => {
@@ -56,6 +68,9 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
       case 'filterText':
         filterText.value = value
         break
+      case 'fieldTypeFilter':
+        fieldTypeFilter.value = value
+        break
       case 'currentRelType':
         currentRelType.value = value
         break
@@ -72,6 +87,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
 
   const setFields = newFields => setState('fields', newFields)
   const setFilterText = text => setState('filterText', text)
+  const setFieldTypeFilter = filter => setState('fieldTypeFilter', filter)
   const setCurrentRelType = type => setState('currentRelType', type)
   const setRepeatableIndex = index => setState('repeatableIndex', index)
   const setRelationshipTypes = types => setState('relationshipTypes', types)
@@ -114,13 +130,34 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     })
   }
 
-  const fetchFields = () => {
+  const fetchFields = async () => {
     isLoading.value = true
     try {
-      const { $lmFields } = useNuxtApp()
-      setFields($lmFields)
+      const { $lmFields, $fetchCustomFields } = useNuxtApp()
+      
+      // Start with static fields from plugin
+      let allFields = [...$lmFields]
+      
+      try {
+        // Fetch custom fields from CRM
+        const customFieldsResponse = await $fetchCustomFields()
+        
+        // Transform custom fields to match expected format
+        const customFields = customFieldsResponse.map(field => ({
+          field_label: field.attributes.name,
+          field_macro: `{{custom_field_${field.id}}}`,
+          field_type: field.attributes.type === 'Contact' ? 'Contact' : 'Matter'
+        }))
+        
+        // Merge static fields with custom fields
+        allFields = [...allFields, ...customFields]
+      } catch (customFieldsError) {
+        console.warn('Failed to fetch custom fields, using static fields only:', customFieldsError)
+      }
+      
+      setFields(allFields)
     } catch (error) {
-      console.error('Failed to load lawmatics fields from config')
+      console.error('Failed to load lawmatics fields:', error)
     } finally {
       isLoading.value = false
     }
@@ -149,6 +186,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     fetchRelationshipTypes,
     fields,
     filterText,
+    fieldTypeFilter,
     filteredFields,
     isCurrentRelTypeRepeatable,
     isLoading,
@@ -156,6 +194,7 @@ export const useLawmaticsFieldsStore = defineStore('lawmaticsFields', () => {
     setCurrentRelType,
     setFields,
     setFilterText,
+    setFieldTypeFilter,
     setRepeatableIndex,
     setRelationshipTypes,
     setState,

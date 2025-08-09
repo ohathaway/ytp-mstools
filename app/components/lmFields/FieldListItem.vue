@@ -3,6 +3,9 @@
     <div class="grid-container">
       <div class="content-column">
         <div :id="toKebabCase(item.field_label)">
+          <span class="field-type-indicator" :class="`field-type-${item.field_type?.toLowerCase()}`">
+            {{ item.field_type }}
+          </span><br />
           <strong>{{ item.field_label }}:</strong><br />
           <span class="preview-macro">
             {{ getDisplayMacro(item) }}
@@ -74,7 +77,7 @@ const { toastSuccess, toastError } = useMainStore()
 const copyButtonPressed = ref(false)
 
 const getPreviewMacro = item => {
-  const prefix = store.relationshipPrefix
+  const prefix = item.field_type === 'Contact' ? store.relationshipPrefix : ''
   return item.field_macro.replace(
     /^{\{/, `{{${prefix}${prefix ? '|' : ''}` 
   )
@@ -87,7 +90,7 @@ const handleInsert = item => {
 }
 
 const getDisplayMacro = item => {
-  const prefix = store.relationshipPrefix
+  const prefix = item.field_type === 'Contact' ? store.relationshipPrefix : ''
   const returnValue = isMruItem && item.fullMacro
     ? item.fullMacro
     : item.field_macro.replace(/^{\{/, `{{${prefix}${prefix ? '|' : ''}`)
@@ -108,7 +111,7 @@ const copyToClipboard = item => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .list-item {
   background: #f8f8f8;
   border: 1px solid var(--border-color);
@@ -138,5 +141,27 @@ const copyToClipboard = item => {
 .preview-macro {
   font-weight: bold;
   color: #244091;
+}
+
+.field-type-indicator {
+  font-size: 0.75em;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.field-type-contact {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.field-type-matter {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.field-type-general {
+  background-color: #e8f5e8;
+  color: #388e3c;
 }
 </style>

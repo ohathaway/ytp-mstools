@@ -83,7 +83,7 @@ const decrementIndex = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 label {
   display: block;
   margin-bottom: 4px;

@@ -3,6 +3,7 @@
     <div class="lm-fields">
       <div class="filter-component">
         <LmFieldsRelationshipSelector />
+        <LmFieldsFieldTypeFilter />
         <LmFieldsFieldSearch />
         <LmFieldsFieldListMRU />
         <LmFieldsFieldList />
@@ -21,7 +22,7 @@ onMounted(async () => {
 })
 </script>
 
-<style lang="scss">
+<style>
 :root {
   --border-color: #d1d1d1;
   --hover-color: #e1e1e1;

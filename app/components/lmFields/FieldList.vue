@@ -18,7 +18,7 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .filtered-list {
   list-style-type: none;
   padding: 0;

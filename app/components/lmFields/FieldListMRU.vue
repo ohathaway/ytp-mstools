@@ -17,7 +17,7 @@
 const store = useLawmaticsFieldsStore()
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .mru-container {
   margin-bottom: 16px;
 

@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   css: [
     'vuetify/styles',
-    '~/assets/css/global.scss'
+    '~/assets/css/global.css'
   ],
   devServer: {
     https: {
@@ -56,7 +56,7 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', (config) => {
         // @ts-expect-error
         config.plugins?.push(vuetify({ 
-          autoImport: true,
+          autoImport: true
         }))
       })
     }
@@ -99,16 +99,6 @@ export default defineNuxtConfig({
     devtools: true,
     optimizeDeps: {
       include: ['@fluentui/web-components', '@microsoft/fast-foundation']
-    },
-    preprocessorOptions: {
-      scss: { 
-        additionalData: `
-          @use "@/assets/css/_colors.scss" as *;
-          @use "@/assets/css/_variables.scss" as *;
-          @use "@vuetify/lib/styles/settings/variables" as;
-        `,
-        api: 'modern-compiler'
-      }
     },
     ssr: { noExternal: ['vuetify']}
   },

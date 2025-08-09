@@ -23,7 +23,7 @@ const debouncedSetFilterText = debounce(
   , 300)
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 label {
   display: block;
   margin-bottom: 4px;

@@ -78,7 +78,7 @@ const setFont = async fontName => {
 }
 </script>
 
-<style lang="scss">
+<style>
 .spacing-control {
   display: flex;
   align-items: center;

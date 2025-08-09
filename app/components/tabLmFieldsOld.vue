@@ -275,7 +275,7 @@ watchEffect(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 $border-color: #d1d1d1;
 $hover-color: #e1e1e1;
 $active-color: #d1d1d1;

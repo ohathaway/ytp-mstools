@@ -1,8 +1,8 @@
-// types/auth.ts
-interface UserSession {
-  id: string
+// server/types/auth.ts
+interface AuthUser {
+  userId: string
   email: string
-  displayName: string
-  createdAt: number
-  expiresAt: number
+  displayName?: string
+  emailVerified?: boolean
+  isAdmin?: boolean
 }

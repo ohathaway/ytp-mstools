@@ -1,25 +1,23 @@
 // server/api/auth/logout.post.ts
 export default defineEventHandler(async (event) => {
   try {
-    const sessionId = getCookie(event, 'session')
-    if (sessionId) {
-      const kv = hubKV()
-      await kv.del(`session:${sessionId}`)
+    // With token-based authentication, logout is handled client-side
+    // This endpoint can be used for logging/auditing purposes if needed
+    
+    const auth = event.context.auth
+    if (auth?.email) {
+      console.log(`User logged out: ${auth.email}`)
     }
 
-    deleteCookie(event, 'session', {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax',
-      path: '/'
-    })
-
-    return { success: true }
+    return { 
+      success: true,
+      message: 'Logout successful - token invalidated on client'
+    }
   } catch (error) {
     console.error('Logout error:', error)
-    throw createError({
-      statusCode: 500,
-      message: 'Failed to logout'
-    })
+    return { 
+      success: true,
+      message: 'Logout processed'
+    }
   }
 })

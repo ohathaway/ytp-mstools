@@ -1,51 +1,90 @@
 <template>
-  <header class="ms-welcome__header ms-bgColor-neutralLighter">
-    <a target="_blank" href="https://ohlawcolorado.com" rel="noopener noreferrer">
-      <!-- <inline-svg width="90" height="90" src="../../assets/ohlaw_icon_circle_outline.svg" alt="OHLaw" title="OHLaw" /> -->
-      <!-- <div v-html="rawLogo" /> -->
-      <img width="90" height="90" src="~/assets/ohlaw_icon_circle_outline.svg?data" alt="OHLaw" title="OHLaw" />
-      <!--
-      <br>
+  <header class="header-container">
+    <div class="header-content">
+      <a target="_blank" href="https://ohlawcolorado.com" rel="noopener noreferrer" class="logo-link">
+        <img width="32" height="32" src="~/assets/ohlaw_icon_circle_outline.svg?data" alt="OHLaw" title="OHLaw" />
+        <span class="logo-text">OHLaw Tools</span>
+      </a>
+      
       <fluent-button
-        v-if="!isAuthenticated"
-        @click="handleLogin()"
+        appearance="stealth"
+        @click="handleLogout"
+        title="Sign out"
+        class="logout-button"
       >
-        Login
+        <span class="logout-icon">⏻</span>
       </fluent-button>
-      <fluent-button
-        v-else
-        @click="handleLogout()"
-      >
-        Logout
-      </fluent-button>
-      -->
-    </a>
+    </div>
+    
+    <div class="user-info" v-if="user?.email">
+      <span class="user-email" :title="user.email">{{ user.displayName || user.email }}</span>
+    </div>
   </header>
 </template>
 
 <script setup>
 const authStore = useAuthStore()
-// import.meta.client && Office.onReady()
+const { user } = storeToRefs(authStore)
 
-const { isAuthenticated } = storeToRefs(authStore)
-const authInit = ref(false)
-
-const handleLogin = async () => {
-  try {
-    await authStore.loginWithGoogle()
-  } catch (error) {
-    console.error('Login error:', error)
-  }
+const handleLogout = async () => {
+  await authStore.logout()
 }
-
-const handleLogout = async () => true
-
-watchEffect(() => {
-  if (authStore && isAuthenticated.value) authInit.value = true
-})
-
 </script>
 
 <style scoped>
-header { background: #f3f2f1; }
+.header-container {
+  background: #f3f2f1;
+  padding: 8px 12px;
+  border-bottom: 1px solid #e1dfdd;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #323130;
+}
+
+.logo-link:hover {
+  color: #106ebe;
+}
+
+.logo-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.logout-button {
+  padding: 4px 8px;
+  min-width: 32px;
+  height: 32px;
+}
+
+.logout-icon {
+  font-size: 16px;
+}
+
+.user-info {
+  margin-top: 4px;
+}
+
+.user-email {
+  font-size: 11px;
+  color: #605e5c;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
 </style>

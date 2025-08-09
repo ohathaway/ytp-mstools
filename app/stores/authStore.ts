@@ -7,99 +7,198 @@ interface AuthUser {
   uid: string
 }
 
+interface AuthResult {
+  user: AuthUser
+  idToken: string
+}
+
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AuthUser | null>(null)
   const isAuthenticated = ref(false)
   const isLoading = ref(false)
+  const idToken = ref<string | null>(null)
+
+  // Create authenticated fetch wrapper
+  const authenticatedFetch = async (url: string, options: any = {}) => {
+    if (!idToken.value) {
+      throw new Error('No authentication token available')
+    }
+
+    return $fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        Authorization: `Bearer ${idToken.value}`
+      }
+    })
+  }
+
+  const { $officeState } = useNuxtApp()
 
   const loginWithGoogle = async () => {
     isLoading.value = true
     try {
-      // Open the Office dialog for Firebase auth
-      const result = await new Promise((resolve, reject) => {
-        Office.context.ui.displayDialogAsync(
-          `${window.location.origin}/auth.html`,
-          { height: 60, width: 30, promptBeforeOpen: false },
-          (result) => {
-            if (result.status === Office.AsyncResultStatus.Failed) {
-              reject(new Error(result.error.message))
+      let authResult: AuthResult
+
+      if ($officeState?.isOfficeEnvironment) {
+        // Use Office dialog for authentication in Office environment
+        authResult = await new Promise((resolve, reject) => {
+          // Generate CSRF state parameter
+          const state = crypto.randomUUID()
+          sessionStorage.setItem('authState', state)
+
+          Office.context.ui.displayDialogAsync(
+            `${window.location.origin}/auth.html?state=${state}`,
+            { height: 60, width: 30, promptBeforeOpen: false },
+            (result) => {
+              if (result.status === Office.AsyncResultStatus.Failed) {
+                reject(new Error(result.error.message))
+                return
+              }
+
+              const dialog = result.value
+              dialog.addEventHandler(Office.EventType.DialogMessageReceived, (arg) => {
+                const message = JSON.parse(arg.message)
+                
+                // Verify state parameter for CSRF protection
+                if (message.state !== sessionStorage.getItem('authState')) {
+                  reject(new Error('Invalid state parameter'))
+                  return
+                }
+
+                if (message.type === 'authComplete') {
+                  resolve({
+                    user: message.user,
+                    idToken: message.idToken
+                  })
+                } else if (message.type === 'authError') {
+                  reject(new Error(message.error?.message || 'Authentication failed'))
+                }
+                dialog.close()
+              })
+            }
+          )
+        })
+      } else {
+        // Fallback for browser environment (development/testing)
+        // Open popup window for authentication
+        authResult = await new Promise((resolve, reject) => {
+          // Generate CSRF state parameter
+          const state = crypto.randomUUID()
+          sessionStorage.setItem('authState', state)
+
+          const popup = window.open(
+            `${window.location.origin}/auth.html?state=${state}`,
+            'auth-popup',
+            'width=500,height=600,scrollbars=yes,resizable=yes'
+          )
+
+          if (!popup) {
+            reject(new Error('Popup blocked. Please allow popups for this site.'))
+            return
+          }
+
+          // Listen for messages from popup
+          const messageHandler = (event: MessageEvent) => {
+            if (event.origin !== window.location.origin) return
+
+            const message = event.data
+
+            // Verify state parameter for CSRF protection
+            if (message.state !== sessionStorage.getItem('authState')) {
+              reject(new Error('Invalid state parameter'))
               return
             }
 
-            const dialog = result.value
-            dialog.addEventHandler(Office.EventType.DialogMessageReceived, (arg) => {
-              const message = JSON.parse(arg.message)
-              if (message.type === 'authComplete') {
-                resolve(message.user)
-              } else if (message.type === 'authError') {
-                reject(message.error)
-              }
-              dialog.close()
-            })
+            if (message.type === 'authComplete') {
+              resolve({
+                user: message.user,
+                idToken: message.idToken
+              })
+              popup.close()
+              window.removeEventListener('message', messageHandler)
+            } else if (message.type === 'authError') {
+              reject(new Error(message.error?.message || 'Authentication failed'))
+              popup.close()
+              window.removeEventListener('message', messageHandler)
+            }
           }
-        )
-      })
 
-      // Validate and create session
-      if (!result.email?.endsWith('@ohlawcolorado.com')) {
+          window.addEventListener('message', messageHandler)
+
+          // Handle popup closure
+          const checkClosed = setInterval(() => {
+            if (popup.closed) {
+              clearInterval(checkClosed)
+              window.removeEventListener('message', messageHandler)
+              reject(new Error('Authentication cancelled'))
+            }
+          }, 1000)
+        })
+      }
+
+      // Validate email domain
+      if (!authResult.user.email?.endsWith('@ohlawcolorado.com')) {
         throw new Error('Invalid email domain. Must be @ohlawcolorado.com')
       }
 
-      const response = await $fetch('/api/auth/sessions', {
-        method: 'POST',
-        body: {
-          email: result.email,
-          displayName: result.displayName
-        }
-      })
+      // Store user data and token in memory
+      user.value = authResult.user
+      idToken.value = authResult.idToken
+      isAuthenticated.value = true
+      
+      // Clear auth state
+      sessionStorage.removeItem('authState')
 
-      if (response.success) {
-        user.value = {
-          email: result.email,
-          displayName: result.displayName,
-          uid: result.uid
-        }
-        isAuthenticated.value = true
-      }
     } catch (error) {
       console.error('Login error:', error)
+      // Clear any partial auth state
+      user.value = null
+      idToken.value = null
+      isAuthenticated.value = false
+      sessionStorage.removeItem('authState')
       throw error
     } finally {
       isLoading.value = false
     }
   }
 
-  const checkSession = async () => {
-    try {
-      const response = await $fetch('/api/auth/validate')
-      if (response.user) {
-        user.value = response.user
-        isAuthenticated.value = true
-      }
-    } catch (error) {
-      user.value = null
-      isAuthenticated.value = false
-    }
+  const logout = async () => {
+    // Clear in-memory state
+    user.value = null
+    idToken.value = null
+    isAuthenticated.value = false
+    
+    // Clear any stored auth state
+    sessionStorage.removeItem('authState')
   }
 
-  const logout = async () => {
+  const validateToken = async () => {
+    if (!idToken.value) return false
+    
     try {
-      await $fetch('/api/auth/logout', { method: 'POST' })
-    } finally {
-      user.value = null
-      isAuthenticated.value = false
+      const response = await authenticatedFetch('/api/auth/validate')
+      return !!response.valid
+    } catch {
+      // Token is invalid, clear auth state
+      logout()
+      return false
     }
   }
 
   return {
     // State
-    user,
-    isAuthenticated,
-    isLoading,
+    user: readonly(user),
+    isAuthenticated: readonly(isAuthenticated),
+    isLoading: readonly(isLoading),
+    idToken: readonly(idToken),
     
     // Actions
     loginWithGoogle,
-    checkSession,
-    logout
+    logout,
+    validateToken,
+    
+    // Utilities
+    authenticatedFetch
   }
 })

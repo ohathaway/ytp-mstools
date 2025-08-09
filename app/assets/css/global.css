@@ -13,6 +13,16 @@ body {
   padding: 0;
 }
 
+/* Constrain app width in browser environments (wider than typical Office Add-in) */
+@media (min-width: 500px) {
+  .v-application {
+    max-width: 320px;
+    margin: 0 auto;
+    border-left: 1px solid #e1dfdd;
+    border-right: 1px solid #e1dfdd;
+  }
+}
+
 ul {
   margin: 0;
   padding: 0;

@@ -1,54 +1,30 @@
 // server/api/auth/validate.get.ts
 export default defineEventHandler(async (event) => {
   try {
-    const sessionId = getCookie(event, 'session')
-    if (!sessionId) {
-      return {
-        statusCode: 401,
-        message: 'No session found'
-      }
-    }
-
-    const kv = hubKV()
-    const sessionData = await kv.get(`session:${sessionId}`)
+    // This endpoint now validates Firebase ID tokens via middleware
+    // If we reach here, the token is valid and user data is in event.context.auth
+    const auth = event.context.auth
     
-    if (!sessionData) {
+    if (!auth) {
       return {
-        statusCode: 401,
-        message: 'Invalid session'
-      }
-    }
-
-    const session: UserSession = JSON.parse(sessionData as string)
-
-    if (session.expiresAt < Date.now()) {
-      await kv.del(`session:${sessionId}`)
-      return {
-        statusCode: 401,
-        message: 'Session expired'
-      }
-    }
-
-    // Additional domain validation
-    if (!session.email.endsWith('@ohlawcolorado.com')) {
-      await kv.delete(`session:${sessionId}`)
-      return {
-        statusCode: 403,
-        message: 'Invalid email domain'
+        valid: false,
+        message: 'No authentication context'
       }
     }
 
     return {
+      valid: true,
       user: {
-        email: session.email,
-        displayName: session.displayName
+        email: auth.email,
+        displayName: auth.displayName,
+        uid: auth.userId
       }
     }
   } catch (error) {
-    console.error('Session validation error:', error)
-    throw createError({
-      statusCode: 500,
-      message: 'Failed to validate session'
-    })
+    console.error('Token validation error:', error)
+    return {
+      valid: false,
+      message: 'Token validation failed'
+    }
   }
 })

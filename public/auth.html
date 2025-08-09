@@ -69,9 +69,12 @@
       // Function for sending messages back to main app window
       const sendMessageToParent = (message) => {
         if (Office?.context?.ui?.messageParent) {
+            // Office Add-in dialog
             Office.context.ui.messageParent(JSON.stringify(message))
-        } else if (window.opener) {
-            window.opener.postMessage(message, '*')
+        } else if (window.opener && !window.opener.closed) {
+            // Browser popup window
+            window.opener.postMessage(message, window.location.origin)
+            window.close()
         } else {
             console.error('No way to communicate with parent window')
         }
@@ -81,10 +84,12 @@
       const checkRedirectResult = async () => {
         try {
           const params = new URLSearchParams(window.location.search)
+          const expectedState = params.get('state')
+          
           console.debug('Checking redirect with full context:', {
             url: window.location.href,
             referer: document.referrer,
-            state: params.get('state'),
+            state: expectedState,
             error: params.get('error'),
             authInProgress: sessionStorage.getItem('authInProgress'),
             hasCode: params.has('code'),
@@ -105,6 +110,10 @@
 
           if (result?.user || currentUser) {
             const user = result?.user || currentUser
+            
+            // Get Firebase ID token for server validation
+            const idToken = await user.getIdToken()
+            
             console.log('Auth succeeded, attempting to message parent')
             sendMessageToParent({
               type: 'authComplete',
@@ -112,7 +121,9 @@
                 uid: user.uid,
                 email: user.email,
                 displayName: user.displayName
-              }
+              },
+              idToken: idToken,
+              state: expectedState
             })
           } else {
             // Only treat this as an error if we were expecting a result
@@ -122,7 +133,8 @@
                 type: 'authError',
                 error: {
                   message: 'No auth result after redirect'
-                }
+                },
+                state: expectedState
               })
             } else {
               console.log('No auth result but none expected')
@@ -144,9 +156,9 @@
             error: {
               code: error.code,
               message: error.message
-            }
-          }, '*')
-          // window.close()
+            },
+            state: new URLSearchParams(window.location.search).get('state')
+          })
         }
       }
 
@@ -207,19 +219,37 @@
         }
       }
 
-      onAuthStateChanged(auth, (user) => {
-        console.debug('Auth state changed: ', auth)
+      onAuthStateChanged(auth, async (user) => {
+        console.debug('Auth state changed: ', user?.email || 'no user')
         if (user && sessionStorage.getItem('authInProgress')) {
           console.debug('User signed in after redirect')
-          sendMessageToParent({
-            type: 'authComplete',
-            user: {
-              uid: user.uid,
-              email: user.email,
-              displayName: user.displayName
-            }
-          })
-          sessionStorage.removeItem('authInProgress')
+          
+          try {
+            // Get Firebase ID token for server validation
+            const idToken = await user.getIdToken()
+            const expectedState = new URLSearchParams(window.location.search).get('state')
+            
+            sendMessageToParent({
+              type: 'authComplete',
+              user: {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName
+              },
+              idToken: idToken,
+              state: expectedState
+            })
+            sessionStorage.removeItem('authInProgress')
+          } catch (error) {
+            console.error('Failed to get ID token:', error)
+            sendMessageToParent({
+              type: 'authError',
+              error: {
+                message: 'Failed to get authentication token'
+              },
+              state: new URLSearchParams(window.location.search).get('state')
+            })
+          }
         }
       })
 

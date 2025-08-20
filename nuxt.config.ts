@@ -69,8 +69,8 @@ export default defineNuxtConfig({
   },
   router: {
     options: {
-      // Office Add-ins require hash mode for compatibility
-      hashMode: true
+      // Office Add-ins require hash mode
+      hashMode: false
     }
   },
   runtimeConfig: {

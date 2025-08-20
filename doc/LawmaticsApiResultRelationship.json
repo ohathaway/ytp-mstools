@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": "66570270",
+    "type": "relationship",
+    "attributes": {
+      "name": "Spouse",
+      "prospect_id": 9281848,
+      "contact_id": 12589880,
+      "relationship_type_id": 35237,
+      "created_at": "2024-09-20T11:53:04.678-07:00",
+      "updated_at": "2024-09-20T11:53:04.678-07:00"
+    }
+  }
+}

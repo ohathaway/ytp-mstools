@@ -54,6 +54,28 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   }
 
+  const getLmObjectWithFields = async (id, objectType = 'contact', fields = 'all') => {
+    console.info('fetching lm object with fields')
+
+    const validationErrors = {
+      id: !id && 'ID parameter is required',
+      objectType: !lmModules.includes(objectType) && `Invalid objectType: ${objectType}. Must be one of: ${lmModules.join(', ')}`
+    };
+  
+    const error = Object.values(validationErrors).find(Boolean);
+    try {
+      console.assert(!error, error)
+      const response = await $fetch(`${lmFunction}/${objectType}/${id}?fields=${fields}`, {
+        headers: { authorization: `Basic ${lmBasicAuth}` },
+        lazy: true
+      }) 
+      return response
+    } catch (error) {
+      console.error(error.message)
+      throw error
+    }
+  }
+
   const fetchCustomFields = async () => {
     try {
       const response = await $fetch(`${lmFunction}/custom_fields?fields=all`, {
@@ -80,6 +102,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     'notes',
     'phone_numbers',
     'prospects',
+    'relationships',
     'tasks'
   ]
 
@@ -510,6 +533,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     provide: {
       lmFields,
       getLmObject,
+      getLmObjectWithFields,
       searchLm,
       setSearchUrl,
       fetchCustomFields

@@ -31,6 +31,26 @@
         class="text-none"
         rounded="sm"
         density="comfortable"
+        :variant="exportButtonVariant"
+        :color="exportButtonColor"
+        @click="downloadRelatedContacts"
+        :loading="isExporting"
+        :disabled="isExporting"
+      >
+        <template v-if="isExporting">
+          {{ exportMessage }}
+        </template>
+        <template v-else-if="error">
+          Retry Download
+        </template>
+        <template v-else>
+          Download Related Contacts
+        </template>
+      </v-btn>
+      <v-btn
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
         variant="tonal"
         @click="openNewWindow(matterLink)"
       >
@@ -50,6 +70,26 @@ const { matter } = defineProps({
     type: Object,
     required: true
   }
+})
+
+// Export functionality
+const { exportMatterContactsToWealthCounsel, getExportProgress } = useLawmaticsExport()
+const { isExporting, progress, error } = getExportProgress()
+
+const exportMessage = computed(() => {
+  if (!isExporting.value) return ''
+  if (error.value) return `Error: ${error.value}`
+  return progress.value.message
+})
+
+const exportButtonVariant = computed(() => {
+  if (error.value) return 'outlined'
+  return 'tonal'
+})
+
+const exportButtonColor = computed(() => {
+  if (error.value) return 'error'
+  return undefined
 })
 
 const attributes = matter.attributes
@@ -86,6 +126,14 @@ const jointPlan = computed(() => {
   })[0] 
   return jointPlan?.formatted_value || 'No'
 })
+
+const downloadRelatedContacts = async () => {
+  try {
+    await exportMatterContactsToWealthCounsel(matter.id)
+  } catch (error) {
+    console.error('Export failed:', error)
+  }
+}
 </script>
 
 <style scoped>

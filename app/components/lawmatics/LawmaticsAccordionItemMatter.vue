@@ -28,6 +28,7 @@
         label="Trust or Will Date"
       />
       <v-btn
+        v-if="$officeState.isOfficeEnvironment === false"
         class="text-none"
         rounded="sm"
         density="comfortable"
@@ -45,6 +46,7 @@
         </template>
         <template v-else>
           Download Related Contacts
+          <IconsIconWrapper :icon="IconDownload" width="12" />
         </template>
       </v-btn>
       <v-btn
@@ -64,6 +66,7 @@
 <script setup>
 import { startCase } from 'lodash-es'
 import IconOpen from '@/components/icons/IconOpen.vue'
+import IconDownload from '@/components/icons/IconDownload.vue'
 
 const { matter } = defineProps({
   matter: {
@@ -81,6 +84,8 @@ const attributes = matter.attributes
 const matterLink = computed(() => {
   return `https://app.lawmatics.com/matters/${matter.id}/details`
 })
+
+const { $officeState } = useNuxtApp()
 
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A'

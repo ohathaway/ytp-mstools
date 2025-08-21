@@ -105,6 +105,7 @@ export const useAuthStore = defineStore('auth', () => {
             const message = event.data
 
             // Verify state parameter for CSRF protection
+            console.debug('message.state:', message.state)
             if (message.state !== sessionStorage.getItem('authState')) {
               reject(new Error('Invalid state parameter'))
               return

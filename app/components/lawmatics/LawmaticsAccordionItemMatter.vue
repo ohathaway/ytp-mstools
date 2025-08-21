@@ -32,16 +32,16 @@
         class="text-none"
         rounded="sm"
         density="comfortable"
-        :variant="exportError ? 'outlined' : 'tonal'"
-        :color="exportError ? 'error' : undefined"
+        :variant="exportButtonVariant"
+        :color="exportButtonColor"
         @click="downloadRelatedContacts"
         :loading="isExporting"
         :disabled="isExporting"
       >
         <template v-if="isExporting">
-          Starting export...
+          {{ exportMessage }}
         </template>
-        <template v-else-if="exportError">
+        <template v-else-if="error">
           Retry Download
         </template>
         <template v-else>
@@ -75,9 +75,25 @@ const { matter } = defineProps({
   }
 })
 
-// Export functionality using server-side processing
-const isExporting = ref(false)
-const exportError = ref(null)
+// Export functionality
+const { exportMatterContactsToWealthCounsel, getExportProgress } = useLawmaticsExport()
+const { isExporting, progress, error } = getExportProgress()
+
+const exportMessage = computed(() => {
+  if (!isExporting.value) return ''
+  if (error.value) return `Error: ${error.value}`
+  return progress.value.message
+})
+
+const exportButtonVariant = computed(() => {
+  if (error.value) return 'outlined'
+  return 'tonal'
+})
+
+const exportButtonColor = computed(() => {
+  if (error.value) return 'error'
+  return undefined
+})
 
 const attributes = matter.attributes
 
@@ -117,89 +133,10 @@ const jointPlan = computed(() => {
 })
 
 const downloadRelatedContacts = async () => {
-  if (isExporting.value) return
-  
-  isExporting.value = true
-  exportError.value = null
-  
   try {
-    // Get authenticated fetch function from auth store
-    const authStore = useAuthStore()
-    
-    // Initiate server-side export with authentication
-    const response = await authStore.authenticatedFetch('/api/lawmatics/export-contacts', {
-      method: 'POST',
-      body: { matterId: matter.id }
-    })
-    
-    const { exportId } = response
-    
-    // Open Office dialog for download progress with auth token
-    const dialogUrl = `/download-dialog.html?exportId=${exportId}&token=${encodeURIComponent(authStore.idToken)}`
-    
-    if (typeof Office !== 'undefined' && Office.context?.ui) {
-      // Office environment - use displayDialogAsync
-      Office.context.ui.displayDialogAsync(
-        `${window.location.origin}${dialogUrl}`,
-        {
-          height: 50,
-          width: 40,
-          displayInIframe: false
-        },
-        (result) => {
-          if (result.status === Office.AsyncResultStatus.Succeeded) {
-            // Handle dialog messages
-            result.value.addEventHandler(Office.EventType.DialogMessageReceived, (args) => {
-              const message = JSON.parse(args.message)
-              if (message.type === 'lawmatics-export') {
-                if (message.message === 'download-complete') {
-                  // Show success message
-                  const { $toast } = useNuxtApp()
-                  if ($toast) {
-                    $toast.success('Contacts exported successfully!')
-                  }
-                }
-                // Close dialog
-                result.value.close()
-              }
-            })
-          } else {
-            console.error('Failed to open dialog:', result.error)
-            exportError.value = 'Failed to open download dialog'
-          }
-        }
-      )
-    } else {
-      // Browser environment - open in new window for testing
-      const popup = window.open(dialogUrl, 'lawmatics-export', 'width=500,height=600,scrollbars=yes,resizable=yes')
-      
-      // Listen for messages from popup
-      const messageHandler = (event) => {
-        if (event.data?.type === 'lawmatics-export') {
-          if (event.data.message === 'download-complete') {
-            const { $toast } = useNuxtApp()
-            if ($toast) {
-              $toast.success('Contacts exported successfully!')
-            }
-          }
-          popup?.close()
-          window.removeEventListener('message', messageHandler)
-        }
-      }
-      
-      window.addEventListener('message', messageHandler)
-    }
-    
+    await exportMatterContactsToWealthCounsel(matter.id)
   } catch (error) {
-    console.error('Export initiation failed:', error)
-    exportError.value = error instanceof Error ? error.message : 'Export failed'
-    
-    const { $toast } = useNuxtApp()
-    if ($toast) {
-      $toast.error(exportError.value)
-    }
-  } finally {
-    isExporting.value = false
+    console.error('Export failed:', error)
   }
 }
 </script>

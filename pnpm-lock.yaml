@@ -41,9 +41,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      nanoid:
-        specifier: ^5.1.0
-        version: 5.1.0
       nuxt:
         specifier: ^4.0.3
         version: 4.0.3(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.2.1)(@vue/compiler-sfc@3.5.18)(db0@0.3.2)(ioredis@5.7.0)(magicast@0.3.5)(rollup@4.46.2)(sass@1.85.0)(terser@5.43.1)(typescript@5.7.3)(vite@7.1.1(@types/node@24.2.1)(jiti@2.5.1)(sass@1.85.0)(terser@5.43.1)(yaml@2.8.1))(yaml@2.8.1)
@@ -4261,6 +4258,11 @@ packages:
 
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
+  nanoid@3.3.8:
+    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -10770,6 +10772,8 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  nanoid@3.3.8: {}
+
   nanoid@5.1.0: {}
 
   nanomatch@1.2.13:
@@ -11549,7 +11553,7 @@ snapshots:
 
   postcss@8.5.2:
     dependencies:
-      nanoid: 3.3.11
+      nanoid: 3.3.8
       picocolors: 1.1.1
       source-map-js: 1.2.1
 

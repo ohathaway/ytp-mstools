@@ -50,6 +50,20 @@
         </template>
       </v-btn>
       <v-btn
+        v-else
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
+        :variant="exportButtonVariant"
+        :color="exportButtonColor"
+        @click="openNewWindow(appBrowserUrl)"
+        :loading="isExporting"
+        :disabled="isExporting"
+      >
+      Download Related Contacts
+      <IconsIconWrapper :icon="IconOpen" width="12" />
+      </v-btn>
+      <v-btn
         class="text-none"
         rounded="sm"
         density="comfortable"
@@ -74,6 +88,8 @@ const { matter } = defineProps({
     required: true
   }
 })
+
+const { public: { appBrowserUrl } } = useRuntimeConfig()
 
 // Export functionality
 const { exportMatterContactsToWealthCounsel, getExportProgress } = useLawmaticsExport()

@@ -1,5 +1,6 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  const { public: { lmFunction, lmBasicAuth } } = useRuntimeConfig()
+  const { public: { lmFunction } } = useRuntimeConfig()
+  const { authenticatedFetch } = useAuthStore()
 
   const setSearchUrl = (endpoint, searchType, searchTerm) => {
     const baseUrl = `${lmFunction}/${endpoint}`
@@ -21,8 +22,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const searchLm = async searchUrl => {
     try {
-      const functionResponse = await $fetch(searchUrl, {
-        headers: { authorization: `Basic ${lmBasicAuth}` },
+      const functionResponse = await authenticatedFetch(searchUrl, {
         lazy: true
       }) 
       return functionResponse
@@ -43,8 +43,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const error = Object.values(validationErrors).find(Boolean);
     try {
       console.assert(!error, error)
-      const response = await $fetch(`${lmFunction}/${objectType}/${id}`, {
-        headers: { authorization: `Basic ${lmBasicAuth}` },
+      const response = await authenticatedFetch(`${lmFunction}/${objectType}/${id}`, {
         lazy: true
       }) 
       return response
@@ -65,8 +64,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const error = Object.values(validationErrors).find(Boolean);
     try {
       console.assert(!error, error)
-      const response = await $fetch(`${lmFunction}/${objectType}/${id}?fields=${fields}`, {
-        headers: { authorization: `Basic ${lmBasicAuth}` },
+      const response = await authenticatedFetch(`${lmFunction}/${objectType}/${id}?fields=${fields}`, {
         lazy: true
       }) 
       return response
@@ -78,8 +76,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const fetchCustomFields = async () => {
     try {
-      const response = await $fetch(`${lmFunction}/custom_fields?fields=all`, {
-        headers: { authorization: `Basic ${lmBasicAuth}` },
+      const response = await authenticatedFetch(`${lmFunction}/custom_fields?fields=all`, {
         lazy: true
       })
       return response

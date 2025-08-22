@@ -20,6 +20,7 @@
           id="insert-button"
           class="icon"
           @click="handleInsert(item)"
+          :disabled="!$officeState.isOfficeEnvironment"
           :aria-label="`Add ${item.field_label} to the document`"
         >
           <IconsIconWrapper
@@ -73,6 +74,7 @@ const { item, isMruItem } = defineProps({
 
 const store = useLawmaticsFieldsStore()
 // const toast = useToast()
+const { $officeState } = useNuxtApp()
 const { toastSuccess, toastError } = useMainStore()
 const copyButtonPressed = ref(false)
 

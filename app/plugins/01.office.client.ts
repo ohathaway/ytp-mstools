@@ -16,11 +16,17 @@ declare global {
   }
 }
 
-export default defineNuxtPlugin(async (nuxtApp) => {
+export default defineNuxtPlugin({
+  name: 'office',
+  async setup(nuxtApp) {
+  // Early environment detection to prevent unnecessary loading
+  const isOfficeEnv = process.client && 
+    !!(window.Office && window.Office.context)
+
   const state = reactive<OfficePluginState>({
     isReady: false,
     error: null,
-    isOfficeEnvironment: false
+    isOfficeEnvironment: isOfficeEnv
   })
 
   const checkOfficeEnvironment = (): boolean => {
@@ -68,10 +74,11 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     state.isReady = true // Mark as ready even without Office.js
   }
 
-  return {
-    provide: {
-      office: window.Office,
-      officeState: readonly(state)
+    return {
+      provide: {
+        office: window.Office,
+        officeState: readonly(state)
+      }
     }
   }
 })

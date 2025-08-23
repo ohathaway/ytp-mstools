@@ -12,6 +12,79 @@ interface AuthResult {
   idToken: string
 }
 
+interface StoredAuth {
+  user: AuthUser
+  idToken: string
+  timestamp: number
+}
+
+const STORAGE_KEY = 'ohlaw_auth_token'
+const TOKEN_MAX_AGE = 24 * 60 * 60 * 1000 // 24 hours
+
+const storeAuth = (user: AuthUser, idToken: string) => {
+  if (!import.meta.client) return
+  
+  const authData: StoredAuth = {
+    user,
+    idToken,
+    timestamp: Date.now()
+  }
+  
+  console.log('Storing auth data:', { 
+    email: user.email, 
+    timestamp: new Date(authData.timestamp).toISOString(),
+    key: STORAGE_KEY 
+  })
+  
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(authData))
+  
+  // Verify it was stored
+  const verification = localStorage.getItem(STORAGE_KEY)
+  console.log('Storage verification:', !!verification)
+}
+
+const loadStoredAuth = async (): Promise<StoredAuth | null> => {
+  if (!import.meta.client) return null
+  
+  try {
+    console.log('Loading stored auth with key:', STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY)
+    console.log('Raw stored data:', !!stored)
+    
+    if (!stored) {
+      console.log('No stored auth data found')
+      return null
+    }
+    
+    const authData: StoredAuth = JSON.parse(stored)
+    console.log('Parsed auth data:', { 
+      email: authData.user?.email, 
+      timestamp: new Date(authData.timestamp).toISOString(),
+      ageHours: (Date.now() - authData.timestamp) / (1000 * 60 * 60)
+    })
+    
+    // Check if token is too old
+    if (Date.now() - authData.timestamp > TOKEN_MAX_AGE) {
+      console.log('Token is too old, removing')
+      localStorage.removeItem(STORAGE_KEY)
+      return null
+    }
+    
+    return authData
+  } catch (error) {
+    console.error('Failed to load stored auth:', error)
+    if (import.meta.client) {
+      localStorage.removeItem(STORAGE_KEY)
+    }
+    return null
+  }
+}
+
+const clearStoredAuth = () => {
+  if (!import.meta.client) return
+  localStorage.removeItem(STORAGE_KEY)
+}
+
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AuthUser | null>(null)
   const isAuthenticated = ref(false)
@@ -24,13 +97,23 @@ export const useAuthStore = defineStore('auth', () => {
       throw new Error('No authentication token available')
     }
 
-    return $fetch(url, {
-      ...options,
-      headers: {
-        ...options.headers,
-        Authorization: `Bearer ${idToken.value}`
+    try {
+      return await $fetch(url, {
+        ...options,
+        headers: {
+          ...options.headers,
+          Authorization: `Bearer ${idToken.value}`
+        }
+      })
+    } catch (error: any) {
+      // If we get a 401, the token is likely expired - clear auth state
+      if (error?.response?.status === 401) {
+        console.log('Received 401, token likely expired - signing out')
+        await logout()
+        throw new Error('Authentication expired. Please sign in again.')
       }
-    })
+      throw error
+    }
   }
 
   const { $officeState } = useNuxtApp()
@@ -148,6 +231,9 @@ export const useAuthStore = defineStore('auth', () => {
       idToken.value = authResult.idToken
       isAuthenticated.value = true
       
+      // Store auth data in localStorage for persistence
+      storeAuth(authResult.user, authResult.idToken)
+      
       // Clear auth state
       sessionStorage.removeItem('authState')
 
@@ -170,21 +256,82 @@ export const useAuthStore = defineStore('auth', () => {
     idToken.value = null
     isAuthenticated.value = false
     
-    // Clear any stored auth state
+    // Clear stored auth
+    clearStoredAuth()
+    
+    // Clear any session storage
     sessionStorage.removeItem('authState')
   }
 
-  const validateToken = async () => {
-    if (!idToken.value) return false
+  const validateToken = async (token?: string) => {
+    const tokenToValidate = token || idToken.value
+    console.log('Validating token:', { 
+      hasToken: !!tokenToValidate, 
+      tokenLength: tokenToValidate?.length,
+      isCustomToken: !!token 
+    })
     
-    try {
-      const response = await authenticatedFetch('/api/auth/validate')
-      return !!response.valid
-    } catch {
-      // Token is invalid, clear auth state
-      logout()
+    if (!tokenToValidate) {
+      console.log('No token to validate')
       return false
     }
+    
+    try {
+      console.log('Making validation request to /api/auth/validate')
+      const response = await $fetch('/api/auth/validate', {
+        headers: {
+          Authorization: `Bearer ${tokenToValidate}`
+        }
+      })
+      console.log('Validation response:', response)
+      return !!response.valid
+    } catch (error) {
+      console.error('Token validation error:', error)
+      // Token is invalid, clear auth state if it was the current token
+      if (!token) {
+        logout()
+      }
+      return false
+    }
+  }
+
+  const initializeAuth = async () => {
+    if (!import.meta.client) return false
+    
+    console.log('Initializing auth, checking for stored credentials...')
+    
+    const storedAuth = await loadStoredAuth()
+    if (storedAuth) {
+      console.log('Found stored auth:', { 
+        email: storedAuth.user.email, 
+        timestamp: new Date(storedAuth.timestamp).toISOString(),
+        hasToken: !!storedAuth.idToken 
+      })
+      
+      // Check if token is very old (more than 1 hour) - likely expired
+      const tokenAgeHours = (Date.now() - storedAuth.timestamp) / (1000 * 60 * 60)
+      if (tokenAgeHours > 1) {
+        console.log(`Token is ${tokenAgeHours.toFixed(2)} hours old, likely expired - clearing storage`)
+        clearStoredAuth()
+        return false
+      }
+      
+      // For relatively fresh tokens (under 1 hour), restore auth state
+      // The first API call will validate the token and trigger logout if invalid
+      console.log('Restoring auth state with stored token')
+      user.value = storedAuth.user
+      idToken.value = storedAuth.idToken
+      isAuthenticated.value = true
+      return true
+    } else {
+      console.log('No stored auth found')
+      return false
+    }
+  }
+
+  // Initialize auth on client side
+  if (import.meta.client) {
+    initializeAuth()
   }
 
   return {
@@ -198,6 +345,7 @@ export const useAuthStore = defineStore('auth', () => {
     loginWithGoogle,
     logout,
     validateToken,
+    initializeAuth,
     
     // Utilities
     authenticatedFetch

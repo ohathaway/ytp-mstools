@@ -22,7 +22,9 @@
         signInWithPopup,
         getRedirectResult,
         GoogleAuthProvider,
-        onAuthStateChanged
+        onAuthStateChanged,
+        setPersistence,
+        browserLocalPersistence
       } = await import('https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js')
 
       // Initialize Firebase
@@ -43,6 +45,10 @@
           
           const auth = getAuth(app)
           console.debug('Firebase auth initialized')
+          
+          // Enable Firebase persistence
+          await setPersistence(auth, browserLocalPersistence)
+          console.debug('Firebase persistence enabled')
           
           return { app, auth }
         } catch (error) {
@@ -221,13 +227,21 @@
 
       onAuthStateChanged(auth, async (user) => {
         console.debug('Auth state changed: ', user?.email || 'no user')
-        if (user && sessionStorage.getItem('authInProgress')) {
-          console.debug('User signed in after redirect')
+        
+        // Handle both new authentication and restored sessions
+        if (user) {
+          const isNewAuth = sessionStorage.getItem('authInProgress')
+          const expectedState = new URLSearchParams(window.location.search).get('state')
+          
+          console.debug('User signed in:', { 
+            isNewAuth: !!isNewAuth, 
+            email: user.email,
+            hasState: !!expectedState
+          })
           
           try {
             // Get Firebase ID token for server validation
             const idToken = await user.getIdToken()
-            const expectedState = new URLSearchParams(window.location.search).get('state')
             
             sendMessageToParent({
               type: 'authComplete',
@@ -239,7 +253,10 @@
               idToken: idToken,
               state: expectedState
             })
-            sessionStorage.removeItem('authInProgress')
+            
+            if (isNewAuth) {
+              sessionStorage.removeItem('authInProgress')
+            }
           } catch (error) {
             console.error('Failed to get ID token:', error)
             sendMessageToParent({
@@ -247,7 +264,7 @@
               error: {
                 message: 'Failed to get authentication token'
               },
-              state: new URLSearchParams(window.location.search).get('state')
+              state: expectedState
             })
           }
         }

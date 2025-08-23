@@ -34,17 +34,13 @@
         density="comfortable"
         :variant="exportButtonVariant"
         :color="exportButtonColor"
-        :variant="exportButtonVariant"
-        :color="exportButtonColor"
         @click="downloadRelatedContacts"
         :loading="isExporting"
         :disabled="isExporting"
       >
         <template v-if="isExporting">
           {{ exportMessage }}
-          {{ exportMessage }}
         </template>
-        <template v-else-if="error">
         <template v-else-if="error">
           Retry Download
         </template>
@@ -155,10 +151,7 @@ const jointPlan = computed(() => {
 const downloadRelatedContacts = async () => {
   try {
     await exportMatterContactsToWealthCounsel(matter.id)
-  try {
-    await exportMatterContactsToWealthCounsel(matter.id)
   } catch (error) {
-    console.error('Export failed:', error)
     console.error('Export failed:', error)
   }
 }

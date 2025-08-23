@@ -76,12 +76,13 @@ const { $layout, $officeState } = useNuxtApp()
 }
 
 fluent-tab {
-  padding: 0 6px;
+  padding: 6px 12px;
+  /* Reduced vertical padding to maintain indicator alignment */
 }
 
 /* Office-specific tab constraints */
 .office-layout fluent-tabs {
-  max-width: 320px;
+  max-width: 340px;
 }
 
 /* Web layout gets more space for cards */

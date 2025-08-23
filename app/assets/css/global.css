@@ -16,10 +16,11 @@ body {
 /* Constrain app width only for Office layout when in browser environments */
 @media (min-width: 500px) {
   .office-layout .v-application {
-    max-width: 320px;
+    max-width: 340px;
     margin: 0 auto;
     border-left: 1px solid #e1dfdd;
     border-right: 1px solid #e1dfdd;
+    padding: 8px;
   }
 }
 
@@ -42,6 +43,25 @@ hr {
 
 button {
   margin: 0.8rem auto;
+}
+
+/* Improved spacing for Fluent UI components */
+fluent-tab {
+  margin: 0 1px !important;
+  /* Remove min-height override to preserve indicator alignment */
+}
+
+fluent-tab-panel {
+  padding: 16px 12px !important;
+}
+
+/* Better spacing for cards and containers */
+.v-card {
+  margin-bottom: 16px;
+}
+
+.v-card-text {
+  padding: 20px !important;
 }
 
 .optima {

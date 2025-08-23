@@ -97,18 +97,25 @@ console.log('OfficeApp component loaded successfully with authentication')
 }
 
 .office-main {
-  padding: 8px;
+  padding: 12px 16px;
 }
 
 /* Ensure fluent components are properly sized for Office */
 fluent-tabs {
   width: 100%;
-  height: calc(100vh - 60px); /* Account for header */
+  /* height: calc(100vh - 60px); Account for header */
+}
+
+fluent-tab {
+  padding: 6px 12px;
+  margin: 0 2px;
+  /* Keep vertical padding minimal to preserve indicator alignment */
 }
 
 fluent-tab-panel {
   overflow-y: auto;
   max-height: calc(100vh - 120px);
+  padding: 12px;
 }
 
 /* Login styles */

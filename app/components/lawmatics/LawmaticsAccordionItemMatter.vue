@@ -27,28 +27,47 @@
         :objectId="matter.id"
         label="Trust or Will Date"
       />
-      <v-btn
-        v-if="$officeState.isOfficeEnvironment === false"
-        class="text-none"
-        rounded="sm"
-        density="comfortable"
-        :variant="exportButtonVariant"
-        :color="exportButtonColor"
-        @click="downloadRelatedContacts"
-        :loading="isExporting"
-        :disabled="isExporting"
-      >
-        <template v-if="isExporting">
-          {{ exportMessage }}
+      <!-- Export Button - Office shows menu, Browser shows direct action -->
+      <v-menu v-if="$officeState.isOfficeEnvironment">
+        <template #activator="{ props }">
+          <v-btn
+            class="text-none"
+            rounded="sm"
+            density="comfortable"
+            :variant="exportButtonVariant"
+            :color="exportButtonColor"
+            v-bind="props"
+            :loading="isExporting"
+            :disabled="isExporting"
+            append-icon="mdi-chevron-down"
+          >
+            <template v-if="isExporting">
+              Starting Export...
+            </template>
+            <template v-else-if="exportError">
+              Retry Download
+            </template>
+            <template v-else>
+              Download Related Contacts
+              <IconsIconWrapper :icon="IconDownload" width="12" />
+            </template>
+          </v-btn>
         </template>
-        <template v-else-if="error">
-          Retry Download
-        </template>
-        <template v-else>
-          Download Related Contacts
-          <IconsIconWrapper :icon="IconDownload" width="12" />
-        </template>
-      </v-btn>
+        
+        <v-list density="compact" min-width="280">
+          <v-list-item @click="startExport" prepend-icon="mdi-microsoft-office">
+            <v-list-item-title>Office Dialog</v-list-item-title>
+            <v-list-item-subtitle>Export within Office environment</v-list-item-subtitle>
+          </v-list-item>
+          
+          <v-list-item @click="openInBrowser" prepend-icon="mdi-open-in-new">
+            <v-list-item-title>Open in Browser</v-list-item-title>
+            <v-list-item-subtitle>Open in external browser for download</v-list-item-subtitle>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      
+      <!-- Direct export button for browser environment -->
       <v-btn
         v-else
         class="text-none"
@@ -56,12 +75,20 @@
         density="comfortable"
         :variant="exportButtonVariant"
         :color="exportButtonColor"
-        @click="openNewWindow(appBrowserUrl)"
         :loading="isExporting"
         :disabled="isExporting"
+        @click="startExport"
       >
-      Download Related Contacts
-      <IconsIconWrapper :icon="IconOpen" width="12" />
+        <template v-if="isExporting">
+          Starting Export...
+        </template>
+        <template v-else-if="exportError">
+          Retry Download
+        </template>
+        <template v-else>
+          Download Related Contacts
+          <IconsIconWrapper :icon="IconDownload" width="12" />
+        </template>
       </v-btn>
       <v-btn
         class="text-none"
@@ -77,7 +104,7 @@
   </fluent-accordion-item>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { startCase } from 'lodash-es'
 import IconOpen from '@/components/icons/IconOpen.vue'
 import IconDownload from '@/components/icons/IconDownload.vue'
@@ -91,23 +118,18 @@ const { matter } = defineProps({
 
 const { public: { appBrowserUrl } } = useRuntimeConfig()
 
-// Export functionality
-const { exportMatterContactsToWealthCounsel, getExportProgress } = useLawmaticsExport()
-const { isExporting, progress, error } = getExportProgress()
-
-const exportMessage = computed(() => {
-  if (!isExporting.value) return ''
-  if (error.value) return `Error: ${error.value}`
-  return progress.value.message
-})
+// Export functionality  
+const { $toast } = useNuxtApp()
+const isExporting = ref(false)
+const exportError = ref(null)
 
 const exportButtonVariant = computed(() => {
-  if (error.value) return 'outlined'
+  if (exportError.value) return 'outlined'
   return 'tonal'
 })
 
 const exportButtonColor = computed(() => {
-  if (error.value) return 'error'
+  if (exportError.value) return 'error'
   return undefined
 })
 
@@ -148,11 +170,134 @@ const jointPlan = computed(() => {
   return jointPlan?.formatted_value || 'No'
 })
 
-const downloadRelatedContacts = async () => {
+const openInBrowser = () => {
   try {
-    await exportMatterContactsToWealthCounsel(matter.id)
+    // Determine the external hostname
+    const currentHost = window.location.hostname
+    let externalHost = 'tools.ohlawcolorado.com' // Production alias
+    
+    // For development, use the alternate development host
+    if (currentHost === 'localhost' || currentHost === '127.0.0.1') {
+      externalHost = '127.0.0.1:3000'
+    }
+    
+    // Build the external URL for browser-based export with autostart
+    const protocol = window.location.protocol
+    const externalUrl = `${protocol}//${externalHost}/export/lawmatics/${matter.id}?autostart=true`
+    
+    // Open in external browser (will open default browser in Office environment)
+    window.open(externalUrl, '_blank')
+    
+    $toast?.success('Opening export in your default browser...')
+    
   } catch (error) {
-    console.error('Export failed:', error)
+    console.error('Error opening in browser:', error)
+    $toast?.error('Failed to open in browser')
+  }
+}
+
+const startExport = async () => {
+  if (isExporting.value) return
+
+  isExporting.value = true
+  exportError.value = null
+
+  try {
+    // Get authenticated fetch from auth store
+    const { authenticatedFetch } = useAuthStore()
+    
+    // Start server-side export
+    const response = await authenticatedFetch('/api/lawmatics/export-contacts', {
+      method: 'POST',
+      body: { matterId: matter.id }
+    })
+
+    const { exportId } = response
+
+    // Open dialog for both Office and web environments
+    openExportDialog(exportId)
+
+    $toast?.success('Export started! A dialog will open to track progress.')
+
+  } catch (error) {
+    console.error('Failed to start export:', error)
+    exportError.value = error instanceof Error ? error.message : 'Failed to start export'
+    $toast?.error(exportError.value)
+  } finally {
+    isExporting.value = false
+  }
+}
+
+const openExportDialog = (exportId) => {
+  try {
+    // Get auth token for the dialog
+    const storedAuth = localStorage.getItem('ohlaw_auth_token')
+    let authToken = ''
+    
+    if (storedAuth) {
+      try {
+        const authData = JSON.parse(storedAuth)
+        const tokenAgeHours = (Date.now() - authData.timestamp) / (1000 * 60 * 60)
+        
+        if (tokenAgeHours < 1 && authData.idToken) {
+          authToken = authData.idToken
+        }
+      } catch (error) {
+        console.error('Error parsing stored auth:', error)
+      }
+    }
+
+    // Build dialog URL with parameters
+    const dialogUrl = `/export-dialog.html?exportId=${exportId}&auth=${encodeURIComponent(authToken)}`
+
+    if ($officeState.isOfficeEnvironment && typeof Office !== 'undefined' && Office.context && Office.context.ui) {
+      // Use Office dialog API
+      Office.context.ui.displayDialogAsync(
+        `${window.location.origin}${dialogUrl}`,
+        {
+          height: 60,
+          width: 50,
+          requireHTTPS: false
+        },
+        (result) => {
+          if (result.status === Office.AsyncResultStatus.Failed) {
+            console.error('Dialog failed to open:', result.error)
+            exportError.value = 'Failed to open export dialog'
+            $toast?.error('Failed to open export dialog')
+          } else {
+            // Handle dialog messages
+            result.value.addEventHandler(Office.EventType.DialogMessageReceived, (args) => {
+              try {
+                const message = JSON.parse(args.message)
+                if (message.type === 'export-dialog') {
+                  if (message.action === 'download-complete') {
+                    $toast?.success('Contact export completed successfully!')
+                  } else if (message.action === 'dialog-close') {
+                    result.value.close()
+                  }
+                }
+              } catch (error) {
+                console.error('Error handling dialog message:', error)
+              }
+            })
+
+            // Handle dialog closed event
+            result.value.addEventHandler(Office.EventType.DialogEventReceived, (args) => {
+              if (args.error === 12006) { // Dialog closed by user
+                console.log('Export dialog was closed by user')
+              }
+            })
+          }
+        }
+      )
+    } else {
+      // Fallback for web environments - open in popup window
+      window.open(dialogUrl, '_blank', 'width=600,height=500,scrollbars=yes,resizable=yes')
+    }
+  } catch (error) {
+    console.error('Error opening dialog:', error)
+    exportError.value = 'Failed to open export dialog'
+    $toast?.error('Failed to open export dialog')
   }
 }
 </script>

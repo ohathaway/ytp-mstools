@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exporting Lawmatics Contacts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .header h2 {
+            color: #2d3748;
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .content {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Processing State */
+        .processing-state h3 {
+            color: #4a5568;
+            margin: 1rem 0;
+            font-size: 1.25rem;
+        }
+
+        .processing-state p {
+            color: #718096;
+            margin-bottom: 1.5rem;
+        }
+
+        .spinner {
+            margin: 0 auto 1.5rem;
+            width: 50px;
+            height: 50px;
+        }
+
+        .spinner-circle {
+            width: 100%;
+            height: 100%;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            color: #4a5568;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding: 0 1rem;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e0;
+            margin-bottom: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .step.active .step-dot {
+            background: #667eea;
+        }
+
+        .step span {
+            font-size: 0.75rem;
+            color: #4a5568;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Success State */
+        .success-state .success-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-state h3 {
+            color: #38a169;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .success-state p {
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+
+        .filename {
+            font-family: monospace;
+            font-size: 0.875rem !important;
+            color: #718096 !important;
+            background: #f7fafc;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 1rem 0 !important;
+        }
+
+        .download-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* Error State */
+        .error-state .error-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-state h3 {
+            color: #e53e3e;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .error-state p {
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .download-btn, .close-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .download-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .close-btn {
+            background: #f7fafc;
+            color: #4a5568;
+            border: 1px solid #e2e8f0;
+        }
+
+        .close-btn:hover {
+            background: #edf2f7;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Exporting Lawmatics Contacts</h2>
+        </div>
+
+        <div class="content">
+            <div id="error-state" class="error-state hidden">
+                <div class="error-icon">⚠️</div>
+                <h3>Export Failed</h3>
+                <p id="error-message">An unexpected error occurred during export.</p>
+                <button onclick="closeDialog()" class="close-btn">Close</button>
+            </div>
+
+            <div id="success-state" class="success-state hidden">
+                <div class="success-icon">✅</div>
+                <h3>Export Complete!</h3>
+                <p id="success-message">Export completed successfully!</p>
+                <p id="filename" class="filename hidden">File: export.csv</p>
+                
+                <div class="download-actions">
+                    <button id="download-btn" onclick="downloadFile()" class="download-btn">
+                        Download CSV
+                    </button>
+                    <button onclick="closeDialog()" class="close-btn">Close</button>
+                </div>
+            </div>
+
+            <div id="processing-state" class="processing-state">
+                <div class="spinner">
+                    <div class="spinner-circle"></div>
+                </div>
+                
+                <h3>Processing Export</h3>
+                <p id="status-message">Preparing your export...</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div id="progress-text" class="progress-text">0%</div>
+                </div>
+
+                <div class="status-steps">
+                    <div class="step" data-step="processing">
+                        <div class="step-dot"></div>
+                        <span>Initializing</span>
+                    </div>
+                    <div class="step" data-step="fetching_matter">
+                        <div class="step-dot"></div>
+                        <span>Fetching Matter</span>
+                    </div>
+                    <div class="step" data-step="fetching_relationships">
+                        <div class="step-dot"></div>
+                        <span>Loading Relationships</span>
+                    </div>
+                    <div class="step" data-step="fetching_contacts">
+                        <div class="step-dot"></div>
+                        <span>Loading Contacts</span>
+                    </div>
+                    <div class="step" data-step="generating_csv">
+                        <div class="step-dot"></div>
+                        <span>Generating CSV</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let exportId = '';
+        let pollInterval = null;
+        let downloadStarted = false;
+        let authToken = '';
+
+        // Initialize from URL parameters
+        function initialize() {
+            const urlParams = new URLSearchParams(window.location.search);
+            exportId = urlParams.get('exportId') || '';
+            authToken = urlParams.get('auth') || '';
+
+            if (!exportId) {
+                showError('Export ID not found in URL');
+                return;
+            }
+
+            startPolling();
+        }
+
+        // Get auth headers
+        function getAuthHeaders() {
+            const headers = { 'Content-Type': 'application/json' };
+            if (authToken) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            }
+            return headers;
+        }
+
+        // Start polling for status
+        function startPolling() {
+            pollStatus();
+            pollInterval = setInterval(pollStatus, 1000);
+        }
+
+        // Stop polling
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
+
+        // Poll status from server
+        async function pollStatus() {
+            try {
+                const response = await fetch(`/api/lawmatics/export-status/${exportId}`, {
+                    headers: getAuthHeaders()
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        throw new Error('Authentication expired. Please refresh and try again.');
+                    }
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                updateUI(data);
+
+                if (data.status === 'completed') {
+                    stopPolling();
+                    setTimeout(() => {
+                        if (!downloadStarted) {
+                            downloadFile();
+                        }
+                    }, 1500);
+                } else if (data.status === 'error') {
+                    stopPolling();
+                }
+
+            } catch (error) {
+                console.error('Polling error:', error);
+                stopPolling();
+                showError(error.message);
+            }
+        }
+
+        // Update UI based on status
+        function updateUI(data) {
+            if (data.status === 'error') {
+                showError(data.error || 'Export failed');
+            } else if (data.status === 'completed') {
+                showSuccess(data.message || 'Export completed!', data.filename);
+            } else {
+                updateProgress(data.status, data.progress || 0, data.message || 'Processing...');
+            }
+        }
+
+        // Show error state
+        function showError(message) {
+            document.getElementById('processing-state').classList.add('hidden');
+            document.getElementById('success-state').classList.add('hidden');
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('error-state').classList.remove('hidden');
+        }
+
+        // Show success state
+        function showSuccess(message, filename) {
+            document.getElementById('processing-state').classList.add('hidden');
+            document.getElementById('error-state').classList.add('hidden');
+            document.getElementById('success-message').textContent = message;
+            
+            if (filename) {
+                document.getElementById('filename').textContent = `File: ${filename}`;
+                document.getElementById('filename').classList.remove('hidden');
+            }
+            
+            document.getElementById('success-state').classList.remove('hidden');
+        }
+
+        // Update progress
+        function updateProgress(status, progress, message) {
+            document.getElementById('status-message').textContent = message;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-text').textContent = `${progress}%`;
+
+            // Update step indicators
+            const steps = ['processing', 'fetching_matter', 'fetching_relationships', 'fetching_contacts', 'generating_csv'];
+            const currentIndex = steps.indexOf(status);
+            
+            document.querySelectorAll('.step').forEach((step, index) => {
+                if (index <= currentIndex) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+
+        // Download file
+        function downloadFile() {
+            if (downloadStarted) return;
+            downloadStarted = true;
+
+            document.getElementById('download-btn').textContent = 'Downloading...';
+            document.getElementById('download-btn').disabled = true;
+
+            try {
+                let downloadUrl = `/api/download/lawmatics-csv/${exportId}`;
+                if (authToken) {
+                    downloadUrl += `?auth=${encodeURIComponent(authToken)}`;
+                }
+
+                // Use direct navigation for Office environment compatibility
+                // This will trigger the browser's download behavior
+                window.location.href = downloadUrl;
+
+                // Give some time for the download to start
+                setTimeout(() => {
+                    notifyParent('download-complete');
+                    
+                    setTimeout(() => {
+                        closeDialog();
+                    }, 1000);
+                }, 1000);
+
+            } catch (error) {
+                console.error('Download failed:', error);
+                downloadStarted = false;
+                document.getElementById('download-btn').textContent = 'Download CSV';
+                document.getElementById('download-btn').disabled = false;
+                
+                // Show error in UI
+                showError(`Download failed: ${error.message}`);
+            }
+        }
+
+        // Notify parent window
+        function notifyParent(message) {
+            try {
+                if (window.parent && window.parent !== window) {
+                    window.parent.postMessage({ 
+                        type: 'export-dialog', 
+                        action: message 
+                    }, '*');
+                }
+            } catch (error) {
+                console.error('Error notifying parent:', error);
+            }
+        }
+
+        // Close dialog
+        function closeDialog() {
+            try {
+                notifyParent('dialog-close');
+                window.close();
+            } catch (error) {
+                console.error('Error closing dialog:', error);
+            }
+        }
+
+        // Handle page visibility changes
+        function handleVisibilityChange() {
+            if (document.hidden) {
+                stopPolling();
+            } else if (!document.getElementById('success-state').classList.contains('hidden') && 
+                       !document.getElementById('error-state').classList.contains('hidden')) {
+                startPolling();
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initialize);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    </script>
+</body>
+</html>

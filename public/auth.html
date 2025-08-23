@@ -30,7 +30,7 @@
       // Initialize Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyCJA5CuyZIl0txUH9tA0XAngcej9kju2gI",
-        authDomain: location.host,
+        authDomain: "flourish-financial-care.firebaseapp.com",
         projectId: "flourish-financial-care",
         storageBucket: "flourish-financial-care.firebasestorage.app",
         messagingSenderId: "274986080130",
@@ -61,20 +61,68 @@
       const provider = new GoogleAuthProvider()
       provider.addScope('profile')
       provider.addScope('email')
+      
+      // Always force account selection and set proper redirect
       provider.setCustomParameters({
         prompt: 'select_account',
-        // Important: full URL including protocol
-        // redirect_uri: 'https://localhost:3000/auth.html',
-        // Preserve Office parameters through redirect
-        state: window.location.search,
-        // Force SSL
-        hd: 'localhost',
-        ssl: 'true'
+        hd: undefined // Remove domain restriction to allow all Google accounts
       })
 
-      // Function for sending messages back to main app window
+      // Check if this is external browser mode (has redirect parameter or no opener)
+      const urlParams = new URLSearchParams(window.location.search)
+      const redirectUrl = urlParams.get('redirect')
+      const isExternalBrowser = !!redirectUrl || (!window.opener && !Office?.context?.ui)
+      
+      // Function for sending messages back to main app window or handling redirect
       const sendMessageToParent = (message) => {
-        if (Office?.context?.ui?.messageParent) {
+        if (isExternalBrowser) {
+          // External browser - handle authentication completion directly
+          if (message.type === 'authComplete') {
+            console.log('Auth complete in external browser, storing token and redirecting')
+            
+            // Store the auth token directly (same format as authStore)
+            const authData = {
+              user: message.user,
+              idToken: message.idToken,
+              timestamp: Date.now()
+            }
+            localStorage.setItem('ohlaw_auth_token', JSON.stringify(authData))
+            
+            // Determine where to redirect
+            if (redirectUrl) {
+              // Explicit redirect URL provided
+              console.log('Redirecting back to:', redirectUrl)
+              window.location.href = redirectUrl
+            } else {
+              // No explicit redirect, try to go back to referrer or show success
+              if (document.referrer && document.referrer !== window.location.href) {
+                console.log('Redirecting back to referrer:', document.referrer)
+                window.location.href = document.referrer
+              } else {
+                // Show success message and let user close/navigate
+                document.body.innerHTML = `
+                  <div style="text-align: center; padding: 2rem; font-family: system-ui;">
+                    <h2>✅ Authentication Successful</h2>
+                    <p>You can now close this window and return to the application.</p>
+                    <button onclick="window.close()" style="padding: 12px 24px; font-size: 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; margin-top: 1rem;">Close Window</button>
+                  </div>
+                `
+              }
+            }
+            return
+          } else if (message.type === 'authError') {
+            console.error('Auth error in external browser:', message.error)
+            // Show error to user
+            document.body.innerHTML = `
+              <div style="text-align: center; padding: 2rem; font-family: system-ui;">
+                <h2>Authentication Error</h2>
+                <p>${message.error.message || 'Authentication failed'}</p>
+                <button onclick="window.close()" style="padding: 12px 24px; font-size: 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+              </div>
+            `
+            return
+          }
+        } else if (Office?.context?.ui?.messageParent) {
             // Office Add-in dialog
             Office.context.ui.messageParent(JSON.stringify(message))
         } else if (window.opener && !window.opener.closed) {
@@ -192,11 +240,9 @@
           // Store the current URL before redirect
           sessionStorage.setItem('redirectUrl', window.location.href)
           
-          // Configure Google sign-in with explicit redirect URI
+          // Ensure account selection is forced for this sign-in
           provider.setCustomParameters({
-            prompt: 'select_account',
-            redirect_uri: window.location.href, // Explicitly set redirect URI
-            response_type: 'token'
+            prompt: 'select_account'
           })
 
           console.debug('Starting redirect with params:', {

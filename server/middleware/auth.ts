@@ -6,6 +6,7 @@ export default defineEventHandler(async (event: H3Event) => {
   if (
     event.path.startsWith('/api/auth') ||
     event.path.startsWith('/api/_hub') ||
+    event.path.startsWith('/api/download') ||  // Skip download routes - they handle auth internally
     !event.path.startsWith('/api')
   ) {
     return

@@ -34,13 +34,17 @@
         density="comfortable"
         :variant="exportButtonVariant"
         :color="exportButtonColor"
+        :variant="exportButtonVariant"
+        :color="exportButtonColor"
         @click="downloadRelatedContacts"
         :loading="isExporting"
         :disabled="isExporting"
       >
         <template v-if="isExporting">
           {{ exportMessage }}
+          {{ exportMessage }}
         </template>
+        <template v-else-if="error">
         <template v-else-if="error">
           Retry Download
         </template>
@@ -48,6 +52,20 @@
           Download Related Contacts
           <IconsIconWrapper :icon="IconDownload" width="12" />
         </template>
+      </v-btn>
+      <v-btn
+        v-else
+        class="text-none"
+        rounded="sm"
+        density="comfortable"
+        :variant="exportButtonVariant"
+        :color="exportButtonColor"
+        @click="openNewWindow(appBrowserUrl)"
+        :loading="isExporting"
+        :disabled="isExporting"
+      >
+      Download Related Contacts
+      <IconsIconWrapper :icon="IconOpen" width="12" />
       </v-btn>
       <v-btn
         class="text-none"
@@ -74,6 +92,8 @@ const { matter } = defineProps({
     required: true
   }
 })
+
+const { public: { appBrowserUrl } } = useRuntimeConfig()
 
 // Export functionality
 const { exportMatterContactsToWealthCounsel, getExportProgress } = useLawmaticsExport()
@@ -135,7 +155,10 @@ const jointPlan = computed(() => {
 const downloadRelatedContacts = async () => {
   try {
     await exportMatterContactsToWealthCounsel(matter.id)
+  try {
+    await exportMatterContactsToWealthCounsel(matter.id)
   } catch (error) {
+    console.error('Export failed:', error)
     console.error('Export failed:', error)
   }
 }

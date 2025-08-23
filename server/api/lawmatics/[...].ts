@@ -3,6 +3,14 @@ import { type H3Event } from 'h3'
 import type { LawmaticsResponse, LawmaticsError } from '../../types/lawmatics'
 
 export default defineEventHandler(async (event: H3Event) => {
+  // Ensure user is authenticated (set by auth middleware)
+  if (!event.context.auth) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Authentication required'
+    })
+  }
+
   const config = useRuntimeConfig()
   const LM_KEY = config.lawmaticsToken
   const LM_HOST = config.lawmaticsUrl

@@ -1,0 +1,41 @@
+pipeline_id,pipeline_name,stage_id,stage_name
+13078,Intake Pipeline,85766,New Lead
+13078,Intake Pipeline,85767,Consult Scheduled
+13078,Intake Pipeline,85768,Reschedule
+13078,Intake Pipeline,85769,Undecided
+13078,Intake Pipeline,85770,EA Sent
+13078,Intake Pipeline,85771,EA Signed
+13078,Intake Pipeline,85772,Invoice Sent
+13078,Intake Pipeline,85773,Invoice Paid
+13078,Intake Pipeline,85774,Welcome Packet Sent
+13078,Intake Pipeline,85775,Long Term Nurture
+13078,Intake Pipeline,85776,Lost
+13078,Intake Pipeline,85777,Consultation Follow Up
+13078,Intake Pipeline,85113,Under Review
+13078,Intake Pipeline,85114,Engagement Agreement /Payment Sent
+13078,Intake Pipeline,85115,Retained
+13133,Estate Planning Pipeline,85602,New Lead
+13133,Estate Planning Pipeline,100320,Homework Assigned
+13133,Estate Planning Pipeline,85603,Booked L&L Session
+13133,Estate Planning Pipeline,85604,Homework Complete
+13133,Estate Planning Pipeline,102364,Not engaged
+13133,Estate Planning Pipeline,85605,Signed Engagement
+13133,Estate Planning Pipeline,92022,CIMI In Progress
+13133,Estate Planning Pipeline,89622,CIMI Sent
+13133,Estate Planning Pipeline,89623,CIMI Complete
+13133,Estate Planning Pipeline,85611,Draft Complete
+13133,Estate Planning Pipeline,85612,Signed Final Documents
+13133,Estate Planning Pipeline,85613,Binder Delivered
+13134,BK Case,142438,Initial Contact
+13134,BK Case,85606,Homework Assigned
+13134,BK Case,85607,Case File Opened
+13134,BK Case,142384,Open - Inactive
+13134,BK Case,85608,Petition Prepared
+13134,BK Case,85609,Petition Filed
+13134,BK Case,85610,341 Complete
+13134,BK Case,89925,Objection to Plan Filed
+13134,BK Case,89926,Amended Plan Pending
+13134,BK Case,89927,Plan Confirmed
+13134,BK Case,89928,Discharge
+13134,BK Case,94249,Dismissed
+13134,BK Case,142385,Closed without filing

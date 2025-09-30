@@ -91,7 +91,8 @@ export default defineNuxtConfig({
   },
   hub: {
     database: true,
-    kv: true
+    kv: true,
+    workers: true
   },
   logLevel: 'verbose',
   // Suppress warnings for dual-mode architecture (Office vs Browser)

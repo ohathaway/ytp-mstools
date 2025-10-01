@@ -115,8 +115,7 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       openAPI: true
-    },
-    preset: 'cloudflare-pages'
+    }
   },
   router: {
     options: {

@@ -29,7 +29,7 @@
     "vue-toastification": "2.0.0-rc.5"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^1.7.0",
+    "@nuxt/devtools": "^2.6.4",
     "@nuxtjs/svg": "^0.4.1",
     "vuetify": "^3.9.4",
     "wrangler": "^4.28.1"

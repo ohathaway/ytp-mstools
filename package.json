@@ -32,6 +32,6 @@
     "@nuxt/devtools": "^1.7.0",
     "@nuxtjs/svg": "^0.4.1",
     "vuetify": "^3.9.4",
-    "wrangler": "^4.28.1"
+    "wrangler": "^4.59.1"
   }
 }
